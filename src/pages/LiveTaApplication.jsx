@@ -1,5 +1,5 @@
 import React from "react";
-import LiveTaTable from "../components/liveTaTable";
+import LiveTaTable from "../components/LiveTaTable";
 import { useState, useEffect } from "react";
 import { taInfo } from "../dummy/taInfos";
 
@@ -17,4 +17,4 @@ export default function LiveTaApplication() {
   },[]);
 
   return <LiveTaTable data={liveTaApplications} />;
-}
+}v
