@@ -32,53 +32,55 @@ export default function Table({ fields, data, setData, readOnly = false }) {
   };
   return (
     <>
-      <table>
-        <thead>
-          <tr>
-            {fields.map((field) => (
-              <th>{field.heading}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((item) => (
+      <div className="relative overflow-x-auto shadow-md sm:rounded-lg pb-2 pl-2 mb-2">
+        <table className="w-full text-base text-left text-gray-900">
+          <thead className="text-base text-gray-700 whitespace-nowrap">
             <tr>
               {fields.map((field) => (
-                <td>
-                  {getStr(
-                    item[
+                <th scope="col" className="px-6 py-3 font-medium">{field.heading}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((item) => (
+              <tr className="border-b border-gray-200">
+                {fields.map((field) => (
+                  <td className="px-6 py-2">
+                    {getStr(
+                      item[
                       field.stateKey
                         ? field.stateKey
                         : field.heading.replaceAll(" ", "_").toLowerCase()
-                    ]
-                  )}
-                </td>
-              ))}
-            </tr>
-          ))}
-          {!readOnly && (
-            <tr ref={newRef}>
-              {fields.map((field) => (
-                <td>
-                  <Input
-                    type={field.type}
-                    name={
-                      field.stateKey
-                        ? field.stateKey
-                        : field.heading.replaceAll(" ", "_").toLowerCase()
-                    }
-                  />
-                </td>
-              ))}
-            </tr>
-          )}
-        </tbody>
-      </table>
-      {!readOnly && (
-        <button type="button" onClick={addNewRow}>
-          Add New Row
-        </button>
-      )}
+                      ]
+                    )}
+                  </td>
+                ))}
+              </tr>
+            ))}
+            {!readOnly && (
+              <tr ref={newRef}>
+                {fields.map((field) => (
+                  <td>
+                    <Input
+                      type={field.type}
+                      name={
+                        field.stateKey
+                          ? field.stateKey
+                          : field.heading.replaceAll(" ", "_").toLowerCase()
+                      }
+                    />
+                  </td>
+                ))}
+              </tr>
+            )}
+          </tbody>
+        </table>
+        </div>
+        {!readOnly && (
+          <button type="button" onClick={addNewRow} class="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
+            + Add New Row
+          </button>
+        )}
     </>
   );
 }
