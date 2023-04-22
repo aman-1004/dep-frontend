@@ -60,9 +60,7 @@ export default function ShowUserApplication() {
       <Modal>
         <ReviewApplication />
       </Modal>
-    
-  {/* <CommentBox onAccept={hodOnAccept} onReview={hodOnReview} /> */}
-   </Form>
+       </Form>
    </>
   );
-}
+  }
