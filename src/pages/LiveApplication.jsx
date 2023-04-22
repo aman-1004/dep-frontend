@@ -14,6 +14,6 @@ export default function LiveApplication() {
     })
       .then((res) => res.json())
       .then(handleList);
-  });
+  },[]);
   return <LiveTable data={liveApplications} />;
 }

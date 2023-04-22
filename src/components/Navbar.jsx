@@ -6,7 +6,7 @@ import ProfileAvatar from "./ProfileAvatar";
 import NotificationBar from "./NotificationBar";
 
 export default function Navbar() {
-  const user = useContext(LoginContext);
+  const [user, setUser] = useContext(LoginContext);
 
   return (
     <div className="bg-gray-200 border-gray-200">

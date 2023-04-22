@@ -4,12 +4,24 @@ import Login from "./pages/Login.jsx";
 import { LoginContext } from "./LoginContext.jsx";
 import { BrowserRouter } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
+import { useState, useEffect } from "react";
 
 function App() {
-  let user = {};
+  const [userInfo, setUserInfo] = useState(null)
+
+  const handleLogin = async (res) => {
+    if(res.status == 200) {
+      const data = await res.json()
+      setUserInfo(data)
+    }
+  }
+
+  useEffect(()=>{
+    fetch('/api/getUserInfo').then(handleLogin)
+  }, [])
   return (
     <BrowserRouter>
-      <LoginContext.Provider value={user1}>
+      <LoginContext.Provider value={[userInfo, setUserInfo]}>
         <Toaster />
         <_App />
       </LoginContext.Provider>
@@ -18,7 +30,7 @@ function App() {
 }
 
 function _App() {
-  let user = useContext(LoginContext);
+  let [user, setUser] = useContext(LoginContext);
   console.log(user, "From _app");
   if (user == null) return <Login />;
   return <Dashboard />;
@@ -26,14 +38,14 @@ function _App() {
 
 export default App;
 
-const user1 = {
-  name: "Aman Kumar",
-  stage_user: 0,
-  isApplicant: true,
-};
+// const user1 = {
+//   name: "Aman Kumar",
+//   stage_user: 0,
+//   isApplicant: true,
+// };
 
-const user2 = {
-  name: "Aman_",
-  stage_user: 0,
-  isApplicant: false,
-};
+// const user2 = {
+//   name: "Aman_",
+//   stage_user: 0,
+//   isApplicant: false,
+// };

@@ -14,7 +14,7 @@ export default function LiveTaApplication() {
     })
       .then((res) => res.json())
       .then(handleTaList);
-  });
+  },[]);
 
   return <LiveTaTable data={liveTaApplications} />;
 }

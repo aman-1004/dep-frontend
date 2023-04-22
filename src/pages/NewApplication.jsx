@@ -2,15 +2,17 @@ import Form from "../components/Form.jsx";
 import InputGroup from "../components/InputGroup.jsx";
 import Input from "../components/Input.jsx";
 import Table from "../components/Table.jsx";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import EstabSubmission from "./EstabSubmission.jsx";
 import AccountsSubmission from "./AccountsSubmission.jsx";
 import CommentBox from "../components/CommentBox.jsx";
 import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
 import { useRef } from "react";
+import { LoginContext } from "../LoginContext.jsx";
 
 export default function NewApplication() {
+  const [userInfo, setUserInfo] = useContext(LoginContext);
   const [people, setPeople] = useState([]);
   const inputRef = useRef(null);
 
@@ -58,14 +60,16 @@ export default function NewApplication() {
     formData["stageCurrent"] = 1;
     formData["stageRedirect"] = null;
     console.log(formData);
+    console.log("jsonified", JSON.stringify(formData));
+
     // a =
 
     fetch("/api/createNewLTCApplications", {
       method: "POST",
       body: JSON.stringify(formData),
-      headers : {
-        'Content-Type': 'application/json'
-     },
+      headers: {
+        "Content-Type": "application/json",
+      },
     }).then(handleRes);
   };
 
@@ -105,9 +109,8 @@ xl:grid-cols-4"
               className="m-4 grid gap-6 mb-1 md:grid-cols-2 
 xl:grid-cols-4"
             >
-
-            <Input label={"From"} name="prefixFrom" type="date" />
-            <Input label={"To"} name="prefixTo" type="date" />
+              <Input label={"From"} name="prefixFrom" type="date" />
+              <Input label={"To"} name="prefixTo" type="date" />
             </div>
             <h3 className="font-semibold text-l m-4 text-gray-900">
               Suffix Details

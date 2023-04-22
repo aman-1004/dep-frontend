@@ -4,82 +4,81 @@ import Input from "../components/Input";
 import CommentBox from "../components/CommentBox";
 import Modal from "../components/Modal";
 import ReviewApplication from "./ReviewApplication";
-import { useNavigate,useParams} from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { toast } from "react-hot-toast";
 
 export default function AccountsSubmission() {
-  const { id } =useParams();
+  const { id } = useParams();
   const [fares, setFares] = useState([]);
 
   const handleAccountsResponse = (res) => {
-    if(res==200)
-    {
+    if (res == 200) {
       useNavigate("/accounts/pending");
-    }
-    else{
+    } else {
       toast("You are not authorized");
-  }
-}
+    }
+  };
 
   const accountsOnAccept = (e) => {
-    const accountsData={};
-    const status="ACCEPT";
-    const totalAccountsRs=document.querySelector('[name="totalRs"]');
-    const accountsAdmissibleAdvance=document.querySelector('[name="admissibleAdvance"]');
-    const accountsPassedRs=document.querySelector('[name="passedRs"]');
-    const accountsTitle=document.querySelector('[name="title"]');
-    const accountsComment=document.querySelector('[name="comment"]');
-    accountsData["totalRs"]=totalAccountsRs.value;
-    accountsData["admissibleAdvance"]=accountsAdmissibleAdvance.value;
-    accountsData["passedRs"]=accountsPassedRs.value;
-    accountsData["title"]=accountsTitle.value;
-    accountsData["comment"]=accountsComment.value;
-    accountsData["status"]=status;
-    accountsData["formId"]=id;
-    accountsData["fares"]=fares;
+    const accountsData = {};
+    const status = "ACCEPT";
+    const totalAccountsRs = document.querySelector('[name="totalRs"]');
+    const accountsAdmissibleAdvance = document.querySelector(
+      '[name="admissibleAdvance"]'
+    );
+    const accountsPassedRs = document.querySelector('[name="passedRs"]');
+    const accountsTitle = document.querySelector('[name="title"]');
+    const accountsComment = document.querySelector('[name="comment"]');
+    accountsData["totalRs"] = totalAccountsRs.value;
+    accountsData["admissibleAdvance"] = accountsAdmissibleAdvance.value;
+    accountsData["passedRs"] = accountsPassedRs.value;
+    accountsData["title"] = accountsTitle.value;
+    accountsData["comment"] = accountsComment.value;
+    accountsData["status"] = status;
+    accountsData["formId"] = id;
+    accountsData["fares"] = fares;
 
     console.log(accountsData);
-  
-    fetch("/api/submitAccountsData",{
-      method:"POST",
-      body:JSON.stringify(accountsData),
-      headers : {
-        'Content-Type': 'application/json'
-     },
-    }).then(handleAccountsResponse);
-  }
 
-  const accountsOnReview = (e) => {
-    const accountsData={};
-    const status="REVIEW";
-    const totalAccountsRs=document.querySelector('[name="totalRs"]');
-    const accountsAdmissibleAdvance=document.querySelector('[name="admissibleAdvance"]');
-    const accountsPassedRs=document.querySelector('[name="passedRs"]');
-    const accountsTitle=document.querySelector('[name="title"]');
-    const accountsComment=document.querySelector('[name="comment"]');
-    accountsData["totalRs"]=totalAccountsRs.value;
-    accountsData["admissibleAdvance"]=accountsAdmissibleAdvance.value;
-    accountsData["passedRs"]=accountsPassedRs.value;
-    accountsData["title"]=accountsTitle.value;
-    accountsData["comment"]=accountsComment.value;
-    accountsData["status"]=status;
-    accountsData["formId"]=id;
-    accountsData["fares"]=fares;
-
-    console.log(accountsData);
-  
-    fetch("/api/submitAccountsData",{
-      method:"POST",
-      body:JSON.stringify(accountsData),
-      headers : {
-         'Content-Type': 'application/json'
+    fetch("/api/submitAccountsData", {
+      method: "POST",
+      body: JSON.stringify(accountsData),
+      headers: {
+        "Content-Type": "application/json",
       },
     }).then(handleAccountsResponse);
-  }
+  };
 
+  const accountsOnReview = (e) => {
+    const accountsData = {};
+    const status = "REVIEW";
+    const totalAccountsRs = document.querySelector('[name="totalRs"]');
+    const accountsAdmissibleAdvance = document.querySelector(
+      '[name="admissibleAdvance"]'
+    );
+    const accountsPassedRs = document.querySelector('[name="passedRs"]');
+    const accountsTitle = document.querySelector('[name="title"]');
+    const accountsComment = document.querySelector('[name="comment"]');
+    accountsData["totalRs"] = totalAccountsRs.value;
+    accountsData["admissibleAdvance"] = accountsAdmissibleAdvance.value;
+    accountsData["passedRs"] = accountsPassedRs.value;
+    accountsData["title"] = accountsTitle.value;
+    accountsData["comment"] = accountsComment.value;
+    accountsData["status"] = status;
+    accountsData["formId"] = id;
+    accountsData["fares"] = fares;
 
+    console.log(accountsData);
 
-  
+    fetch("/api/submitAccountsData", {
+      method: "POST",
+      body: JSON.stringify(accountsData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then(handleAccountsResponse);
+  };
+
   return (
     <>
       <h3>For use by the Accounts Section</h3>
@@ -110,7 +109,7 @@ export default function AccountsSubmission() {
         name="title"
         type="text"
       />
-      <CommentBox onAccept={accountsOnAccept} onReview={accountsOnReview}/>
+      <CommentBox onAccept={accountsOnAccept} onReview={accountsOnReview} />
     </>
   );
 }
