@@ -104,9 +104,11 @@ xl:grid-cols-4"
             <div
               className="m-4 grid gap-6 mb-1 md:grid-cols-2 
 xl:grid-cols-4"
-            ></div>
+            >
+
             <Input label={"From"} name="prefixFrom" type="date" />
             <Input label={"To"} name="prefixTo" type="date" />
+            </div>
             <h3 className="font-semibold text-l m-4 text-gray-900">
               Suffix Details
             </h3>

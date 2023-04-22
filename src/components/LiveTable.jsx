@@ -57,7 +57,7 @@ function LiveTable(props) {
                 <td className="px-6 py-4">{item.fillDate}</td>
                 <td className="px-6 py-4">{stageName[item.stageCurrent]}</td>
                 <td className="px-6 py-4">
-                  <Link to={`/user`}>View Application</Link>
+                  <Link to={`/user`} className="text-blue-500 font-semibold">View Application</Link>
                 </td>
                 {/* <td >
               <Modal>

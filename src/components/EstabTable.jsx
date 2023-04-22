@@ -13,13 +13,17 @@ export default function EstabTable() {
       <Input label={"Date of Joining"} name="joining date" type="date" value={ltcData.user.dateOfJoining}/>
       <Input label={"Block Year"} name="blockYear" type="text" />
       </div>
-      <table>
+
+      <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+      <table className="w-full text-base text-left text-gray-500">
+        <thead>
         <tr>
-          <th>SI. No.</th>
-          <th>Particulars</th>
-          <th>Last Availed</th>
-          <th>Current LTC</th>
+          <th scope="col" className="px-6 py-3 bg-gray-50">SI. No.</th>
+          <th scope="col" className="px-6 py-3 bg-gray-50">Particulars</th>
+          <th scope="col" className="px-6 py-3 bg-gray-50">Last Availed</th>
+          <th scope="col" className="px-6 py-3 bg-gray-50">Current LTC</th>
         </tr>
+        </thead>
         <EstabRow
           serialNo={"1."}
           particulars={"Nature of Visiting Place"}
@@ -27,7 +31,7 @@ export default function EstabTable() {
           type={"text"}
           dataOld={ltcDataOld.natureOfTravel}
           dataNew={ltcData.natureOfTravel}
-        />
+          />
         <EstabRow
           serialNo={"2."}
           particulars={"Period From"}
@@ -35,7 +39,7 @@ export default function EstabTable() {
           type={"date"}
           dataOld={ltcDataOld.fromDate}
           dataNew={ltcData.fromDate}
-        />
+          />
         <EstabRow
           serialNo={"3."}
           particulars={"Period To"}
@@ -43,7 +47,7 @@ export default function EstabTable() {
           type={"date"}
           dataOld={ltcDataOld.toDate}
           dataNew={ltcData.toDate}
-        />
+          />
         <EstabRow
           serialNo={"4."}
           particulars={"Earned leave encashment (No. of Days)"}
@@ -51,7 +55,7 @@ export default function EstabTable() {
           type={"number"}
           dataOld={ltcDataOld.encashmentNoOfDays}
           dataNew={ltcData.encashmentNoOfDays}
-        />
+          />
         <EstabRow
           serialNo={"5."}
           particulars={"Earned Leave standing to his credit"}
@@ -59,7 +63,7 @@ export default function EstabTable() {
           type={"number"}
           dataOld={ltcDataOld.user.standingEarnedLeave}
           dataNew={ltcData.user.standingEarnedLeave}
-        />
+          />
         <EstabRow
           serialNo={"6."}
           particulars={"Balance Earned leave after this encashment"}
@@ -67,7 +71,7 @@ export default function EstabTable() {
           type={"number"}
           dataOld={ltcDataOld.user.standingEarnedLeave-ltcDataOld.encashmentNoOfDays}
           dataNew={ltcData.user.standingEarnedLeave-ltcData.encashmentNoOfDays}
-        />
+          />
         <EstabRow
           serialNo={"7."}
           particulars={"Earned Leave encashment admissible"}
@@ -75,8 +79,9 @@ export default function EstabTable() {
           type={"number"}
           dataOld={ltcDataOld.encashmentNoOfDays}
           dataNew={ltcData.encashmentNoOfDays}
-        />
+          />
       </table>
+      </div>
     </>
   );
 }

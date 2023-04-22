@@ -76,7 +76,7 @@ export default function Table({ fields, data, setData, readOnly = false }) {
       </table>
       {!readOnly && (
         <button type="button" onClick={addNewRow}>
-          +
+          Add New Row
         </button>
       )}
     </>

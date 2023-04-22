@@ -49,7 +49,7 @@ export default function AccountsTaSubmission() {
     
     console.log(accountsTaData);
   
-    fetch("/api/submitAccountsTaData",{
+    fetch("/api/submitAccountsTaData", {
       method:"POST",
       body:JSON.stringify(accountsTaData),
       headers : {
