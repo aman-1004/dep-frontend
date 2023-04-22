@@ -67,7 +67,10 @@ export default function AccountsSubmission() {
   
     fetch("/api/submitAccountsData",{
       method:"POST",
-      data:JSON.stringify(accountsData),
+      body:JSON.stringify(accountsData),
+      headers : {
+         'Content-Type': 'application/json'
+      },
     }).then(handleAccountsResponse);
   }
 

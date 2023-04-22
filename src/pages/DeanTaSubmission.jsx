@@ -48,7 +48,10 @@ export default function DeanTaSubmission() {
 
     fetch("/api/submitDeanTaData", {
       method: "POST",
-      data: JSON.stringify(deanTaData),
+      body: JSON.stringify(deanTaData),
+      headers : {
+        'Content-Type': 'application/json'
+     },
     }).then(handleDeanTaResponse);
 
     console.log(deanTaData);

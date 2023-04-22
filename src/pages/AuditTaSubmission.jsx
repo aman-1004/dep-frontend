@@ -30,7 +30,10 @@ export default function AuditTaSubmission() {
 
     fetch("/api/submitAuditTaData", {
       method: "POST",
-      data: JSON.stringify(auditTaData),
+      body: JSON.stringify(auditTaData),
+      headers : {
+        'Content-Type': 'application/json'
+     },
     }).then(handleAuditTaResponse);
 
     console.log(auditTaData);

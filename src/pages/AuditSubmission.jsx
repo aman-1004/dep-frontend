@@ -47,7 +47,10 @@ export default function AuditSubmission() {
 
     fetch("/api/submitAuditData", {
       method: "POST",
-      data: JSON.stringify(auditData),
+      body: JSON.stringify(auditData),
+      headers : {
+        'Content-Type': 'application/json'
+     },
     }).then(handleAuditResponse);
 
     console.log(auditData);

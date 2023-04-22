@@ -49,7 +49,10 @@ export default function EstabSubmission() {
 
     fetch("/api/submitEstabData", {
       method: "POST",
-      data: JSON.stringify(estabData),
+      body: JSON.stringify(estabData),
+      headers : {
+        'Content-Type': 'application/json'
+     },
     }).then(handleEstabResponse);
   };
 

@@ -48,7 +48,10 @@ export default function RegistrarTaSubmission() {
 
     fetch("/api/submitRegistrarTaData", {
       method: "POST",
-      data: JSON.stringify(registrarTaData),
+      body: JSON.stringify(registrarTaData),
+      headers : {
+        'Content-Type': 'application/json'
+     },
     }).then(handleRegistrarTaResponse);
 
     console.log(registrarTaData);

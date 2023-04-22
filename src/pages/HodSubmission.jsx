@@ -29,7 +29,10 @@ export default function HodSubmission() {
 
     fetch("/api/submitHodData", {
       method: "POST",
-      data: JSON.stringify(hodData),
+      body: JSON.stringify(hodData),
+      headers : {
+        'Content-Type': 'application/json'
+     },
     }).then(handleHodResponse);
 
     console.log(hodData);

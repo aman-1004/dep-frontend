@@ -62,7 +62,10 @@ export default function NewApplication() {
 
     fetch("/api/createNewLTCApplications", {
       method: "POST",
-      data: JSON.stringify(formData),
+      body: JSON.stringify(formData),
+      headers : {
+        'Content-Type': 'application/json'
+     },
     }).then(handleRes);
   };
 

@@ -51,7 +51,10 @@ export default function AccountsTaSubmission() {
   
     fetch("/api/submitAccountsTaData",{
       method:"POST",
-      data:JSON.stringify(accountsTaData),
+      body:JSON.stringify(accountsTaData),
+      headers : {
+        'Content-Type': 'application/json'
+     },
     }).then(handleAccountsTaResponse);
   }
 

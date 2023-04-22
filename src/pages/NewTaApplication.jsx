@@ -56,7 +56,10 @@ export default function NewTaApplication() {
   
       fetch("/api/createNewTAApplication", {
         method: "POST",
-        data: JSON.stringify(taFormData),
+        body: JSON.stringify(taFormData),
+        headers : {
+          'Content-Type': 'application/json'
+       },
       }).then(handleTaRes);
     };
 

@@ -31,7 +31,10 @@ export default function HodTaSubmission() {
 
     fetch("/api/submitHodTaData", {
       method: "POST",
-      data: JSON.stringify(hodTaData),
+      body: JSON.stringify(hodTaData),
+      headers : {
+        'Content-Type': 'application/json'
+     },
     }).then(handleHodTaResponse);
 
     console.log(hodTaData);

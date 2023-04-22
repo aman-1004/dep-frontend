@@ -30,7 +30,10 @@ export default function DeanSubmission() {
 
     fetch("/api/submitDeanData", {
       method: "POST",
-      data: JSON.stringify(deanData),
+      body: JSON.stringify(deanData),
+      headers : {
+        'Content-Type': 'application/json'
+     },
     }).then(handleDeanResponse);
 
     console.log(deanData);
