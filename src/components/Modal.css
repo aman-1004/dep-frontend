@@ -6,11 +6,13 @@
   right: 0;
   bottom: 0;
   position: fixed;
-  background-color: rgba(49, 49, 49, 0.8)
+  background-color: rgba(49, 49, 49, 0.8);
+  z-index: 100; 
 }
 
 #modalcontent{
   position: fixed;
+  z-index: 100;
   top: 10%;
   left: 50%;
   transform: translate(-50%, -0%);

@@ -81,7 +81,9 @@ export default function AccountsSubmission() {
 
   return (
     <>
-      <h3>For use by the Accounts Section</h3>
+      <div className="max-w-screen-xl mx-auto">
+
+      <h3 className="font-semibold text-xl text-gray-900 m-4 flex mx-auto">For use by the Accounts Section</h3>
       <Modal>
         <ReviewApplication />
       </Modal>
@@ -97,6 +99,7 @@ export default function AccountsSubmission() {
         data={fares}
         setData={setFares}
       />
+      <div className="m-4 grid gap-6 mb-1 md:grid-cols-2 xl:grid-cols-4">
       <Input label={"Total Rs."} name="totalRs" type="number" />
       <Input
         label={"Advance Admissible"}
@@ -108,8 +111,10 @@ export default function AccountsSubmission() {
         label={"Debitable to LTC Advance Dr./Mr./Mrs./Ms."}
         name="title"
         type="text"
-      />
+        />
+        </div>
       <CommentBox onAccept={accountsOnAccept} onReview={accountsOnReview} />
+      </div>
     </>
   );
 }

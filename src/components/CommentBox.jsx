@@ -6,12 +6,12 @@ export default function CommentBox({ onAccept, onReview }) {
       <div>
         <label
           htmlFor="comment"
-          className="block mb-2 text-sm font-medium text-gray-900"
+          className="block m-2 text-sm font-medium text-gray-900"
         >
           Add a comment
         </label>
         <textarea
-          className=" resize-none block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+          className=" resize-none block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 my-4"
           name="comment"
           placeholder=""
         ></textarea>
