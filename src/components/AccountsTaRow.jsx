@@ -5,10 +5,10 @@ export default function AccountsTaRow(props) {
   const { serialNo, particulars, name, type } = props;
   return (
     <>
-      <tr>
-        <th>{serialNo}</th>
-        <th>{particulars}</th>
-        <td>
+      <tr className="border-b border-gray-200">
+        <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50">{serialNo}</th>
+        <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{particulars}</th>
+        <td className="px-6 py-4 bg-gray-50">
           <Input name={name} type={type}  />
         </td>
         

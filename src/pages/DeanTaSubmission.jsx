@@ -59,7 +59,6 @@ export default function DeanTaSubmission() {
 
   return (
     <>
-     <h3>For use by the Dean</h3>
     <Modal>
         <ReviewTaApplication />
       </Modal>

@@ -59,7 +59,6 @@ export default function RegistrarTaSubmission() {
 
   return (
     <>
-      <h3>For use by the Registrar</h3>
       <Modal>
         <ReviewTaApplication />
       </Modal>

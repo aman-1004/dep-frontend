@@ -34,7 +34,7 @@ export default function Table({ fields, data, setData, readOnly = false }) {
     <>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg pb-2 pl-2 mb-2">
         <table className="w-full text-base text-left text-gray-900">
-          <thead className="text-base text-gray-700 whitespace-nowrap">
+          <thead className="text-base border-b border-gray-200 text-gray-700 whitespace-nowrap">
             <tr>
               {fields.map((field) => (
                 <th scope="col" className="px-6 py-3 font-medium">{field.heading}</th>
