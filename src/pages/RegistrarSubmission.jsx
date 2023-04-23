@@ -59,7 +59,7 @@ export default function RegistrarSubmission() {
 
   return (
     <>
-     <h3>For use by the Registrar</h3>
+
     <Modal>
         <ReviewApplication />
       </Modal>

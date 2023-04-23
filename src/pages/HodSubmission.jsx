@@ -58,7 +58,7 @@ export default function HodSubmission() {
 
   return (
     <Form>
-      <h3>For use by the Head of the Department</h3>
+      <h3 className="font-semibold text-xl text-gray-900 m-4 flex mx-auto">For use by the Head of the Department</h3>
       <Modal>
         <ReviewApplication />
       </Modal>

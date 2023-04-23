@@ -59,7 +59,6 @@ export default function DeanSubmission() {
 
   return (
     <>
-     <h3>For use by the Dean</h3>
     <Modal>
         <ReviewApplication />
       </Modal>
