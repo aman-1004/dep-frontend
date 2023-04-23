@@ -3,7 +3,7 @@ import Input from "./Input";
 export default function CommentBox({ onAccept, onReview }) {
   return (
     <>
-      <div>
+      <div className="mt-4">
         <label
           htmlFor="comment"
           className="block m-2 text-sm font-medium text-gray-900"
