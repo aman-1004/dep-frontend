@@ -122,7 +122,7 @@ export default function ReviewApplication() {
             label={"Spouse Entitled for LTC"}
             name="spouseEntitled"
             type="checkbox"
-            value={ltcData.spouseEntitled}
+            checked={ltcData.spouseEntitled}
           />
           <Input
             readOnly
@@ -179,7 +179,7 @@ export default function ReviewApplication() {
             label={"Advance Required"}
             name="advanceRequired"
             type="checkbox"
-            value={ltcData.advanceRequired}
+            checked={ltcData.advanceRequired}
           />
           <h3>Details for Encashment of Earned Leave</h3>
           <Input
@@ -199,7 +199,7 @@ export default function ReviewApplication() {
           <p>
             The information, as given above is true to the best of my knowledge
             and belief{" "}
-            <Input name="certification" type="checkbox" value={true} readOnly/>
+            <Input name="certification" type="checkbox" checked={true} readOnly/>
           </p>
         </InputGroup>
       </Form>
