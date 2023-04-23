@@ -9,61 +9,14 @@ import { toast } from 'react-hot-toast';
 export default function ShowUserApplication() {
   const { id } = useParams();
 
-  const handleHodResponse = (res) => {
-    if (res == 200) {
-      useNavigate("/hod/pending");
-    } else {
-      toast("You are not authorized");
-    }
-  };
-
-  const hodOnAccept = (e) => {
-    const hodData = {};
-    const status = "ACCEPT";
-    const hodComment = document.querySelector('[name="comment"]');
-    hodData["comment"] = hodComment.value;
-    hodData["status"] = status;
-    hodData["formId"] = id;
-
-    console.log(hodData);
-
-    fetch("/api/submitHodData", {
-      method: "POST",
-      body: JSON.stringify(hodData),
-      headers : {
-        'Content-Type': 'application/json'
-     },
-    }).then(handleHodResponse);
-
-    console.log(hodData);
-  };
-
-  const hodOnReview = (e) => {
-    const hodData = {};
-    const status = "REVIEW";
-    const hodComment = document.querySelector('[name="comment"]');
-    hodData["comment"] = hodComment.value;
-    hodData["status"] = status;
-    hodData["formId"] = id;
-
-    console.log(hodData);
-
-    fetch("/api/submitHodData", {
-      method: "POST",
-      data: JSON.stringify(hodData),
-    }).then(handleHodResponse);
-
-    console.log(hodData);
-  };
-
   return (
     <>
-    <Form>
-    <h3>click on View Application</h3>
+      <Form>
+        <h3>click on View Application</h3>
+      </Form>
       <Modal>
         <ReviewApplication />
       </Modal>
-       </Form>
-   </>
+    </>
   );
   }

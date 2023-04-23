@@ -28,9 +28,13 @@ export default function Main() {
       <Route path="applicant">
         <Route path="new" element={<NewApplication />} />
         <Route path="live" element={<LiveApplication />} />
+        <Route path="view">
+          <Route path=":id" element={<ShowUserApplication />} />
+        </Route> 
         <Route path="newTa" element={<NewTaApplication />} />
         <Route path="liveTa" element={<LiveTaApplication />} />
       </Route>
+
       <Route path="establish">
         <Route path="pending" element={<PendingApplication />} />
         <Route path="view">
@@ -91,7 +95,6 @@ export default function Main() {
           <Route path=":id" element={<RegistrarTaSubmission />} />
         </Route>
       </Route>
-      <Route path="user" element={<ShowUserApplication />} />
     </Routes>
   );
 }

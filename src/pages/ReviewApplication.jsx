@@ -9,17 +9,32 @@ import AccountsSubmission from "./AccountsSubmission.jsx";
 import CommentBox from "../components/CommentBox.jsx";
 // import { user1 } from "../dummy/user.js";
 import { ltcInfo } from "../dummy/ltcInfos.js";
+import { useEffect } from "react";
 
 export default function ReviewApplication() {
+  const {id} = useParams()
   const [ltcData, setLtcData] = useState(ltcInfo[0]);
   const [people, setPeople] = useState(ltcData.peopleInvolved);
-  console.log(ltcData);
+
+  const handleInfo = (json) => {
+    setLtcData(json)
+    setPeople(json.peopleInvolved)
+  }
+
+  useEffect(() => {
+    fetch("/api/getLTCInfo", {
+      method: "POST", 
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ltcId: id})
+    }).then(res => res.json()).then(handleInfo)
+  }, [])
+
   return (
     <>
       <Form
-        onSubmit={() => {
-          console.log("Submitting Form");
-        }}
+        onSubmit={()=>false}
       >
         <InputGroup>
           <Input
@@ -30,18 +45,21 @@ export default function ReviewApplication() {
             value={ltcData.user.firstName + ltcData.user.lastName}
           />
           <Input
+            readOnly
             label={"Designation"}
             name="Designation"
             type="text"
             value={ltcData.user.role.designation}
           />
           <Input
+            readOnly
             label={"Date of Joining"}
             name="date"
             type="date"
             value={ltcData.user.dateOfJoining}
           />
           <Input
+            readOnly
             label={"Pay Level"}
             name="payLevel"
             type="number"
@@ -49,18 +67,21 @@ export default function ReviewApplication() {
           />
           <h3>Leave Details</h3>
           <Input
+            readOnly
             label={"Earned Leave Availed"}
             name="earnedLeave"
             type="number"
             value={ltcData.earnedLeaveAvailed}
           />
           <Input
+            readOnly
             label={"From"}
             name="leaveFrom"
             type="date"
             value={new Date(ltcData.fromDate).toISOString().substring(0, 10)}
           />
           <Input
+            readOnly
             label={"To"}
             name="leaveTo"
             type="date"
@@ -68,12 +89,14 @@ export default function ReviewApplication() {
           />
           <h3>Prefix Details</h3>
           <Input
+            readOnly
             label={"From"}
             name="prefixFrom"
             type="date"
             value={new Date(ltcData.prefixFrom).toISOString().substring(0, 10)}
           />
           <Input
+            readOnly
             label={"To"}
             name="prefixTo"
             type="date"
@@ -81,12 +104,14 @@ export default function ReviewApplication() {
           />
           <h3>Suffix Details</h3>
           <Input
+            readOnly
             label={"From"}
             name="suffixFrom"
             type="date"
             value={new Date(ltcData.suffixFrom).toISOString().substring(0, 10)}
           />
           <Input
+            readOnly
             label={"To"}
             name="suffixTo"
             type="date"
@@ -100,24 +125,28 @@ export default function ReviewApplication() {
             value={ltcData.spouseEntitled}
           />
           <Input
+            readOnly
             label={"Home Town"}
             name="homeTown"
             type="text"
             value={ltcData.user.hometown}
           />
           <Input
+            readOnly
             label={"Nature of Visiting Place"}
             name="visitNature"
             type="text"
             value={ltcData.natureOfTravel}
           />
           <Input
+            readOnly
             label={"Visiting Place"}
             name="visitPlace"
             type="text"
             value={ltcData.placeToVisit}
           />
           <Input
+            readOnly
             label={"Total Estimated Fare"}
             name="estimatedFare"
             type="number"
@@ -154,12 +183,14 @@ export default function ReviewApplication() {
           />
           <h3>Details for Encashment of Earned Leave</h3>
           <Input
+            readOnly
             label={"Encashment Required"}
             name="encashment"
             type="checkbox"
             checked={ltcData.encashmentAvailed}
           />
           <Input
+            readOnly
             label={"No. of Days"}
             name="encashmentDays"
             type="number"
@@ -168,7 +199,7 @@ export default function ReviewApplication() {
           <p>
             The information, as given above is true to the best of my knowledge
             and belief{" "}
-            <Input name="certification" type="checkbox" value={true} />
+            <Input name="certification" type="checkbox" value={true} readOnly/>
           </p>
         </InputGroup>
       </Form>
