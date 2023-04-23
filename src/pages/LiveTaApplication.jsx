@@ -17,4 +17,4 @@ export default function LiveTaApplication() {
   },[]);
 
   return <LiveTaTable data={liveTaApplications} />;
-}v
+}

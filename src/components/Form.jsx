@@ -4,7 +4,7 @@ export default function Form(props) {
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        props.onSubmit(e);
+        if(props.onSubmit) props.onSubmit(e);
         // console.log(e.target);
         // const formData = new FormData(e.target);
         // for (const data of formData.entries()) {
