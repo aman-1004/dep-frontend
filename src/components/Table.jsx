@@ -77,7 +77,7 @@ export default function Table({ fields, data, setData, readOnly = false }) {
         </table>
         </div>
         {!readOnly && (
-          <button type="button" onClick={addNewRow} class="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
+          <button type="button" onClick={addNewRow} className="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
             + Add New Row
           </button>
         )}

@@ -59,7 +59,6 @@ export default function EstabSubmission() {
   return (
     <>
       <div className="max-w-screen-xl mx-auto">
-        <h3>FOR USE OF ESTABLISHMENT SECTION</h3>
         <Modal>
           <ReviewApplication />
         </Modal>

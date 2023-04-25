@@ -59,11 +59,12 @@ export default function AuditSubmission() {
 
   return (
     <>
-     <h3 className="font-semibold text-xl text-gray-900 m-4 flex mx-auto">For use by the Audit Section</h3>
+      <div className="max-w-screen-xl mx-auto">
     <Modal>
         <ReviewApplication />
       </Modal>
       <CommentBox onAccept={auditOnAccept} onReview={auditOnReview} />
+      </div>
     </>
     
   )
