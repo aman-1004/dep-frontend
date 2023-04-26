@@ -4,9 +4,36 @@ import { LoginContext } from "../LoginContext";
 import { useContext } from "react";
 import ProfileAvatar from "./ProfileAvatar";
 import NotificationBar from "./NotificationBar";
+import { toast } from "react-hot-toast";
 
 export default function Navbar() {
   const [user, setUser] = useContext(LoginContext);
+
+  const stakeHolderType = [
+    "applicant",
+    "hod",
+    "establish",
+    "establish",
+    "establish",
+    "accounts",
+    "accounts",
+    "accounts",
+    "audit",
+    "audit",
+    "audit",
+    "registrar",
+    "dean"
+  ] 
+
+
+  const logoutHandle = () => {
+    const handleStatus = (res) => {
+      if(res.status === 200) setUser(null);
+    }
+    fetch("/api/logout", {
+      method: "POST",
+    }).then(res => res.status === 200? setUser(null): toast("Failed to Logout"))
+  }
 
   return (
     <div className="bg-gray-200 border-gray-200">
@@ -36,13 +63,14 @@ export default function Navbar() {
               </>
             ) : (
               <>
-                <Link to={"/pending"} className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:hover:text-blue-700 lg:p-0">Pending LTC Application </Link>
-                <Link to={"/pendingTa"} className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:hover:text-blue-700 lg:p-0">Pending TA Application </Link>
+                <Link to={`/${stakeHolderType[user.roleId]}/pending`} className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:hover:text-blue-700 lg:p-0">Pending LTC Application </Link>
+                <Link to={`/${stakeHolderType[user.roleId]}/pendingTa`} className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:hover:text-blue-700 lg:p-0">Pending TA Application </Link>
               </>
             )}
           </div>
         </div>
       </div>
+    <button onClick={logoutHandle}> Logout </button>
     </div>
   );
 }

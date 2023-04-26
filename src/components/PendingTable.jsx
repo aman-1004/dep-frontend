@@ -3,6 +3,22 @@ import { Link } from "react-router-dom";
 // import Modal from "./Modal"
 // import AdminForm from "./AdminForm";
 
+const stakeHolderType = [
+    "applicant",
+    "hod",
+    "establish",
+    "establish",
+    "establish",
+    "accounts",
+    "accounts",
+    "accounts",
+    "audit",
+    "audit",
+    "audit",
+    "registrar",
+    "dean"
+  ] 
+
 let stageName = [
   "SENT BACK",
   "PENDING HOD",
@@ -30,7 +46,6 @@ function PendingTable(props) {
             <th scope="col" className="px-6 py-3">User Email</th>
             <th scope="col" className="px-6 py-3">Name</th>
             <th scope="col" className="px-6 py-3">Created On</th>
-            <th scope="col" className="px-6 py-3">Status</th>
             <th scope="col" className="px-6 py-3">Form</th>
           </tr>
         </thead>
@@ -42,9 +57,8 @@ function PendingTable(props) {
                 <td className="px-6 py-4">{item.user.emailId}</td>
                 <td className="px-6 py-4">{item.user.firstName + " " + item.user.lastName}</td>
                 <td className="px-6 py-4">{item.fillDate}</td>
-                <td className="px-6 py-4">{stageName[item.stageCurrent]}</td>
                 <td className="px-6 py-4">
-                  <Link to={"/establish/view/"}  className="text-blue-500 font-semibold hover:underline">View Application </Link>
+                  <Link to={`../view/${item.id}`}  className="text-blue-500 font-semibold hover:underline">View Application </Link>
                 </td>
                 {/* <td >
               <Modal>

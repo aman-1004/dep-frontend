@@ -21,7 +21,7 @@ import DeanTaSubmission from "../pages/DeanTaSubmission.jsx";
 import RegistrarTaSubmission from "../pages/RegistrarTaSubmission.jsx";
 import LiveTaApplication from "../pages/LiveTaApplication.jsx";
 import ShowUserApplication from "../pages/ShowUserApplication.jsx";
-
+import UserProfile from '../pages/UserProfile.jsx'
 export default function Main() {
   return (
     <Routes>
@@ -95,6 +95,8 @@ export default function Main() {
           <Route path=":id" element={<RegistrarTaSubmission />} />
         </Route>
       </Route>
+      <Route path="avatar" element={<UserProfile />} />
+        
     </Routes>
   );
 }

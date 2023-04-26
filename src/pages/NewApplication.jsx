@@ -8,13 +8,11 @@ import AccountsSubmission from "./AccountsSubmission.jsx";
 import CommentBox from "../components/CommentBox.jsx";
 import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
-import { useRef } from "react";
 import { LoginContext } from "../LoginContext.jsx";
 
 export default function NewApplication() {
-  const [userInfo, setUserInfo] = useContext(LoginContext);
+  const [user, setUser] = useContext(LoginContext);
   const [people, setPeople] = useState([]);
-  const inputRef = useRef(null);
 
   const handleRes = (res) => {
     if (res.status == 200) {
@@ -83,10 +81,10 @@ export default function NewApplication() {
         <Form onSubmit={ltcSubmitHandler}>
           <InputGroup>
             <div className="m-4 grid gap-6 mb-1 md:grid-cols-2 xl:grid-cols-4">
-              <Input ref={inputRef} label={"Name"} name="name" type="text" />
-              <Input label={"Designation"} name="Designation" type="text" />
-              <Input label={"Date of Joining"} name="date" type="date" />
-              <Input label={"Pay Level"} name="payLevel" type="number" />
+              <Input label={"Name"} name="name" type="text" value={`${user.firstName} ${user.lastName}`} />
+              <Input label={"Designation"} name="Designation" type="text" value={user.designation}/>
+              <Input label={"Date of Joining"} name="date" type="date" value={new Date(user.dateOfJoining).toISOString().substring(0, 10)}/>
+              <Input label={"Pay Level"} name="payLevel" type="number" value={user.role.payLevel}/>
             </div>
             <h3 className="font-semibold text-l m-4 text-gray-900">
               Leave Details
