@@ -52,12 +52,18 @@ export default function NewApplication() {
     const inputs = e.target.querySelectorAll("input");
     // console.log(inputs);
     // formData['name'] = inputs[0].value;
-    for (let i = 0; i < 19; i++) {
+    for (let i = 0; i < 16; i++) {
       formData[arr[i]] = inputs[i].value;
     }
+    formData["advanceRequired"]=document.querySelector('[name="advanceRequired"]').value;
+    formData["encashment"]=document.querySelector('[name="encashment"]').value;
+    formData["encashmentDays"]=document.querySelector('[name="encashmentDays"]').value;
+    formData["certification"]=document.querySelector('[name="certification"]').value;
+
     formData["peopleInvolved"] = people;
     formData["stageCurrent"] = 1;
     formData["stageRedirect"] = null;
+    console.log(people);
     console.log(formData);
     console.log("jsonified", JSON.stringify(formData));
 
