@@ -55,8 +55,8 @@ export default function NewApplication() {
     for (let i = 0; i < 16; i++) {
       formData[arr[i]] = inputs[i].value;
     }
-    formData["advanceRequired"]=document.querySelector('[name="advanceRequired"]').value;
-    formData["encashmentAvailed"]=document.querySelector('[name="encashment"]').value;
+    formData["advanceRequired"]=document.querySelector('[name="advanceRequired"]').checked;
+    formData["encashmentAvailed"]=document.querySelector('[name="encashment"]').checked;
     formData["encashmentNoOfDays"]=document.querySelector('[name="encashmentDays"]').value;
     formData["certification"]=document.querySelector('[name="certification"]').value;
 
