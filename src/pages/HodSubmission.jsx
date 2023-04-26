@@ -8,10 +8,10 @@ import { toast } from 'react-hot-toast';
 
 export default function HodSubmission() {
   const { id } = useParams();
-
+  const navigate = useNavigate();
   const handleHodResponse = (res) => {
-    if (res == 200) {
-      useNavigate("/hod/pending");
+    if (res.status == 200) {
+      navigate("/hod/pending");
     } else {
       toast("You are not authorized");
     }
@@ -25,7 +25,7 @@ export default function HodSubmission() {
     hodData["status"] = status;
     hodData["formId"] = id;
 
-    console.log(hodData);
+    // console.log(hodData);
 
     fetch("/api/submitHodData", {
       method: "POST",
@@ -35,7 +35,7 @@ export default function HodSubmission() {
      },
     }).then(handleHodResponse);
 
-    console.log(hodData);
+    // console.log(hodData);
   };
 
   const hodOnReview = (e) => {
@@ -46,14 +46,14 @@ export default function HodSubmission() {
     hodData["status"] = status;
     hodData["formId"] = id;
 
-    console.log(hodData);
+    // console.log(hodData);
 
     fetch("/api/submitHodData", {
       method: "POST",
       data: JSON.stringify(hodData),
     }).then(handleHodResponse);
 
-    console.log(hodData);
+    // console.log(hodData);
   };
 
   return (
