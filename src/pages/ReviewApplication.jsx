@@ -12,7 +12,7 @@ import { ltcInfo } from "../dummy/ltcInfos.js";
 import { useEffect } from "react";
 
 export default function ReviewApplication() {
-  const {id} = useParams()
+  const { id } = useParams()
   const [ltcData, setLtcData] = useState(ltcInfo[0]);
   const [people, setPeople] = useState(ltcData.peopleInvolved);
 
@@ -23,139 +23,156 @@ export default function ReviewApplication() {
 
   useEffect(() => {
     fetch("/api/getLTCInfo", {
-      method: "POST", 
+      method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ltcId: id})
+      body: JSON.stringify({ ltcId: id })
     }).then(res => res.json()).then(handleInfo)
   }, [])
 
   return (
     <>
       <Form
-        onSubmit={()=>false}
+        onSubmit={() => false}
       >
-        <InputGroup>
-          <Input
-            readOnly
-            label={"Name"}
-            name="name"
-            type="text"
-            value={ltcData.user.firstName + ltcData.user.lastName}
-          />
-          <Input
-            readOnly
-            label={"Designation"}
-            name="Designation"
-            type="text"
-            value={ltcData.user.role.designation}
-          />
-          <Input
-            readOnly
-            label={"Date of Joining"}
-            name="date"
-            type="date"
-            value={ltcData.user.dateOfJoining}
-          />
-          <Input
-            readOnly
-            label={"Pay Level"}
-            name="payLevel"
-            type="number"
-            value={ltcData.user.role.payLevel}
-          />
-          <h3>Leave Details</h3>
-          <Input
-            readOnly
-            label={"Earned Leave Availed"}
-            name="earnedLeave"
-            type="number"
-            value={ltcData.earnedLeaveAvailed}
-          />
-          <Input
-            readOnly
-            label={"From"}
-            name="leaveFrom"
-            type="date"
-            value={new Date(ltcData.fromDate).toISOString().substring(0, 10)}
-          />
-          <Input
-            readOnly
-            label={"To"}
-            name="leaveTo"
-            type="date"
-            value={new Date(ltcData.toDate).toISOString().substring(0, 10)}
-          />
-          <h3>Prefix Details</h3>
-          <Input
-            readOnly
-            label={"From"}
-            name="prefixFrom"
-            type="date"
-            value={new Date(ltcData.prefixFrom).toISOString().substring(0, 10)}
-          />
-          <Input
-            readOnly
-            label={"To"}
-            name="prefixTo"
-            type="date"
-            value={new Date(ltcData.prefixTo).toISOString().substring(0, 10)}
-          />
-          <h3>Suffix Details</h3>
-          <Input
-            readOnly
-            label={"From"}
-            name="suffixFrom"
-            type="date"
-            value={new Date(ltcData.suffixFrom).toISOString().substring(0, 10)}
-          />
-          <Input
-            readOnly
-            label={"To"}
-            name="suffixTo"
-            type="date"
-            value={new Date(ltcData.suffixTo).toISOString().substring(0, 10)}
-          />
-          <Input
-            readOnly
-            label={"Spouse Entitled for LTC"}
-            name="spouseEntitled"
-            type="checkbox"
-            checked={ltcData.spouseEntitled}
-          />
-          <Input
-            readOnly
-            label={"Home Town"}
-            name="homeTown"
-            type="text"
-            value={ltcData.user.hometown}
-          />
-          <Input
-            readOnly
-            label={"Nature of Visiting Place"}
-            name="visitNature"
-            type="text"
-            value={ltcData.natureOfTravel}
-          />
-          <Input
-            readOnly
-            label={"Visiting Place"}
-            name="visitPlace"
-            type="text"
-            value={ltcData.placeToVisit}
-          />
-          <Input
-            readOnly
-            label={"Total Estimated Fare"}
-            name="estimatedFare"
-            type="number"
-            value={ltcData.totalEstimatedFare}
-          />
+        <InputGroup >
+          <div className=" grid gap-6 mt-4 mb-2 md:grid-cols-2 xl:grid-cols-4">
+            <Input
+              readOnly
+              label={"Name"}
+              name="name"
+              type="text"
+              value={ltcData.user.firstName + ltcData.user.lastName}
+            />
+            <Input
+              readOnly
+              label={"Designation"}
+              name="Designation"
+              type="text"
+              value={ltcData.user.role.designation}
+            />
+            <Input
+              readOnly
+              label={"Date of Joining"}
+              name="date"
+              type="date"
+              value={ltcData.user.dateOfJoining}
+            />
+            <Input
+              readOnly
+              label={"Pay Level"}
+              name="payLevel"
+              type="number"
+              value={ltcData.user.role.payLevel}
+            />
+          </div>
+          <h3 className="font-semibold text-l m-4 text-gray-900">Leave Details</h3>
+          <div className=" grid gap-6 mt-4 mb-2 md:grid-cols-2 xl:grid-cols-4">
+
+            <Input
+              readOnly
+              label={"Earned Leave Availed"}
+              name="earnedLeave"
+              type="number"
+              value={ltcData.earnedLeaveAvailed}
+            />
+            <Input
+              readOnly
+              label={"From"}
+              name="leaveFrom"
+              type="date"
+              value={new Date(ltcData.fromDate).toISOString().substring(0, 10)}
+            />
+            <Input
+              readOnly
+              label={"To"}
+              name="leaveTo"
+              type="date"
+              value={new Date(ltcData.toDate).toISOString().substring(0, 10)}
+            />
+          </div>
+
+          <h3 className="font-semibold text-l m-4 text-gray-900">Prefix Details</h3>
+          <div className=" grid gap-6 mt-4 mb-2 md:grid-cols-2 xl:grid-cols-4">
+            <Input
+              readOnly
+              label={"From"}
+              name="prefixFrom"
+              type="date"
+              value={new Date(ltcData.prefixFrom).toISOString().substring(0, 10)}
+            />
+            <Input
+              readOnly
+              label={"To"}
+              name="prefixTo"
+              type="date"
+              value={new Date(ltcData.prefixTo).toISOString().substring(0, 10)}
+            />
+          </div>
+          <h3 className="font-semibold text-l m-4 text-gray-900">Suffix Details</h3>
+          <div className=" grid gap-6 mt-4 mb-2 md:grid-cols-2 xl:grid-cols-4">
+            <Input
+              readOnly
+              label={"From"}
+              name="suffixFrom"
+              type="date"
+              value={new Date(ltcData.suffixFrom).toISOString().substring(0, 10)}
+            />
+            <Input
+              readOnly
+              label={"To"}
+              name="suffixTo"
+              type="date"
+              value={new Date(ltcData.suffixTo).toISOString().substring(0, 10)}
+            />
+          </div>
+
+          <div className="flex ml-4 justify-center space-x-10 items-center my-4">
+          <span className="font-semibold text-gray-900"> Spouse Entitled for LTC</span>
+            <Input className="mt-3"
+              readOnly
+              label={""}
+              name="spouseEntitled"
+              type="checkbox"
+              checked={ltcData.spouseEntitled}
+            />
+          </div>
+
+          <div className=" grid gap-6 mt-4 mb-2 md:grid-cols-2 xl:grid-cols-4">
+            <Input
+              readOnly
+              label={"Home Town"}
+              name="homeTown"
+              type="text"
+              value={ltcData.user.hometown}
+            />
+            <Input
+              readOnly
+              label={"Nature of Visiting Place"}
+              name="visitNature"
+              type="text"
+              value={ltcData.natureOfTravel}
+            />
+            <Input
+              readOnly
+              label={"Visiting Place"}
+              name="visitPlace"
+              type="text"
+              value={ltcData.placeToVisit}
+            />
+            <Input
+              readOnly
+              label={"Total Estimated Fare"}
+              name="estimatedFare"
+              type="number"
+              value={ltcData.totalEstimatedFare}
+            />
+          </div>
         </InputGroup>
 
         <InputGroup>
-          <h3>Details of People involved in LTC</h3>
+          <h3 className="font-semibold text-l m-4 text-gray-900">Details of People involved in LTC</h3>
           <Table
             readOnly={true}
             fields={[
@@ -174,32 +191,41 @@ export default function ReviewApplication() {
             data={people}
             setData={setPeople}
           />
-          <Input
-            readOnly
-            label={"Advance Required"}
-            name="advanceRequired"
-            type="checkbox"
-            checked={ltcData.advanceRequired}
-          />
-          <h3>Details for Encashment of Earned Leave</h3>
-          <Input
-            readOnly
-            label={"Encashment Required"}
-            name="encashment"
-            type="checkbox"
-            checked={ltcData.encashmentAvailed}
-          />
-          <Input
-            readOnly
-            label={"No. of Days"}
-            name="encashmentDays"
-            type="number"
-            value={ltcData.encashmentNoOfDays}
-          />
+          <div className="flex ml-4 justify-center space-x-10 items-center my-4">
+            <span className="font-semibold text-gray-900"> Advance Required</span>
+            <Input className="mt-3"
+              readOnly
+              label={""}
+              name="advanceRequired"
+              type="checkbox"
+              checked={ltcData.advanceRequired}
+            />
+          </div>
+          <h3 className="font-semibold text-l m-4 text-gray-900">Details for Encashment of Earned Leave</h3>
+          <div className=" grid gap-6 mt-4 mb-2 md:grid-cols-2 xl:grid-cols-4">
+
+            <div className="flex ml-4 justify-center space-x-10 items-center my-4">
+              <span className="font-semibold text-gray-900"> Encashment Required</span>
+              <Input className="mt-3"
+                readOnly
+                label={""}
+                name="encashment"
+                type="checkbox"
+                checked={ltcData.encashmentAvailed}
+              />
+            </div>
+            <Input
+              readOnly
+              label={"No. of Days"}
+              name="encashmentDays"
+              type="number"
+              value={ltcData.encashmentNoOfDays}
+            />
+          </div>
           <p>
             The information, as given above is true to the best of my knowledge
             and belief{" "}
-            <Input name="certification" type="checkbox" checked={true} readOnly/>
+            <Input name="certification" type="checkbox" checked={true} readOnly />
           </p>
         </InputGroup>
       </Form>
