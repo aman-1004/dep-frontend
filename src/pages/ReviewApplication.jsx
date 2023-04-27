@@ -57,7 +57,7 @@ export default function ReviewApplication() {
               label={"Date of Joining"}
               name="date"
               type="date"
-              value={ltcData.user.dateOfJoining}
+              value={new Date(ltcData.user.dateOfJoining).toISOString().substring(0, 10)}
             />
             <Input
               readOnly

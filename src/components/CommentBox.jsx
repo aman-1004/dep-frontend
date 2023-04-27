@@ -1,8 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Input from "./Input";
-export default function CommentBox({ onAccept, onReview }) {
+import { json, useParams } from "react-router";
+export default function CommentBox({ onAccept, onReview, readOnly}) {
+  const {id} = useParams()
+  const [comments, setComments] = useState([])
+
+  useEffect(() => {
+    fetch("/api/getComments", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ ltcId: id })
+    }).then(res => res.json()).then(setComments)
+  }, [])
+
   return (
     <>
+    <h3>Comments:</h3>
+    <ul>
+      {comments.map(comment => <li key={comment.id}>{`Comment: ${comment.comment} by ${comment.handler.role.designation}`}</li>)}
+    </ul>
+    {!readOnly && ( 
+      <>
       <div className="mt-4">
         <label
           htmlFor="comment"
@@ -32,6 +52,8 @@ export default function CommentBox({ onAccept, onReview }) {
       >
         Submit
       </button>
+      </>
+    )}
     </>
   );
 }

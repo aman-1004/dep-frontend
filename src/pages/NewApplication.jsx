@@ -13,10 +13,10 @@ import { LoginContext } from "../LoginContext.jsx";
 export default function NewApplication() {
   const [user, setUser] = useContext(LoginContext);
   const [people, setPeople] = useState([]);
-
+  const navigate = useNavigate();
   const handleRes = (res) => {
     if (res.status == 200) {
-      useNavigate("/applicant/live");
+      navigate("/applicant/live")
     } else {
       toast("You are not authorized");
     }
@@ -55,9 +55,9 @@ export default function NewApplication() {
     for (let i = 0; i < 16; i++) {
       formData[arr[i]] = inputs[i].value;
     }
-    formData["advanceRequired"]=document.querySelector('[name="advanceRequired"]').value;
-    formData["encashment"]=document.querySelector('[name="encashment"]').value;
-    formData["encashmentDays"]=document.querySelector('[name="encashmentDays"]').value;
+    formData["advanceRequired"]=document.querySelector('[name="advanceRequired"]').checked;
+    formData["encashmentAvailed"]=document.querySelector('[name="encashment"]').checked;
+    formData["encashmentNoOfDays"]=document.querySelector('[name="encashmentDays"]').value;
     formData["certification"]=document.querySelector('[name="certification"]').value;
 
     formData["peopleInvolved"] = people;
@@ -165,10 +165,10 @@ xl:grid-cols-4"
                 { heading: "Name", type: "text" },
                 { heading: "Age", type: "number" },
                 { heading: "Relation", type: "text" },
-                { heading: "From", type: "text" },
-                { heading: "To", type: "text" },
+                { heading: "From", type: "text", stateKey: 'fromPlace' },
+                { heading: "To", type: "text", stateKey: 'toPlace' },
                 { heading: "Back", type: "checkbox" },
-                { heading: "Mode Of Travel", type: "text" },
+                { heading: "Mode Of Travel", type: "text", stateKey: "modeOfTravel" },
               ]}
               data={people}
               setData={setPeople}

@@ -32,7 +32,9 @@ export default function Main() {
         <Route path="view">
           <Route path=":id" element={<ShowUserApplication />} />
         </Route> 
-        <Route path="newTa" element={<NewTaApplication />} />
+        <Route path="newTa">
+          <Route path=":ltcId" element={<NewTaApplication />} />
+        </Route>
         <Route path="liveTa" element={<LiveTaApplication />} />
         <Route path="viewTa">
           <Route path=":id" element={<ShowUserTaApplication />} />
