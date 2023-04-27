@@ -7,10 +7,11 @@ import EstabSubmission from "./EstabSubmission.jsx";
 import AccountsSubmission from "./AccountsSubmission.jsx";
 import CommentBox from "../components/CommentBox.jsx";
 import ReviewTaApplication from "./ReviewTaApplication.jsx";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import toast from "react-hot-toast";
 
 export default function NewTaApplication() {
+    const {ltcId} = useParams()
     const [peopleInTa, setPeopleInTa] = useState([]);
     const [journeyDetails,setJourneyDetails] =useState([]);
 
@@ -40,7 +41,7 @@ export default function NewTaApplication() {
       ];
   
       // console.log(e.target.querySelectorAll("input"));
-      const taFormData = {};
+      const taFormData = {ltcId: ltcId};
       const inputs = e.target.querySelectorAll("input");
       // console.log(inputs);
       // formData['name'] = inputs[0].value;
@@ -143,16 +144,16 @@ export default function NewTaApplication() {
             <h3 className="font-semibold text-l text-gray-900 m-4 flex">Details of journey(s) performed by Government Employee and the members of his/her family:</h3>
             <Table
               fields={[
-                { heading: "Departure Date", type: "date" },
-                { heading: "Departure From", type: "text" },
-                { heading: "Arrival Date", type: "date" },
-                { heading: "Arrival To", type: "text" },
-                { heading: "Distance in Kms", type: "number" },
-                { heading: "Mode Of Travel", type: "text" },
-                { heading: "Class of Travel", type: "text" },
-                { heading: "No. of Fares", type: "number" },
-                { heading: "Total Fare Paid", type: "number" },
-                { heading: "Ticket No./PNR/Remarks", type: "text" },
+                { heading: "Departure Date", type: "date", stateKey: "departureDate"},
+                { heading: "Departure From", type: "text", stateKey: "departureFrom"},
+                { heading: "Arrival Date", type: "date", stateKey: "arrivalDate"},
+                { heading: "Arrival To", type: "text", stateKey: "arrivalTo"},
+                { heading: "Distance in Kms", type: "number", stateKey: "distance" },
+                { heading: "Mode Of Travel", type: "text", stateKey: "modeOfTravel"},
+                { heading: "Class of Travel", type: "text", stateKey: "classOfTravel"},
+                { heading: "No. of Fares", type: "number", stateKey: "noOfFares" },
+                { heading: "Total Fare Paid", type: "number", stateKey: "totalFare" },
+                { heading: "Ticket No./PNR/Remarks", type: "text", stateKey: "ticketNo" },
               ]}
               data={journeyDetails}
               setData={setJourneyDetails}
