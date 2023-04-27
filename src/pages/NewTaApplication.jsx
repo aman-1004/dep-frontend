@@ -11,59 +11,17 @@ import { useNavigate, useParams } from "react-router";
 import toast from "react-hot-toast";
 
 export default function NewTaApplication() {
+  const { ltcId } = useParams();
+  const [peopleInTa, setPeopleInTa] = useState([]);
+  const [journeyDetails, setJourneyDetails] = useState([]);
 
-    const {ltcId} = useParams()
-    const [peopleInTa, setPeopleInTa] = useState([]);
-    const [journeyDetails,setJourneyDetails] =useState([]);
-
-    const handleTaRes = (res) => {
-      if (res.status == 200) {
-        useNavigate("/applicant/liveTa");
-      } else {
-        toast("You are not authorized");
-      }
-    };
-  
-    const taSubmitHandler = (e) => {
-      const arr = [
-        "name",
-        "empCode",
-        "payLevel",
-        "Designation",
-        "department",
-        "date",
-        "leaveFrom",
-        "leaveTo",
-        "advanceDrawnAmount",
-        "advanceDrawnDate",
-        "accountNo",
-        "totalAmount",
-        "certification",
-      ];
-  
-      // console.log(e.target.querySelectorAll("input"));
-      const taFormData = {ltcId: ltcId};
-      const inputs = e.target.querySelectorAll("input");
-      // console.log(inputs);
-      // formData['name'] = inputs[0].value;
-      for (let i = 0; i < 13; i++) {
-        taFormData[arr[i]] = inputs[i].value;
-      }
-      taFormData["peopleInvolved"] = peopleInTa;
-      taFormData["journeyDetails"] = journeyDetails;
-      taFormData["stageCurrent"]= 1;
-      taFormData["stageRedirect"]=null;
-      console.log(taFormData);
-      // a =
-  
-      fetch("/api/createNewTAApplication", {
-        method: "POST",
-        body: JSON.stringify(taFormData),
-        headers : {
-          'Content-Type': 'application/json'
-       },
-      }).then(handleTaRes);
-    };
+  const handleTaRes = (res) => {
+    if (res.status == 200) {
+      useNavigate("/applicant/liveTa");
+    } else {
+      toast("You are not authorized");
+    }
+  };
 
   const taSubmitHandler = (e) => {
     const arr = [
@@ -83,7 +41,7 @@ export default function NewTaApplication() {
     ];
 
     // console.log(e.target.querySelectorAll("input"));
-    const taFormData = {};
+    const taFormData = { ltcId: ltcId };
     const inputs = e.target.querySelectorAll("input");
     // console.log(inputs);
     // formData['name'] = inputs[0].value;
@@ -105,6 +63,8 @@ export default function NewTaApplication() {
       },
     }).then(handleTaRes);
   };
+
+  // a =
 
   return (
     <>
@@ -208,16 +168,52 @@ export default function NewTaApplication() {
             </h3>
             <Table
               fields={[
-                { heading: "Departure Date", type: "date", stateKey: "departureDate"},
-                { heading: "Departure From", type: "text", stateKey: "departureFrom"},
-                { heading: "Arrival Date", type: "date", stateKey: "arrivalDate"},
-                { heading: "Arrival To", type: "text", stateKey: "arrivalTo"},
-                { heading: "Distance in Kms", type: "number", stateKey: "distance" },
-                { heading: "Mode Of Travel", type: "text", stateKey: "modeOfTravel"},
-                { heading: "Class of Travel", type: "text", stateKey: "classOfTravel"},
-                { heading: "No. of Fares", type: "number", stateKey: "noOfFares" },
-                { heading: "Total Fare Paid", type: "number", stateKey: "totalFare" },
-                { heading: "Ticket No./PNR/Remarks", type: "text", stateKey: "ticketNo" },
+                {
+                  heading: "Departure Date",
+                  type: "date",
+                  stateKey: "departureDate",
+                },
+                {
+                  heading: "Departure From",
+                  type: "text",
+                  stateKey: "departureFrom",
+                },
+                {
+                  heading: "Arrival Date",
+                  type: "date",
+                  stateKey: "arrivalDate",
+                },
+                { heading: "Arrival To", type: "text", stateKey: "arrivalTo" },
+                {
+                  heading: "Distance in Kms",
+                  type: "number",
+                  stateKey: "distance",
+                },
+                {
+                  heading: "Mode Of Travel",
+                  type: "text",
+                  stateKey: "modeOfTravel",
+                },
+                {
+                  heading: "Class of Travel",
+                  type: "text",
+                  stateKey: "classOfTravel",
+                },
+                {
+                  heading: "No. of Fares",
+                  type: "number",
+                  stateKey: "noOfFares",
+                },
+                {
+                  heading: "Total Fare Paid",
+                  type: "number",
+                  stateKey: "totalFare",
+                },
+                {
+                  heading: "Ticket No./PNR/Remarks",
+                  type: "text",
+                  stateKey: "ticketNo",
+                },
               ]}
               data={journeyDetails}
               setData={setJourneyDetails}
