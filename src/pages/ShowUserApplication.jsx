@@ -14,7 +14,7 @@ export default function ShowUserApplication() {
       <Form>
         <h3>click on View Application</h3>
       </Form>
-      <Modal>
+      <Modal title={"View Application"}>
         <ReviewApplication />
       </Modal>
     </>
