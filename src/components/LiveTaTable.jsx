@@ -10,8 +10,8 @@ let stageName = [
   "PENDING SUPERINTENDENT",
   "PENDING AR ESTABLISHMENT",
   "PENDING JA ACCOUNTS",
-  "PENDING JAO", 
-  "PENDING AR", 
+  "PENDING JAO",
+  "PENDING AR",
   "PENDING ASS AUDIT",
   "PENDING JAO AUDIT",
   "PENDING SR. AUDIT",
@@ -38,14 +38,19 @@ function LiveTaTable(props) {
           return (
             <tbody key={Math.random()}>
               <tr className="bg-white border-b">
-                <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{item.id}</th>
+                <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                  {item.id}
+                </th>
                 {/* <td>{item.user.emailId}</td>
                 <td>{item.user.firstName + " " + item.user.lastName}</td> */}
                 <td className="px-6 py-4">{item.fillDate}</td>
                 <td className="px-6 py-4">{stageName[item.stageCurrent]}</td>
                 <td className="px-6 py-4">
-                  <Link to={`/user`} className="text-blue-500 font-semibold">
-                    View Application
+                  <Link
+                    to={`/applicant/viewTa/${item.id}`}
+                    className="text-blue-500 font-semibold"
+                  >
+                    View TA Application
                   </Link>
                 </td>
                 {/* <td >

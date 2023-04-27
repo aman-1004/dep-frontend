@@ -12,7 +12,7 @@ export default function ShowUserApplication() {
   return (
     <>
       <CommentBox readOnly/>
-      <Modal>
+      <Modal title={"View Application"}>
         <ReviewApplication />
       </Modal>
     </>

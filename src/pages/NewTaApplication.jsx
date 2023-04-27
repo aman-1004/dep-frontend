@@ -11,6 +11,7 @@ import { useNavigate, useParams } from "react-router";
 import toast from "react-hot-toast";
 
 export default function NewTaApplication() {
+
     const {ltcId} = useParams()
     const [peopleInTa, setPeopleInTa] = useState([]);
     const [journeyDetails,setJourneyDetails] =useState([]);
@@ -64,42 +65,99 @@ export default function NewTaApplication() {
       }).then(handleTaRes);
     };
 
-    return (
-      <>
-              <div className="max-w-screen-xl mx-auto">
-        <h3 className="font-semibold text-xl text-gray-900 m-4 flex">New TA Application</h3>
-        <Form onSubmit={taSubmitHandler}
-        >
-          <InputGroup>
-          <div className='m-4 grid gap-6 mb-1 md:grid-cols-2 xl:grid-cols-4'>
+  const taSubmitHandler = (e) => {
+    const arr = [
+      "name",
+      "empCode",
+      "payLevel",
+      "Designation",
+      "department",
+      "date",
+      "leaveFrom",
+      "leaveTo",
+      "advanceDrawnAmount",
+      "advanceDrawnDate",
+      "accountNo",
+      "totalAmount",
+      "certification",
+    ];
 
-            <Input label={"Name"} name="name" type="text"  />
-            <Input label={"Emp. Code"} name="empCode" type="number"  />
-            <Input label={"Pay Level"} name="payLevel" type="number" />
-            <Input label={"Designation"} name="Designation" type="text" />
-            <Input label={"Department"} name="department" type="text" />
-            <Input label={"Date of Joining"} name="date" type="date" /> 
+    // console.log(e.target.querySelectorAll("input"));
+    const taFormData = {};
+    const inputs = e.target.querySelectorAll("input");
+    // console.log(inputs);
+    // formData['name'] = inputs[0].value;
+    for (let i = 0; i < 13; i++) {
+      taFormData[arr[i]] = inputs[i].value;
+    }
+    taFormData["peopleInvolved"] = peopleInTa;
+    taFormData["journeyDetails"] = journeyDetails;
+    taFormData["stageCurrent"] = 1;
+    taFormData["stageRedirect"] = null;
+    console.log(taFormData);
+    // a =
+
+    fetch("/api/createNewTAApplication", {
+      method: "POST",
+      body: JSON.stringify(taFormData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then(handleTaRes);
+  };
+
+  return (
+    <>
+      <div className="max-w-screen-xl mx-auto">
+        <h3 className="font-semibold text-xl text-gray-900 m-4 flex">
+          New TA Application
+        </h3>
+        <Form onSubmit={taSubmitHandler}>
+          <InputGroup>
+            <div className="m-4 grid gap-6 mb-1 md:grid-cols-2 xl:grid-cols-4">
+              <Input label={"Name"} name="name" type="text" />
+              <Input label={"Emp. Code"} name="empCode" type="number" />
+              <Input label={"Pay Level"} name="payLevel" type="number" />
+              <Input label={"Designation"} name="Designation" type="text" />
+              <Input label={"Department"} name="department" type="text" />
+              <Input label={"Date of Joining"} name="date" type="date" />
             </div>
-            <h3 className="font-semibold text-l text-gray-900 m-4 flex">Leave Details</h3>
-            <div className='m-4 grid gap-6 mb-1 md:grid-cols-2 xl:grid-cols-4'>            {/* <Input label={"Earned Leave Availed"} name="earnedLeave" type="number" /> */}
-            <Input label={"From"} name="leaveFrom" type="date" />
-            <Input label={"To"} name="leaveTo" type="date" />
-            {/* <h3>Prefix Details</h3>
+            <h3 className="font-semibold text-l text-gray-900 m-4 flex">
+              Leave Details
+            </h3>
+            <div className="m-4 grid gap-6 mb-1 md:grid-cols-2 xl:grid-cols-4">
+              {" "}
+              {/* <Input label={"Earned Leave Availed"} name="earnedLeave" type="number" /> */}
+              <Input label={"From"} name="leaveFrom" type="date" />
+              <Input label={"To"} name="leaveTo" type="date" />
+              {/* <h3>Prefix Details</h3>
             <Input label={"From"} name="prefixFrom" type="date" />
             <Input label={"To"} name="prefixTo" type="date" />
             <h3>Suffix Details</h3>
             <Input label={"From"} name="suffixFrom" type="date" />
             <Input label={"To"} name="suffixTo" type="date" /> */}
-            {/* <Input
+              {/* <Input
               label={"Spouse Entitled for LTC"}
               name="spouseEntitled"
               type="checkbox"
             /> */}
-            <Input label={"Advance Drawn"} name="advanceDrawnAmount" type="number" />
-            <Input label={"Advance Drawn Date"} name="advanceDrawnDate" type="date" />
-            {/* <Input label={"Home Town"} name="homeTown" type="text" /> */}
-            <Input label={"Bank Account No. (SBI/Any other):"} name="accountNo" type="number" />
-            {/* <Input
+              <Input
+                label={"Advance Drawn"}
+                name="advanceDrawnAmount"
+                type="number"
+              />
+              <Input
+                label={"Advance Drawn Date"}
+                name="advanceDrawnDate"
+                type="date"
+              />
+              {/* <Input label={"Home Town"} name="homeTown" type="text" /> */}
+              <Input
+                label={"Bank Account No. (SBI/Any other):"}
+                name="accountNo"
+                type="number"
+              />
+              {/* <Input
               label={"Nature of Visiting Place"}
               name="visitNature"
               type="text"
@@ -112,9 +170,12 @@ export default function NewTaApplication() {
             /> */}
             </div>
           </InputGroup>
-  
+
           <InputGroup>
-            <h3 className="font-semibold text-l text-gray-900 m-4 flex">Particulars of the claimant and family in respect of whom the Leave Travel Concession has been claimed:</h3>
+            <h3 className="font-semibold text-l text-gray-900 m-4 flex">
+              Particulars of the claimant and family in respect of whom the
+              Leave Travel Concession has been claimed:
+            </h3>
             <Table
               fields={[
                 { heading: "Name", type: "text" },
@@ -141,7 +202,10 @@ export default function NewTaApplication() {
             />
             <Input label={"No. of Days"} name="encashmentDays" type="number" /> */}
 
-            <h3 className="font-semibold text-l text-gray-900 m-4 flex">Details of journey(s) performed by Government Employee and the members of his/her family:</h3>
+            <h3 className="font-semibold text-l text-gray-900 m-4 flex">
+              Details of journey(s) performed by Government Employee and the
+              members of his/her family:
+            </h3>
             <Table
               fields={[
                 { heading: "Departure Date", type: "date", stateKey: "departureDate"},
@@ -159,33 +223,34 @@ export default function NewTaApplication() {
               setData={setJourneyDetails}
             />
 
-<div className="m-4 grid gap-6 mb-1 md:grid-cols-2 xl:grid-cols-4">
-            <Input label={"Total"} name="totalAmount" type="number" />
-
+            <div className="m-4 grid gap-6 mb-1 md:grid-cols-2 xl:grid-cols-4">
+              <Input label={"Total"} name="totalAmount" type="number" />
             </div>
 
-
-            <h3 className="font-semibold text-l text-gray-900 m-4 flex">CERTIFIED THAT:</h3>
-            <div className='flex ml-4 justify-start space-x-10 items-center my-8'>
-            <p className="font-semibold">
-              The information, as given above is true to the best of my knowledge
-              and belief 
-            </p>
-            <Input name="certification" type="checkbox" />
+            <h3 className="font-semibold text-l text-gray-900 m-4 flex">
+              CERTIFIED THAT:
+            </h3>
+            <div className="flex ml-4 justify-start space-x-10 items-center my-8">
+              <p className="font-semibold">
+                The information, as given above is true to the best of my
+                knowledge and belief
+              </p>
+              <Input name="certification" type="checkbox" />
             </div>
-            <div className='flex ml-4 justify-center space-x-10 items-center my-8'>
-            <Input className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2"  type="submit" />
+            <div className="flex ml-4 justify-center space-x-10 items-center my-8">
+              <Input
+                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2"
+                type="submit"
+              />
             </div>
-            
-            
           </InputGroup>
         </Form>
         {/* <EstabSubmission /> */}
         {/* <AccountsSubmission /> */}
         {/* <CommentBox /> */}
- 
+
         {/* <ReviewTaApplication /> */}
-         </div>
-      </>
-    );
+      </div>
+    </>
+  );
 }
