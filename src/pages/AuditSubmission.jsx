@@ -7,10 +7,11 @@ import { toast } from "react-hot-toast";
 
 export default function AuditSubmission() {
   const { id } =useParams();
+  const navigate = useNavigate();
 
   const handleAuditResponse = (res) => {
-    if (res == 200) {
-      useNavigate("/audit/pending");
+    if (res.status == 200) {
+      navigate("/audit/pending");
     } else {
       toast("You are not authorized");
     }
@@ -29,7 +30,10 @@ export default function AuditSubmission() {
 
     fetch("/api/submitAuditData", {
       method: "POST",
-      data: JSON.stringify(auditData),
+      body: JSON.stringify(auditData),
+      headers : {
+        'Content-Type': 'application/json'
+     },
     }).then(handleAuditResponse);
 
     console.log(auditData);

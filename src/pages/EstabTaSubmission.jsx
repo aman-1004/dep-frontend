@@ -10,11 +10,12 @@ import { toast } from "react-hot-toast";
 export default function EstabTaSubmission() {
 
   const { id } =useParams();
+  const navigate = useNavigate();
 
  const handleEstabTaResponse = (res) => {
-  if(res==200)
+  if(res.status==200)
   {
-    useNavigate("/establish/pendingTa");
+    navigate("/establish/pendingTa");
   }
   else{
     toast("You are not authorized");
@@ -34,7 +35,10 @@ export default function EstabTaSubmission() {
   
     fetch("/api/submitEstabTaData",{
       method:"POST",
-      data:JSON.stringify(estabTaData),
+      body:JSON.stringify(estabTaData),
+      headers: {
+        "Content-Type": "application/json",
+      },
     }).then(handleEstabTaResponse);
 
  }

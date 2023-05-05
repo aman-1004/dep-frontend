@@ -12,12 +12,14 @@ import toast from "react-hot-toast";
 
 export default function NewTaApplication() {
   const { ltcId } = useParams();
+  const navigate = useNavigate();
+
   const [peopleInTa, setPeopleInTa] = useState([]);
   const [journeyDetails, setJourneyDetails] = useState([]);
 
   const handleTaRes = (res) => {
     if (res.status == 200) {
-      useNavigate("/applicant/liveTa");
+      navigate("/applicant/liveTa");
     } else {
       toast("You are not authorized");
     }

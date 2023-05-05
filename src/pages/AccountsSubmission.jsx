@@ -9,11 +9,13 @@ import { toast } from "react-hot-toast";
 
 export default function AccountsSubmission() {
   const { id } = useParams();
+  const navigate = useNavigate();
+
   const [fares, setFares] = useState([]);
 
   const handleAccountsResponse = (res) => {
-    if (res == 200) {
-      useNavigate("/accounts/pending");
+    if (res.status == 200) {
+      navigate("/accounts/pending");
     } else {
       toast("You are not authorized");
     }

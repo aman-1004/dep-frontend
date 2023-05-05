@@ -4,19 +4,19 @@ import { Link } from "react-router-dom";
 // import AdminForm from "./AdminForm";
 
 let stageName = [
-  "SENT BACK",
-  "PENDING HOD",
-  "PENDING JA ESTABLISHMENT",
-  "PENDING SUPERINTENDENT",
-  "PENDING AR ESTABLISHMENT",
-  "PENDING JA ACCOUNTS",
-  "PENDING JAO",
-  "PENDING AR",
-  "PENDING ASS AUDIT",
-  "PENDING JAO AUDIT",
-  "PENDING SR. AUDIT",
-  "PENDING REGISTRAR",
-  "PENDING DEAN",
+  "Sent Back",
+  "Pending HOD",
+  "Pending Establishment Jr.Assistant",
+  "Pending Establishment Superintendent",
+  "Pending Establishment DR",
+  "Pending Accounts JAA",
+  "Pending Accounts AO",
+  "Pending Accounts DR",
+  "Pending Audit DA",
+  "Pending Audit AO",
+  "Pending Sr.Audit Officer",
+  "Pending Registrar",
+  "Pending Dean",
 ];
 
 function LiveTaTable(props) {

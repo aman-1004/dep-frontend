@@ -3,15 +3,15 @@ import EstabTable from "../components/EstabTable";
 import CommentBox from "../components/CommentBox";
 import Modal from "../components/Modal";
 import ReviewApplication from "./ReviewApplication";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate, useParams, redirect, Navigate } from "react-router";
 import { toast } from "react-hot-toast";
 
 export default function EstabSubmission() {
   const { id } = useParams();
-
+  const navigate = useNavigate();
   const handleEstabResponse = (res) => {
-    if (res == 200) {
-      useNavigate("/establish/pending");
+    if (res.status == 200) {
+      navigate("/establish/pending");
     } else {
       toast("You are not authorized");
     }
@@ -31,7 +31,10 @@ export default function EstabSubmission() {
 
     fetch("/api/submitEstabData", {
       method: "POST",
-      data: JSON.stringify(estabData),
+      body: JSON.stringify(estabData),
+      headers: {
+        "Content-Type": "application/json",
+      },
     }).then(handleEstabResponse);
   };
 
@@ -50,9 +53,9 @@ export default function EstabSubmission() {
     fetch("/api/submitEstabData", {
       method: "POST",
       body: JSON.stringify(estabData),
-      headers : {
-        'Content-Type': 'application/json'
-     },
+      headers: {
+        "Content-Type": "application/json",
+      },
     }).then(handleEstabResponse);
   };
 

@@ -4,7 +4,7 @@ import Modal from "../components/Modal.jsx";
 import ReviewApplication from "./ReviewApplication.jsx";
 import { useNavigate, useParams } from "react-router-dom";
 import Form from "../components/Form.jsx";
-import { toast } from 'react-hot-toast';
+import { toast } from "react-hot-toast";
 
 export default function HodSubmission() {
   const { id } = useParams();
@@ -30,9 +30,9 @@ export default function HodSubmission() {
     fetch("/api/submitHodData", {
       method: "POST",
       body: JSON.stringify(hodData),
-      headers : {
-        'Content-Type': 'application/json'
-     },
+      headers: {
+        "Content-Type": "application/json",
+      },
     }).then(handleHodResponse);
 
     // console.log(hodData);
@@ -50,7 +50,10 @@ export default function HodSubmission() {
 
     fetch("/api/submitHodData", {
       method: "POST",
-      data: JSON.stringify(hodData),
+      body: JSON.stringify(hodData),
+      headers: {
+        "Content-Type": "application/json",
+      },
     }).then(handleHodResponse);
 
     // console.log(hodData);
@@ -58,7 +61,9 @@ export default function HodSubmission() {
 
   return (
     <Form>
-      <h3 className="font-semibold text-xl text-gray-900 m-4 flex mx-auto">For use by the Head of the Department</h3>
+      <h3 className="font-semibold text-xl text-gray-900 m-4 flex mx-auto">
+        For use by the Head of the Department
+      </h3>
       <Modal>
         <ReviewApplication />
       </Modal>

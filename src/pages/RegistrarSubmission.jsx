@@ -8,10 +8,12 @@ import { toast } from "react-hot-toast";
 export default function RegistrarSubmission() {
 
   const { id } =useParams();
+  const navigate = useNavigate();
+
 
   const handleRegistrarResponse = (res) => {
     if (res == 200) {
-      useNavigate("/registrar/pending");
+      navigate("/registrar/pending");
     } else {
       toast("You are not authorized");
     }
@@ -30,7 +32,10 @@ export default function RegistrarSubmission() {
 
     fetch("/api/submitRegistrarData", {
       method: "POST",
-      data: JSON.stringify(registrarData),
+      body: JSON.stringify(registrarData),
+      headers : {
+        'Content-Type': 'application/json'
+     },
     }).then(handleRegistrarResponse);
 
     console.log(registrarData);

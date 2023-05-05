@@ -8,10 +8,12 @@ import { toast } from "react-hot-toast";
 export default function DeanSubmission() {
 
   const { id } =useParams();
+  const navigate = useNavigate();
+
 
   const handleDeanResponse = (res) => {
-    if (res == 200) {
-      useNavigate("/dean/pending");
+    if (res.status == 200) {
+      navigate("/dean/pending");
     } else {
       toast("You are not authorized");
     }
@@ -51,7 +53,10 @@ export default function DeanSubmission() {
 
     fetch("/api/submitDeanData", {
       method: "POST",
-      data: JSON.stringify(deanData),
+      body: JSON.stringify(deanData),
+      headers : {
+        'Content-Type': 'application/json'
+     },
     }).then(handleDeanResponse);
 
     console.log(deanData);

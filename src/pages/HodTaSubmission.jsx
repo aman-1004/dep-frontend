@@ -10,10 +10,10 @@ import { toast } from 'react-hot-toast';
 export default function HodTaSubmission() {
 
   const { id } = useParams();
-
+  const navigate = useNavigate();
   const handleHodTaResponse = (res) => {
-    if (res == 200) {
-      useNavigate("/hod/pendingTa");
+    if (res.status == 200) {
+      navigate("/hod/pendingTa");
     } else {
       toast("You are not authorized");
     }
@@ -52,7 +52,10 @@ export default function HodTaSubmission() {
 
     fetch("/api/submitHodTaData", {
       method: "POST",
-      data: JSON.stringify(hodTaData),
+      body: JSON.stringify(hodTaData),
+      headers : {
+        'Content-Type': 'application/json'
+     },
     }).then(handleHodTaResponse);
 
     console.log(hodTaData);
