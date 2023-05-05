@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useRef } from "react";
 import { Link } from "react-router-dom";
 import { LoginContext } from "../LoginContext";
 import { useContext } from "react";
@@ -26,7 +27,16 @@ export default function Navbar() {
     "dean"
   ]
 
+  const catMenu = useRef(null)
+  const [openSlide, setopenSlide] = useState("");
 
+  const closeOpenMenus = (e) => {
+    if (catMenu.current && openSlide && !catMenu.current.contains(e.target)) {
+      setopenSlide(false)
+    }
+  }
+
+  document.addEventListener('mousedown', closeOpenMenus)
 
   const logoutHandle = () => {
     const handleStatus = (res) => {
@@ -42,7 +52,7 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="bg-gray-200 border-gray-200">
+      <div className="bg-gray-200 border-gray-200" ref={catMenu}>
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 relative">
 
           {/* Name + Logo */}
