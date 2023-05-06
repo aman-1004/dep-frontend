@@ -27,9 +27,8 @@ export default function HodTaSubmission() {
     hodTaData["status"] = status;
     hodTaData["formId"] = id;
 
-    console.log(hodTaData);
 
-    fetch("/api/submitHodTaData", {
+    fetch("/api/submitTAHodData", {
       method: "POST",
       body: JSON.stringify(hodTaData),
       headers : {
@@ -37,7 +36,6 @@ export default function HodTaSubmission() {
      },
     }).then(handleHodTaResponse);
 
-    console.log(hodTaData);
   };
 
   const hodOnTaReview = (e) => {
@@ -48,9 +46,8 @@ export default function HodTaSubmission() {
     hodTaData["status"] = status;
     hodTaData["formId"] = id;
 
-    console.log(hodTaData);
 
-    fetch("/api/submitHodTaData", {
+    fetch("/api/submitTAHodData", {
       method: "POST",
       body: JSON.stringify(hodTaData),
       headers : {
@@ -58,7 +55,6 @@ export default function HodTaSubmission() {
      },
     }).then(handleHodTaResponse);
 
-    console.log(hodTaData);
   };
 
   return (

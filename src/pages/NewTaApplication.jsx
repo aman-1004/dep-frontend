@@ -8,14 +8,37 @@ import AccountsSubmission from "./AccountsSubmission.jsx";
 import CommentBox from "../components/CommentBox.jsx";
 import ReviewTaApplication from "./ReviewTaApplication.jsx";
 import { useNavigate, useParams } from "react-router";
+import { useEffect } from "react";
+import { taInfo } from "../dummy/taInfos.js";
 import toast from "react-hot-toast";
 
 export default function NewTaApplication() {
+  const [ltcInfo, setLtcInfo] = useState(taInfo[0]);
   const { ltcId } = useParams();
   const navigate = useNavigate();
 
-  const [peopleInTa, setPeopleInTa] = useState([]);
-  const [journeyDetails, setJourneyDetails] = useState([]);
+  const [peopleInTa, setPeopleInTa] = useState(taInfo[0].peopleInvolved);
+  const [journeyDetails, setJourneyDetails] = useState(
+    taInfo[0].journeyDetails
+  );
+
+  const handleInfo = (json) => {
+    setLtcInfo(json);
+    setPeopleInTa(json.peopleInvolved);
+    // setJourneyDetails(json.journeyDetails);
+  };
+
+  useEffect(() => {
+    fetch("/api/getLTCInfo", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ltcId: ltcId }),
+    })
+      .then((res) => res.json())
+      .then(handleInfo);
+  }, []);
 
   const handleTaRes = (res) => {
     if (res.status == 200) {
@@ -42,10 +65,8 @@ export default function NewTaApplication() {
       "certification",
     ];
 
-    // console.log(e.target.querySelectorAll("input"));
     const taFormData = { ltcId: ltcId };
     const inputs = e.target.querySelectorAll("input");
-    // console.log(inputs);
     // formData['name'] = inputs[0].value;
     for (let i = 0; i < 13; i++) {
       taFormData[arr[i]] = inputs[i].value;
@@ -54,7 +75,6 @@ export default function NewTaApplication() {
     taFormData["journeyDetails"] = journeyDetails;
     taFormData["stageCurrent"] = 1;
     taFormData["stageRedirect"] = null;
-    console.log(taFormData);
     // a =
 
     fetch("/api/createNewTAApplication", {
@@ -77,12 +97,37 @@ export default function NewTaApplication() {
         <Form onSubmit={taSubmitHandler}>
           <InputGroup>
             <div className="m-4 grid gap-6 mb-1 md:grid-cols-2 xl:grid-cols-4">
-              <Input label={"Name"} name="name" type="text" />
-              <Input label={"Emp. Code"} name="empCode" type="number" />
-              <Input label={"Pay Level"} name="payLevel" type="number" />
-              <Input label={"Designation"} name="Designation" type="text" />
-              <Input label={"Department"} name="department" type="text" />
-              <Input label={"Date of Joining"} name="date" type="date" />
+              <Input
+                label={"Name"}
+                name="name"
+                type="text"
+                value={ltcInfo.user.firstName + ltcInfo.user.lastName}
+              />
+              {/* <Input label={"Emp. Code"} name="empCode" type="number" value={ltcInfo.user.id} /> */}
+              <Input
+                label={"Pay Level"}
+                name="payLevel"
+                type="number"
+                value={ltcInfo.user.payLevel}
+              />
+              <Input
+                label={"Designation"}
+                name="Designation"
+                type="text"
+                value={ltcInfo.user.designation}
+              />
+              <Input
+                label={"Department"}
+                name="department"
+                type="text"
+                value={ltcInfo.user.department}
+              />
+              <Input
+                label={"Date of Joining"}
+                name="date"
+                type="date"
+                value={new Date(ltcInfo.user.dateOfJoining).toISOString().substring(0, 10)}
+              />
             </div>
             <h3 className="font-semibold text-l text-gray-900 m-4 flex">
               Leave Details
@@ -90,8 +135,18 @@ export default function NewTaApplication() {
             <div className="m-4 grid gap-6 mb-1 md:grid-cols-2 xl:grid-cols-4">
               {" "}
               {/* <Input label={"Earned Leave Availed"} name="earnedLeave" type="number" /> */}
-              <Input label={"From"} name="leaveFrom" type="date" />
-              <Input label={"To"} name="leaveTo" type="date" />
+              <Input
+                label={"From"}
+                name="leaveFrom"
+                type="date"
+                value={new Date(ltcInfo.fromDate).toISOString().substring(0, 10)}
+              />
+              <Input
+                label={"To"}
+                name="leaveTo"
+                type="date"
+                value={new Date(ltcInfo.toDate).toISOString().substring(0, 10)}
+              />
               {/* <h3>Prefix Details</h3>
             <Input label={"From"} name="prefixFrom" type="date" />
             <Input label={"To"} name="prefixTo" type="date" />
@@ -107,17 +162,20 @@ export default function NewTaApplication() {
                 label={"Advance Drawn"}
                 name="advanceDrawnAmount"
                 type="number"
+                value={ltcInfo.advanceDrawn}
               />
               <Input
                 label={"Advance Drawn Date"}
                 name="advanceDrawnDate"
                 type="date"
+                value={ltcInfo.advanceDrawnDate}
               />
               {/* <Input label={"Home Town"} name="homeTown" type="text" /> */}
               <Input
                 label={"Bank Account No. (SBI/Any other):"}
                 name="accountNo"
                 type="number"
+                // value={ltcInfo.accountNo}
               />
               {/* <Input
               label={"Nature of Visiting Place"}

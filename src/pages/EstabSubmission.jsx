@@ -27,7 +27,6 @@ export default function EstabSubmission() {
     estabData["status"] = status;
     estabData["formId"] = id;
 
-    console.log(estabData);
 
     fetch("/api/submitEstabData", {
       method: "POST",
@@ -48,7 +47,6 @@ export default function EstabSubmission() {
     estabData["status"] = status;
     estabData["formId"] = id;
 
-    console.log(estabData);
 
     fetch("/api/submitEstabData", {
       method: "POST",

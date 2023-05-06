@@ -36,7 +36,6 @@ let stageName = [
 ];
 
 function PendingTable(props) {
-  console.log(props.data);
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg max-w-screen-xl mx-auto">
       <table className="w-full text-sm text-left text-gray-500">

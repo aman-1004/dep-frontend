@@ -31,7 +31,6 @@ export default function EstabTaSubmission() {
     estabTaData["status"]=status;
     estabTaData["formId"]=id;
 
-    console.log(estabTaData);
   
     fetch("/api/submitEstabTaData",{
       method:"POST",
@@ -52,7 +51,6 @@ export default function EstabTaSubmission() {
   estabTaData["status"]=status;
   estabTaData["formId"]=id;
 
-  console.log(estabTaData);
 
   fetch("/api/submitEstabTaData",{
     method:"POST",

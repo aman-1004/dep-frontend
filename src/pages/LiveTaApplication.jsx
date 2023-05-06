@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { taInfo } from "../dummy/taInfos";
 
 export default function LiveTaApplication() {
-  const [liveTaApplications, setLiveTaApplications] = useState(taInfo);
+  const [liveTaApplications, setLiveTaApplications] = useState([]);
   const handleTaList = (data) => {
     setLiveTaApplications(data);
   };

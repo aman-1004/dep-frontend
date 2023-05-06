@@ -4,7 +4,7 @@ import PendingTable from "../components/PendingTable";
 import { useEffect } from "react";
 
 export default function PendingApplication() {
-  const [pendingList, setPendingList] = useState(ltcInfo);
+  const [pendingList, setPendingList] = useState([]);
 
   const getData = () => {
     fetch("/api/listPendingLTCApplication", { method: "POST" })

@@ -26,7 +26,6 @@ export default function AuditSubmission() {
     auditData["status"] = status;
     auditData["formId"] = id;
 
-    console.log(auditData);
 
     fetch("/api/submitAuditData", {
       method: "POST",
@@ -36,7 +35,6 @@ export default function AuditSubmission() {
      },
     }).then(handleAuditResponse);
 
-    console.log(auditData);
   };
 
   const auditOnReview = (e) => {
@@ -47,7 +45,6 @@ export default function AuditSubmission() {
     auditData["status"] = status;
     auditData["formId"] = id;
 
-    console.log(auditData);
 
     fetch("/api/submitAuditData", {
       method: "POST",
@@ -57,7 +54,6 @@ export default function AuditSubmission() {
      },
     }).then(handleAuditResponse);
 
-    console.log(auditData);
   };
 
 

@@ -11,6 +11,7 @@ function formatDate(date) {
 }
 
 export default function UserProfile() {
+
   const [user, setUser] = useContext(LoginContext)
   const imgRef = useRef(null)
   useEffect(() => {
@@ -20,6 +21,7 @@ export default function UserProfile() {
     })
     console.log('user is', user)
   }, [])
+
   return (
     // <div>{JSON.stringify(user)}</div>
     <div className='max-w-screen-xl mx-auto'>

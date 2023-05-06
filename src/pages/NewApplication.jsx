@@ -46,11 +46,9 @@ export default function NewApplication() {
       "certification",
     ];
 
-    // console.log(e.target.querySelectorAll("input"));
     toast("Here is your toast");
     const formData = {};
     const inputs = e.target.querySelectorAll("input");
-    // console.log(inputs);
     // formData['name'] = inputs[0].value;
     for (let i = 0; i < 16; i++) {
       formData[arr[i]] = inputs[i].value;
@@ -63,9 +61,6 @@ export default function NewApplication() {
     formData["peopleInvolved"] = people;
     formData["stageCurrent"] = 1;
     formData["stageRedirect"] = null;
-    console.log(people);
-    console.log(formData);
-    console.log("jsonified", JSON.stringify(formData));
 
     // a =
 

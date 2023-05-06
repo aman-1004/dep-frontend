@@ -4,7 +4,6 @@ import "./Modal.css"
 const Modal = ({children, ...props}) => {
   const [visible, setVisible] = useState(false);
   const toggleVisible = () => {
-    console.log("Pressed Modal Button ")
     setVisible( visible => !visible)
   }
   return (

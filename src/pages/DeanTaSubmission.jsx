@@ -28,7 +28,6 @@ export default function DeanTaSubmission() {
     deanTaData["status"] = status;
     deanTaData["formId"] = id;
 
-    console.log(deanTaData);
 
     fetch("/api/submitDeanTaData", {
       method: "POST",
@@ -38,7 +37,6 @@ export default function DeanTaSubmission() {
      },
     }).then(handleDeanTaResponse);
 
-    console.log(deanTaData);
   };
 
   const deanOnTaReview = (e) => {
@@ -49,7 +47,6 @@ export default function DeanTaSubmission() {
     deanTaData["status"] = status;
     deanTaData["formId"] = id;
 
-    console.log(deanTaData);
 
     fetch("/api/submitDeanTaData", {
       method: "POST",
@@ -59,7 +56,6 @@ export default function DeanTaSubmission() {
      },
     }).then(handleDeanTaResponse);
 
-    console.log(deanTaData);
   };
 
   return (

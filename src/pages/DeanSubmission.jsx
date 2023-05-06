@@ -28,7 +28,6 @@ export default function DeanSubmission() {
     deanData["status"] = status;
     deanData["formId"] = id;
 
-    console.log(deanData);
 
     fetch("/api/submitDeanData", {
       method: "POST",
@@ -38,7 +37,6 @@ export default function DeanSubmission() {
      },
     }).then(handleDeanResponse);
 
-    console.log(deanData);
   };
 
   const deanOnReview = (e) => {
@@ -49,7 +47,6 @@ export default function DeanSubmission() {
     deanData["status"] = status;
     deanData["formId"] = id;
 
-    console.log(deanData);
 
     fetch("/api/submitDeanData", {
       method: "POST",
@@ -59,7 +56,6 @@ export default function DeanSubmission() {
      },
     }).then(handleDeanResponse);
 
-    console.log(deanData);
   };
 
   return (
