@@ -77,8 +77,9 @@ export default function Navbar() {
             </div>
             <div className={!avatar ? "hidden" : "absolute top-0 right-0 translate-y-10 z-50 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow"} id="user-dropdown">
               <div class="px-4 py-3">
-                <span className="block text-sm text-gray-900 ">Bonnie Green</span>
-                <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">name1234567890@flowbite.com</span>
+                <span className="block text-sm text-gray-900 ">{`${user.firstName} ${user.lastName}`}</span>
+                <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">{user.emailId}</span>
+                {user.role.stageCurrent > 0 && <span> {user.designation} </span>}
               </div>
               <ul className="py-2" aria-labelledby="user-menu-button">
                 <li>
