@@ -7,9 +7,9 @@ const user1 = {
   dateOfJoining: "2022-05-01",
   department: "civil",
   standingEarnedLeave:30,
+  designation: "Assistant Proff.",
+  payLevel: 8,
   role: {
-    designation: "Assistant Proff.",
-    payLevel: 8,
     stageCurrent: 0,
     nextStage: 1,
     prevStage: 0,
