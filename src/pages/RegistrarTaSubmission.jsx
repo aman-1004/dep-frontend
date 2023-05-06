@@ -8,10 +8,12 @@ import { toast } from "react-hot-toast";
 export default function RegistrarTaSubmission() {
 
   const { id } =useParams();
+  const navigate = useNavigate();
+
 
   const handleRegistrarTaResponse = (res) => {
     if (res == 200) {
-      useNavigate("/registrar/pendingTa");
+      navigate("/registrar/pendingTa");
     } else {
       toast("You are not authorized");
     }
@@ -26,14 +28,15 @@ export default function RegistrarTaSubmission() {
     registrarTaData["status"] = status;
     registrarTaData["formId"] = id;
 
-    console.log(registrarTaData);
 
     fetch("/api/submitRegistrarTaData", {
       method: "POST",
-      data: JSON.stringify(registrarTaData),
+      body: JSON.stringify(registrarTaData),
+      headers : {
+        'Content-Type': 'application/json'
+     },
     }).then(handleRegistrarTaResponse);
 
-    console.log(registrarTaData);
   };
 
   const registrarOnTaReview = (e) => {
@@ -44,7 +47,6 @@ export default function RegistrarTaSubmission() {
     registrarTaData["status"] = status;
     registrarTaData["formId"] = id;
 
-    console.log(registrarTaData);
 
     fetch("/api/submitRegistrarTaData", {
       method: "POST",
@@ -54,7 +56,6 @@ export default function RegistrarTaSubmission() {
      },
     }).then(handleRegistrarTaResponse);
 
-    console.log(registrarTaData);
   };
 
   return (

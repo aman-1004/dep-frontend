@@ -12,11 +12,11 @@ export default function ShowUserApplication() {
 
   return (
     <>
-      <Form>
-        <h3>click on View Application</h3>
-      </Form>
-      <Modal>
-        <OfficeOrder />
+
+      <CommentBox readOnly/>
+      <Modal title={"View Application"}>
+        <ReviewApplication />
+
       </Modal>
     </>
   );

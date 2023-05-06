@@ -20,23 +20,22 @@ const stakeHolderType = [
   ] 
 
 let stageName = [
-  "SENT BACK",
-  "PENDING HOD",
-  "PENDING JA ESTABLISHMENT",
-  "PENDING SUPERINTENDENT",
-  "PENDING AR ESTABLISHMENT",
-  "PENDING JA ACCOUNTS",
-  "PENDING JAO",
-  "PENDING AR",
-  "PENDING ASS AUDIT",
-  "PENDING JAO AUDIT",
-  "PENDING SR. AUDIT",
-  "PENDING REGISTRAR",
-  "PENDING DEAN",
+  "Sent Back",
+  "Pending HOD",
+  "Pending Establishment Jr.Assistant",
+  "Pending Establishment Superintendent",
+  "Pending Establishment DR",
+  "Pending Accounts JAA",
+  "Pending Accounts AO",
+  "Pending Accounts DR",
+  "Pending Audit DA",
+  "Pending Audit AO",
+  "Pending Sr.Audit Officer",
+  "Pending Registrar",
+  "Pending Dean",
 ];
 
 function PendingTable(props) {
-  console.log(props.data);
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg max-w-screen-xl mx-auto">
       <table className="w-full text-sm text-left text-gray-500">

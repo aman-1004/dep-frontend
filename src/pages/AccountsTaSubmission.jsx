@@ -10,11 +10,12 @@ import { toast } from "react-hot-toast";
 export default function AccountsTaSubmission() {
 
   const { id } =useParams();
+  const navigate = useNavigate();
 
   const handleAccountsTaResponse = (res) => {
-    if(res==200)
+    if(res.status==200)
     {
-      useNavigate("/accounts/pendingTa");
+      navigate("/accounts/pendingTa");
     }
     else{
       toast("You are not authorized");
@@ -47,7 +48,6 @@ export default function AccountsTaSubmission() {
     accountsTaData["formId"]=id;
     accountsTaData["comment"]=accountsTaComment.value;
     
-    console.log(accountsTaData);
   
     fetch("/api/submitAccountsTaData", {
       method:"POST",
@@ -84,11 +84,13 @@ export default function AccountsTaSubmission() {
     accountsTaData["formId"]=id;
     accountsTaData["comment"]=accountsTaComment.value;
     
-    console.log(accountsTaData);
   
     fetch("/api/submitAccountsTaData",{
       method:"POST",
-      data:JSON.stringify(accountsTaData),
+      body:JSON.stringify(accountsTaData),
+      headers : {
+        'Content-Type': 'application/json'
+     },
     }).then(handleAccountsTaResponse);
   }
 

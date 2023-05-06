@@ -8,10 +8,12 @@ import { toast } from "react-hot-toast";
 export default function DeanTaSubmission() {
 
   const { id } =useParams();
+  const navigate = useNavigate();
+
 
   const handleDeanTaResponse = (res) => {
-    if (res == 200) {
-      useNavigate("/dean/pendingTa");
+    if (res.status == 200) {
+      navigate("/dean/pendingTa");
     } else {
       toast("You are not authorized");
     }
@@ -26,14 +28,15 @@ export default function DeanTaSubmission() {
     deanTaData["status"] = status;
     deanTaData["formId"] = id;
 
-    console.log(deanTaData);
 
     fetch("/api/submitDeanTaData", {
       method: "POST",
-      data: JSON.stringify(deanTaData),
+      body: JSON.stringify(deanTaData),
+      headers : {
+        'Content-Type': 'application/json'
+     },
     }).then(handleDeanTaResponse);
 
-    console.log(deanTaData);
   };
 
   const deanOnTaReview = (e) => {
@@ -44,7 +47,6 @@ export default function DeanTaSubmission() {
     deanTaData["status"] = status;
     deanTaData["formId"] = id;
 
-    console.log(deanTaData);
 
     fetch("/api/submitDeanTaData", {
       method: "POST",
@@ -54,7 +56,6 @@ export default function DeanTaSubmission() {
      },
     }).then(handleDeanTaResponse);
 
-    console.log(deanTaData);
   };
 
   return (

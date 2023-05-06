@@ -7,98 +7,177 @@ import EstabSubmission from "./EstabSubmission.jsx";
 import AccountsSubmission from "./AccountsSubmission.jsx";
 import CommentBox from "../components/CommentBox.jsx";
 import ReviewTaApplication from "./ReviewTaApplication.jsx";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
+import { useEffect } from "react";
+import { taInfo } from "../dummy/taInfos.js";
 import toast from "react-hot-toast";
 
 export default function NewTaApplication() {
-    const [peopleInTa, setPeopleInTa] = useState([]);
-    const [journeyDetails,setJourneyDetails] =useState([]);
+  const [ltcInfo, setLtcInfo] = useState(taInfo[0]);
+  const { ltcId } = useParams();
+  const navigate = useNavigate();
 
-    const handleTaRes = (res) => {
-      if (res.status == 200) {
-        useNavigate("/applicant/liveTa");
-      } else {
-        toast("You are not authorized");
-      }
-    };
-  
-    const taSubmitHandler = (e) => {
-      const arr = [
-        "name",
-        "empCode",
-        "payLevel",
-        "Designation",
-        "department",
-        "date",
-        "leaveFrom",
-        "leaveTo",
-        "advanceDrawnAmount",
-        "advanceDrawnDate",
-        "accountNo",
-        "totalAmount",
-        "certification",
-      ];
-  
-      // console.log(e.target.querySelectorAll("input"));
-      const taFormData = {};
-      const inputs = e.target.querySelectorAll("input");
-      // console.log(inputs);
-      // formData['name'] = inputs[0].value;
-      for (let i = 0; i < 13; i++) {
-        taFormData[arr[i]] = inputs[i].value;
-      }
-      taFormData["peopleInvolved"] = peopleInTa;
-      taFormData["journeyDetails"] = journeyDetails;
-      taFormData["stageCurrent"]= 1;
-      taFormData["stageRedirect"]=null;
-      console.log(taFormData);
-      // a =
-  
-      fetch("/api/createNewTAApplication", {
-        method: "POST",
-        body: JSON.stringify(taFormData),
-        headers : {
-          'Content-Type': 'application/json'
-       },
-      }).then(handleTaRes);
-    };
+  const [peopleInTa, setPeopleInTa] = useState(taInfo[0].peopleInvolved);
+  const [journeyDetails, setJourneyDetails] = useState(
+    taInfo[0].journeyDetails
+  );
 
-    return (
-      <>
-              <div className="max-w-screen-xl mx-auto">
-        <h3 className="font-semibold text-xl text-gray-900 m-4 flex">New TA Application</h3>
-        <Form onSubmit={taSubmitHandler}
-        >
+  const handleInfo = (json) => {
+    setLtcInfo(json);
+    setPeopleInTa(json.peopleInvolved);
+    // setJourneyDetails(json.journeyDetails);
+  };
+
+  useEffect(() => {
+    fetch("/api/getLTCInfo", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ltcId: ltcId }),
+    })
+      .then((res) => res.json())
+      .then(handleInfo);
+  }, []);
+
+  const handleTaRes = (res) => {
+    if (res.status == 200) {
+      navigate("/applicant/liveTa");
+    } else {
+      toast("You are not authorized");
+    }
+  };
+
+  const taSubmitHandler = (e) => {
+    const arr = [
+      "name",
+      "empCode",
+      "payLevel",
+      "Designation",
+      "department",
+      "date",
+      "leaveFrom",
+      "leaveTo",
+      "advanceDrawnAmount",
+      "advanceDrawnDate",
+      "accountNo",
+      "totalAmount",
+      "certification",
+    ];
+
+    const taFormData = { ltcId: ltcId };
+    const inputs = e.target.querySelectorAll("input");
+    // formData['name'] = inputs[0].value;
+    for (let i = 0; i < 13; i++) {
+      taFormData[arr[i]] = inputs[i].value;
+    }
+    taFormData["peopleInvolved"] = peopleInTa;
+    taFormData["journeyDetails"] = journeyDetails;
+    taFormData["stageCurrent"] = 1;
+    taFormData["stageRedirect"] = null;
+    // a =
+
+    fetch("/api/createNewTAApplication", {
+      method: "POST",
+      body: JSON.stringify(taFormData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then(handleTaRes);
+  };
+
+  // a =
+
+  return (
+    <>
+      <div className="max-w-screen-xl mx-auto">
+        <h3 className="font-semibold text-xl text-gray-900 m-4 flex">
+          New TA Application
+        </h3>
+        <Form onSubmit={taSubmitHandler}>
           <InputGroup>
-          <div className='m-4 grid gap-6 mb-1 md:grid-cols-2 xl:grid-cols-4'>
-
-            <Input label={"Name"} name="name" type="text"  />
-            <Input label={"Emp. Code"} name="empCode" type="number"  />
-            <Input label={"Pay Level"} name="payLevel" type="number" />
-            <Input label={"Designation"} name="Designation" type="text" />
-            <Input label={"Department"} name="department" type="text" />
-            <Input label={"Date of Joining"} name="date" type="date" /> 
+            <div className="m-4 grid gap-6 mb-1 md:grid-cols-2 xl:grid-cols-4">
+              <Input
+                label={"Name"}
+                name="name"
+                type="text"
+                value={ltcInfo.user.firstName + ltcInfo.user.lastName}
+              />
+              {/* <Input label={"Emp. Code"} name="empCode" type="number" value={ltcInfo.user.id} /> */}
+              <Input
+                label={"Pay Level"}
+                name="payLevel"
+                type="number"
+                value={ltcInfo.user.payLevel}
+              />
+              <Input
+                label={"Designation"}
+                name="Designation"
+                type="text"
+                value={ltcInfo.user.designation}
+              />
+              <Input
+                label={"Department"}
+                name="department"
+                type="text"
+                value={ltcInfo.user.department}
+              />
+              <Input
+                label={"Date of Joining"}
+                name="date"
+                type="date"
+                value={new Date(ltcInfo.user.dateOfJoining).toISOString().substring(0, 10)}
+              />
             </div>
-            <h3 className="font-semibold text-l text-gray-900 m-4 flex">Leave Details</h3>
-            <div className='m-4 grid gap-6 mb-1 md:grid-cols-2 xl:grid-cols-4'>            {/* <Input label={"Earned Leave Availed"} name="earnedLeave" type="number" /> */}
-            <Input label={"From"} name="leaveFrom" type="date" />
-            <Input label={"To"} name="leaveTo" type="date" />
-            {/* <h3>Prefix Details</h3>
+            <h3 className="font-semibold text-l text-gray-900 m-4 flex">
+              Leave Details
+            </h3>
+            <div className="m-4 grid gap-6 mb-1 md:grid-cols-2 xl:grid-cols-4">
+              {" "}
+              {/* <Input label={"Earned Leave Availed"} name="earnedLeave" type="number" /> */}
+              <Input
+                label={"From"}
+                name="leaveFrom"
+                type="date"
+                value={new Date(ltcInfo.fromDate).toISOString().substring(0, 10)}
+              />
+              <Input
+                label={"To"}
+                name="leaveTo"
+                type="date"
+                value={new Date(ltcInfo.toDate).toISOString().substring(0, 10)}
+              />
+              {/* <h3>Prefix Details</h3>
             <Input label={"From"} name="prefixFrom" type="date" />
             <Input label={"To"} name="prefixTo" type="date" />
             <h3>Suffix Details</h3>
             <Input label={"From"} name="suffixFrom" type="date" />
             <Input label={"To"} name="suffixTo" type="date" /> */}
-            {/* <Input
+              {/* <Input
               label={"Spouse Entitled for LTC"}
               name="spouseEntitled"
               type="checkbox"
             /> */}
-            <Input label={"Advance Drawn"} name="advanceDrawnAmount" type="number" />
-            <Input label={"Advance Drawn Date"} name="advanceDrawnDate" type="date" />
-            {/* <Input label={"Home Town"} name="homeTown" type="text" /> */}
-            <Input label={"Bank Account No. (SBI/Any other):"} name="accountNo" type="number" />
-            {/* <Input
+              <Input
+                label={"Advance Drawn"}
+                name="advanceDrawnAmount"
+                type="number"
+                value={ltcInfo.advanceDrawn}
+              />
+              <Input
+                label={"Advance Drawn Date"}
+                name="advanceDrawnDate"
+                type="date"
+                value={ltcInfo.advanceDrawnDate}
+              />
+              {/* <Input label={"Home Town"} name="homeTown" type="text" /> */}
+              <Input
+                label={"Bank Account No. (SBI/Any other):"}
+                name="accountNo"
+                type="number"
+                // value={ltcInfo.accountNo}
+              />
+              {/* <Input
               label={"Nature of Visiting Place"}
               name="visitNature"
               type="text"
@@ -111,9 +190,12 @@ export default function NewTaApplication() {
             /> */}
             </div>
           </InputGroup>
-  
+
           <InputGroup>
-            <h3 className="font-semibold text-l text-gray-900 m-4 flex">Particulars of the claimant and family in respect of whom the Leave Travel Concession has been claimed:</h3>
+            <h3 className="font-semibold text-l text-gray-900 m-4 flex">
+              Particulars of the claimant and family in respect of whom the
+              Leave Travel Concession has been claimed:
+            </h3>
             <Table
               fields={[
                 { heading: "Name", type: "text" },
@@ -140,51 +222,91 @@ export default function NewTaApplication() {
             />
             <Input label={"No. of Days"} name="encashmentDays" type="number" /> */}
 
-            <h3 className="font-semibold text-l text-gray-900 m-4 flex">Details of journey(s) performed by Government Employee and the members of his/her family:</h3>
+            <h3 className="font-semibold text-l text-gray-900 m-4 flex">
+              Details of journey(s) performed by Government Employee and the
+              members of his/her family:
+            </h3>
             <Table
               fields={[
-                { heading: "Departure Date", type: "date" },
-                { heading: "Departure From", type: "text" },
-                { heading: "Arrival Date", type: "date" },
-                { heading: "Arrival To", type: "text" },
-                { heading: "Distance in Kms", type: "number" },
-                { heading: "Mode Of Travel", type: "text" },
-                { heading: "Class of Travel", type: "text" },
-                { heading: "No. of Fares", type: "number" },
-                { heading: "Total Fare Paid", type: "number" },
-                { heading: "Ticket No./PNR/Remarks", type: "text" },
+                {
+                  heading: "Departure Date",
+                  type: "date",
+                  stateKey: "departureDate",
+                },
+                {
+                  heading: "Departure From",
+                  type: "text",
+                  stateKey: "departureFrom",
+                },
+                {
+                  heading: "Arrival Date",
+                  type: "date",
+                  stateKey: "arrivalDate",
+                },
+                { heading: "Arrival To", type: "text", stateKey: "arrivalTo" },
+                {
+                  heading: "Distance in Kms",
+                  type: "number",
+                  stateKey: "distance",
+                },
+                {
+                  heading: "Mode Of Travel",
+                  type: "text",
+                  stateKey: "modeOfTravel",
+                },
+                {
+                  heading: "Class of Travel",
+                  type: "text",
+                  stateKey: "classOfTravel",
+                },
+                {
+                  heading: "No. of Fares",
+                  type: "number",
+                  stateKey: "noOfFares",
+                },
+                {
+                  heading: "Total Fare Paid",
+                  type: "number",
+                  stateKey: "totalFare",
+                },
+                {
+                  heading: "Ticket No./PNR/Remarks",
+                  type: "text",
+                  stateKey: "ticketNo",
+                },
               ]}
               data={journeyDetails}
               setData={setJourneyDetails}
             />
 
-<div className="m-4 grid gap-6 mb-1 md:grid-cols-2 xl:grid-cols-4">
-            <Input label={"Total"} name="totalAmount" type="number" />
-
+            <div className="m-4 grid gap-6 mb-1 md:grid-cols-2 xl:grid-cols-4">
+              <Input label={"Total"} name="totalAmount" type="number" />
             </div>
 
-
-            <h3 className="font-semibold text-l text-gray-900 m-4 flex">CERTIFIED THAT:</h3>
-            <div className='flex ml-4 justify-start space-x-10 items-center my-8'>
-            <p className="font-semibold">
-              The information, as given above is true to the best of my knowledge
-              and belief 
-            </p>
-            <Input name="certification" type="checkbox" />
+            <h3 className="font-semibold text-l text-gray-900 m-4 flex">
+              CERTIFIED THAT:
+            </h3>
+            <div className="flex ml-4 justify-start space-x-10 items-center my-8">
+              <p className="font-semibold">
+                The information, as given above is true to the best of my
+                knowledge and belief
+              </p>
+              <Input name="certification" type="checkbox" />
             </div>
-            <div className='flex ml-4 justify-center space-x-10 items-center my-8'>
-            <Input className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2"  type="submit" />
+            <div className="flex ml-4 justify-center space-x-10 items-center my-8">
+              <Input
+                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2"
+                type="submit"
+              />
             </div>
-            
-            
           </InputGroup>
         </Form>
         {/* <EstabSubmission /> */}
         {/* <AccountsSubmission /> */}
         {/* <CommentBox /> */}
- 
+
         {/* <ReviewTaApplication /> */}
-         </div>
-      </>
-    );
+      </div>
+    </>
+  );
 }

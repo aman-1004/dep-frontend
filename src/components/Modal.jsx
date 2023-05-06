@@ -1,15 +1,14 @@
 import { useState } from "react"
 import "./Modal.css"
 
-const Modal = ({children}) => {
+const Modal = ({children, ...props}) => {
   const [visible, setVisible] = useState(false);
   const toggleVisible = () => {
-    console.log("Pressed Modal Button ")
     setVisible( visible => !visible)
   }
   return (
     <div>
-      <button className="font-medium text-blue-600 dark:text-blue-500 hover:underline" onClick={toggleVisible}> View Application </button>
+      <button className="font-medium text-blue-600 dark:text-blue-500 hover:underline" onClick={toggleVisible}>{props.title} </button>
       {/* <button className="font-medium text-blue-600 dark:text-blue-500 hover:underline" onClick={toggleVisible}> View Application </button> */}
 
     { visible && (<>
