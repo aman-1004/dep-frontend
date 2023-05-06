@@ -48,7 +48,6 @@ export default function AccountsTaSubmission() {
     accountsTaData["formId"]=id;
     accountsTaData["comment"]=accountsTaComment.value;
     
-    console.log(accountsTaData);
   
     fetch("/api/submitAccountsTaData", {
       method:"POST",
@@ -85,7 +84,6 @@ export default function AccountsTaSubmission() {
     accountsTaData["formId"]=id;
     accountsTaData["comment"]=accountsTaComment.value;
     
-    console.log(accountsTaData);
   
     fetch("/api/submitAccountsTaData",{
       method:"POST",

@@ -228,7 +228,7 @@ export default function ReviewApplication() {
             <Input name="certification" type="checkbox" checked={true} readOnly />
           </p>
         </InputGroup>
-      </Form>
+      </Form> 
       {/* <EstabSubmission /> */}
       {/* <AccountsSubmission /> */}
       {/* <CommentBox /> */}

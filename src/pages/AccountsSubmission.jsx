@@ -40,8 +40,6 @@ export default function AccountsSubmission() {
     accountsData["formId"] = id;
     accountsData["fares"] = fares;
 
-    console.log(accountsData);
-
     fetch("/api/submitAccountsData", {
       method: "POST",
       body: JSON.stringify(accountsData),
@@ -70,7 +68,7 @@ export default function AccountsSubmission() {
     accountsData["formId"] = id;
     accountsData["fares"] = fares;
 
-    console.log(accountsData);
+    accountsData;
 
     fetch("/api/submitAccountsData", {
       method: "POST",
@@ -84,37 +82,36 @@ export default function AccountsSubmission() {
   return (
     <>
       <div className="max-w-screen-xl mx-auto">
-
-      <Modal>
-        <ReviewApplication />
-      </Modal>
-      <Table
-        fields={[
-          { heading: "From", type: "text" },
-          { heading: "To", type: "text" },
-          { heading: "Mode Of Travel", type: "text" },
-          { heading: "No. of Fares", type: "number" },
-          { heading: "Single Fare", type: "number" },
-          { heading: "Amount", type: "number" },
-        ]}
-        data={fares}
-        setData={setFares}
-      />
-      <div className="m-4 grid gap-6 mb-1 md:grid-cols-2 xl:grid-cols-4">
-      <Input label={"Total Rs."} name="totalRs" type="number" />
-      <Input
-        label={"Advance Admissible"}
-        name="admissibleAdvance"
-        type="number"
-      />
-      <Input label={"Passed For Rs."} name="passedRs" type="number" />
-      <Input
-        label={"Debitable to LTC Advance Dr./Mr./Mrs./Ms."}
-        name="title"
-        type="text"
+        <Modal>
+          <ReviewApplication />
+        </Modal>
+        <Table
+          fields={[
+            { heading: "From", type: "text" },
+            { heading: "To", type: "text" },
+            { heading: "Mode Of Travel", type: "text" },
+            { heading: "No. of Fares", type: "number" },
+            { heading: "Single Fare", type: "number" },
+            { heading: "Amount", type: "number" },
+          ]}
+          data={fares}
+          setData={setFares}
         />
+        <div className="m-4 grid gap-6 mb-1 md:grid-cols-2 xl:grid-cols-4">
+          <Input label={"Total Rs."} name="totalRs" type="number" />
+          <Input
+            label={"Advance Admissible"}
+            name="admissibleAdvance"
+            type="number"
+          />
+          <Input label={"Passed For Rs."} name="passedRs" type="number" />
+          <Input
+            label={"Debitable to LTC Advance Dr./Mr./Mrs./Ms."}
+            name="title"
+            type="text"
+          />
         </div>
-      <CommentBox onAccept={accountsOnAccept} onReview={accountsOnReview} />
+        <CommentBox onAccept={accountsOnAccept} onReview={accountsOnReview} />
       </div>
     </>
   );

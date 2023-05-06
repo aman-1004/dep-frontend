@@ -28,7 +28,6 @@ export default function AuditTaSubmission() {
     auditTaData["status"] = status;
     auditTaData["formId"] = id;
 
-    console.log(auditTaData);
 
     fetch("/api/submitAuditTaData", {
       method: "POST",
@@ -38,7 +37,6 @@ export default function AuditTaSubmission() {
      },
     }).then(handleAuditTaResponse);
 
-    console.log(auditTaData);
   };
 
   const auditOnTaReview = (e) => {
@@ -49,7 +47,6 @@ export default function AuditTaSubmission() {
     auditTaData["status"] = status;
     auditTaData["formId"] = id;
 
-    console.log(auditTaData);
 
     fetch("/api/submitAuditTaData", {
       method: "POST",
@@ -59,7 +56,6 @@ export default function AuditTaSubmission() {
      },
     }).then(handleAuditTaResponse);
 
-    console.log(auditTaData);
   };
 
   return (

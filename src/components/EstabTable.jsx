@@ -20,7 +20,7 @@ export default function EstabTable() {
     })
       .then((res) => res.json())
       .then(setLtcData);
-    console.log("ltcData", ltcData);
+  
 
     fetch("/api/getOldLTCInfo", {
       method: "POST",

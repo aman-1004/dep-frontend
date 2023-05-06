@@ -31,7 +31,6 @@ function App() {
 
 function _App() {
   let [user, setUser] = useContext(LoginContext);
-  console.log(user, "From _app");
   if (user == null) return <Login />;
   return <Dashboard />;
 }

@@ -20,7 +20,6 @@ let stageName = [
 ];
 
 function PendingTaTable(props) {
-  console.log(props.data);
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg max-w-screen-xl mx-auto">
       <table className="w-full text-sm text-left text-gray-500">
@@ -64,7 +63,7 @@ function PendingTaTable(props) {
                 <td className="px-6 py-4">{stageName[item.stageCurrent]}</td>
                 <td className="px-6 py-4">
                   <Link
-                    to={"/establish/viewTa/"}
+                    to={`../viewTa/${item.id}`}
                     className="text-blue-500 font-semibold hover:underline"
                   >
                     View Application{" "}

@@ -28,7 +28,6 @@ export default function RegistrarTaSubmission() {
     registrarTaData["status"] = status;
     registrarTaData["formId"] = id;
 
-    console.log(registrarTaData);
 
     fetch("/api/submitRegistrarTaData", {
       method: "POST",
@@ -38,7 +37,6 @@ export default function RegistrarTaSubmission() {
      },
     }).then(handleRegistrarTaResponse);
 
-    console.log(registrarTaData);
   };
 
   const registrarOnTaReview = (e) => {
@@ -49,7 +47,6 @@ export default function RegistrarTaSubmission() {
     registrarTaData["status"] = status;
     registrarTaData["formId"] = id;
 
-    console.log(registrarTaData);
 
     fetch("/api/submitRegistrarTaData", {
       method: "POST",
@@ -59,7 +56,6 @@ export default function RegistrarTaSubmission() {
      },
     }).then(handleRegistrarTaResponse);
 
-    console.log(registrarTaData);
   };
 
   return (

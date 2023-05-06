@@ -25,7 +25,6 @@ export default function HodSubmission() {
     hodData["status"] = status;
     hodData["formId"] = id;
 
-    // console.log(hodData);
 
     fetch("/api/submitHodData", {
       method: "POST",
@@ -35,7 +34,6 @@ export default function HodSubmission() {
       },
     }).then(handleHodResponse);
 
-    // console.log(hodData);
   };
 
   const hodOnReview = (e) => {
@@ -46,7 +44,6 @@ export default function HodSubmission() {
     hodData["status"] = status;
     hodData["formId"] = id;
 
-    // console.log(hodData);
 
     fetch("/api/submitHodData", {
       method: "POST",
@@ -56,7 +53,6 @@ export default function HodSubmission() {
       },
     }).then(handleHodResponse);
 
-    // console.log(hodData);
   };
 
   return (

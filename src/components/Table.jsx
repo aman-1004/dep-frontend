@@ -11,9 +11,7 @@ export default function Table({ fields, data, setData, readOnly = false }) {
     setData(data => data.filter((obj) => obj!==item))
   }
   const newRef = useRef(null);
-  console.log(data);
   const addNewRow = () => {
-    console.log("New Row");
     const inputs = [...newRef.current.querySelectorAll("input")];
     const newRow = Object.fromEntries(
       new Map(
@@ -32,7 +30,6 @@ export default function Table({ fields, data, setData, readOnly = false }) {
       )
     );
     setData((data) => [...data, newRow]);
-    console.log(newRow);
   };
   return (
     <>

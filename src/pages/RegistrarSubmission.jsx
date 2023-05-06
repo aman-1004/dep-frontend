@@ -28,7 +28,6 @@ export default function RegistrarSubmission() {
     registrarData["status"] = status;
     registrarData["formId"] = id;
 
-    console.log(registrarData);
 
     fetch("/api/submitRegistrarData", {
       method: "POST",
@@ -38,7 +37,6 @@ export default function RegistrarSubmission() {
      },
     }).then(handleRegistrarResponse);
 
-    console.log(registrarData);
   };
 
   const registrarOnReview = (e) => {
@@ -49,7 +47,6 @@ export default function RegistrarSubmission() {
     registrarData["status"] = status;
     registrarData["formId"] = id;
 
-    console.log(registrarData);
 
     fetch("/api/submitRegistrarData", {
       method: "POST",
@@ -59,7 +56,6 @@ export default function RegistrarSubmission() {
      },
     }).then(handleRegistrarResponse);
 
-    console.log(registrarData);
   };
 
   return (

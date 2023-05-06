@@ -14,22 +14,22 @@ import toast from "react-hot-toast";
 
 export default function NewTaApplication() {
   const [ltcInfo, setLtcInfo] = useState(taInfo[0]);
-  console.log("ltc", ltcInfo);
   const { ltcId } = useParams();
   const navigate = useNavigate();
 
   const [peopleInTa, setPeopleInTa] = useState(taInfo[0].peopleInvolved);
-  const [journeyDetails, setJourneyDetails] = useState(taInfo[0].journeyDetails);
+  const [journeyDetails, setJourneyDetails] = useState(
+    taInfo[0].journeyDetails
+  );
 
   const handleInfo = (json) => {
-    console.log("recieved", json);
     setLtcInfo(json);
     setPeopleInTa(json.peopleInvolved);
-    setJourneyDetails(json.journeyDetails);
+    // setJourneyDetails(json.journeyDetails);
   };
 
   useEffect(() => {
-    fetch("/api/getTAInfo", {
+    fetch("/api/getLTCInfo", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -38,7 +38,6 @@ export default function NewTaApplication() {
     })
       .then((res) => res.json())
       .then(handleInfo);
-    console.log(ltcInfo);
   }, []);
 
   const handleTaRes = (res) => {
@@ -66,10 +65,8 @@ export default function NewTaApplication() {
       "certification",
     ];
 
-    // console.log(e.target.querySelectorAll("input"));
     const taFormData = { ltcId: ltcId };
     const inputs = e.target.querySelectorAll("input");
-    // console.log(inputs);
     // formData['name'] = inputs[0].value;
     for (let i = 0; i < 13; i++) {
       taFormData[arr[i]] = inputs[i].value;
@@ -78,7 +75,6 @@ export default function NewTaApplication() {
     taFormData["journeyDetails"] = journeyDetails;
     taFormData["stageCurrent"] = 1;
     taFormData["stageRedirect"] = null;
-    console.log(taFormData);
     // a =
 
     fetch("/api/createNewTAApplication", {
@@ -130,7 +126,7 @@ export default function NewTaApplication() {
                 label={"Date of Joining"}
                 name="date"
                 type="date"
-                value={ltcInfo.user.dateOfJoining}
+                value={new Date(ltcInfo.user.dateOfJoining).toISOString().substring(0, 10)}
               />
             </div>
             <h3 className="font-semibold text-l text-gray-900 m-4 flex">
@@ -143,9 +139,14 @@ export default function NewTaApplication() {
                 label={"From"}
                 name="leaveFrom"
                 type="date"
-                value={ltcInfo.fromDate}
+                value={new Date(ltcInfo.fromDate).toISOString().substring(0, 10)}
               />
-              <Input label={"To"} name="leaveTo" type="date" value={ltcInfo.toDate} />
+              <Input
+                label={"To"}
+                name="leaveTo"
+                type="date"
+                value={new Date(ltcInfo.toDate).toISOString().substring(0, 10)}
+              />
               {/* <h3>Prefix Details</h3>
             <Input label={"From"} name="prefixFrom" type="date" />
             <Input label={"To"} name="prefixTo" type="date" />

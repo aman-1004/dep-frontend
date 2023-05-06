@@ -8,13 +8,11 @@ import { toast } from "react-hot-toast";
 export default function Login() {
   const [userInfo, setUserInfo] = useContext(LoginContext);
   const handleStatus = async (res) => {
-    console.log("response status is", res.status);
     if (res.status != 200) {
       toast("You are not authoried");
       setUserInfo(null);
     } else {
       const data = await res.json();
-      console.log(data);
       setUserInfo(data);
     }
   };
