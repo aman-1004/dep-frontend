@@ -129,14 +129,14 @@ export default function ReviewApplication() {
           </div>
 
           <div className="flex ml-4 justify-center space-x-10 items-center my-4">
-          <span className="font-semibold text-gray-900"> Spouse Entitled for LTC</span>
-            <Input className="mt-3"
-              readOnly
-              label={""}
-              name="spouseEntitled"
-              type="checkbox"
-              checked={ltcData.spouseEntitled}
-            />
+
+
+
+
+
+
+
+
           </div>
 
           <div className=" grid gap-6 mt-4 mb-2 md:grid-cols-2 xl:grid-cols-4">
@@ -192,6 +192,14 @@ export default function ReviewApplication() {
             setData={setPeople}
           />
           <div className="flex ml-4 justify-center space-x-10 items-center my-4">
+            <span className="font-semibold text-gray-900"> Spouse Entitled for LTC</span>
+            <Input className="mt-3"
+              readOnly
+              label={""}
+              name="spouseEntitled"
+              type="checkbox"
+              checked={ltcData.spouseEntitled}
+            />
             <span className="font-semibold text-gray-900"> Advance Required</span>
             <Input className="mt-3"
               readOnly
