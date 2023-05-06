@@ -56,7 +56,7 @@ export default function Table({ fields, data, setData, readOnly = false }) {
                     )}
                   </td>
                 ))}
-                {!readOnly && (<button onClick={(e) => removePerson(e,item)}>X</button>)}
+                {!readOnly && (<button className="m-2 bg-red-500 px-1 rounded-md text-white font-bold" onClick={(e) => removePerson(e,item)}>X</button>)}
               </tr>
             ))}
             {!readOnly && (
@@ -81,7 +81,7 @@ export default function Table({ fields, data, setData, readOnly = false }) {
         {!readOnly && (
           <>
           <button type="button" onClick={addNewRow} className="px-3 py-2 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
-            + Add New Row
+            + Add Row
           </button>
           </>
         )}

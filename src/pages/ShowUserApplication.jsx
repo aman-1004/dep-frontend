@@ -12,12 +12,16 @@ export default function ShowUserApplication() {
 
   return (
     <>
+    <div className="max-w-screen-lg mx-auto py-4">
+      <div className="pb-8">
 
       <CommentBox readOnly/>
+      </div>
       <Modal title={"View Application"}>
         <ReviewApplication />
 
       </Modal>
+    </div>
     </>
   );
   }

@@ -53,10 +53,10 @@ export default function NewApplication() {
     for (let i = 0; i < 16; i++) {
       formData[arr[i]] = inputs[i].value;
     }
-    formData["advanceRequired"]=document.querySelector('[name="advanceRequired"]').checked;
-    formData["encashmentAvailed"]=document.querySelector('[name="encashment"]').checked;
-    formData["encashmentNoOfDays"]=document.querySelector('[name="encashmentDays"]').value;
-    formData["certification"]=document.querySelector('[name="certification"]').value;
+    formData["advanceRequired"] = document.querySelector('[name="advanceRequired"]').checked;
+    formData["encashmentAvailed"] = document.querySelector('[name="encashment"]').checked;
+    formData["encashmentNoOfDays"] = document.querySelector('[name="encashmentDays"]').value;
+    formData["certification"] = document.querySelector('[name="certification"]').value;
 
     formData["peopleInvolved"] = people;
     formData["stageCurrent"] = 1;
@@ -83,9 +83,9 @@ export default function NewApplication() {
           <InputGroup>
             <div className="m-4 grid gap-6 mb-1 md:grid-cols-2 xl:grid-cols-4">
               <Input label={"Name"} name="name" type="text" value={`${user.firstName} ${user.lastName}`} />
-              <Input label={"Designation"} name="Designation" type="text" value={user.designation}/>
-              <Input label={"Date of Joining"} name="date" type="date" value={new Date(user.dateOfJoining).toISOString().substring(0, 10)}/>
-              <Input label={"Pay Level"} name="payLevel" type="number" value={user.role.payLevel}/>
+              <Input label={"Designation"} name="Designation" type="text" value={user.designation} />
+              <Input label={"Date of Joining"} name="date" type="date" value={new Date(user.dateOfJoining).toISOString().substring(0, 10)} />
+              <Input label={"Pay Level"} name="payLevel" type="number" value={user.role.payLevel} />
             </div>
             <h3 className="font-semibold text-l m-4 text-gray-900">
               Leave Details
@@ -123,13 +123,7 @@ xl:grid-cols-4"
               <Input label={"To"} name="suffixTo" type="date" />
 
               <div className="flex ml-4 justify-around items-center">
-                <h3 className="font-semibold">Spouse Entitled for LTC</h3>
-                <Input
-                  className="m-auto"
-                  label={""}
-                  name="spouseEntitled"
-                  type="checkbox"
-                />
+
               </div>
             </div>
             <div
@@ -169,13 +163,22 @@ xl:grid-cols-4"
               setData={setPeople}
             />
             <div className="flex ml-4 justify-center space-x-10 items-center my-4">
-              <h3 className="font-semibold">Advance Required</h3>
+              <h3 className="font-semibold">Spouse Entitled for LTC</h3>
               <Input
-                className="ml-8 mt-6"
+                className="mt-2"
                 label={""}
-                name="advanceRequired"
+                name="spouseEntitled"
                 type="checkbox"
               />
+              <h3 className="font-semibold">Advance Required</h3>
+              <span className="mt-2">
+                <Input
+                  className=""
+                  label={""}
+                  name="advanceRequired"
+                  type="checkbox"
+                />
+              </span>
             </div>
             <h3 className="font-semibold text-l m-4 text-gray-900">
               Details for Encashment of Earned Leave

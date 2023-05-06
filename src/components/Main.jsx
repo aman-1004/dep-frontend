@@ -22,11 +22,13 @@ import RegistrarTaSubmission from "../pages/RegistrarTaSubmission.jsx";
 import LiveTaApplication from "../pages/LiveTaApplication.jsx";
 import ShowUserApplication from "../pages/ShowUserApplication.jsx";
 import ShowUserTaApplication from "../pages/ShowUserTaApplication.jsx";
+import NotificationPage from "../pages/NotificationPage.jsx"
 import UserProfile from '../pages/UserProfile.jsx'
 import OfficeOrder from "./OfficeOrder.jsx";
 export default function Main() {
   return (
     <Routes>
+      <Route path="notification" element={<NotificationPage />} />
       <Route path="applicant">
         <Route path="new" element={<NewApplication />} />
         <Route path="live" element={<LiveApplication />} />
