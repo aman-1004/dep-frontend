@@ -5,6 +5,7 @@ import ReviewApplication from "./ReviewApplication.jsx";
 import { useNavigate, useParams } from "react-router-dom";
 import Form from "../components/Form.jsx";
 import { toast } from 'react-hot-toast';
+import OfficeOrder from "../components/OfficeOrder.jsx";
 
 export default function ShowUserApplication() {
   const { id } = useParams();
@@ -15,7 +16,7 @@ export default function ShowUserApplication() {
         <h3>click on View Application</h3>
       </Form>
       <Modal>
-        <ReviewApplication />
+        <OfficeOrder />
       </Modal>
     </>
   );

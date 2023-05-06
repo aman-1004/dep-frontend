@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { LoginContext } from "../LoginContext";
 import { useContext } from "react";
 import ProfileAvatar from "./ProfileAvatar";
@@ -9,6 +9,7 @@ import { toast } from "react-hot-toast";
 import ProfileImage from '../../public/user.png'
 
 export default function Navbar() {
+  const location = useLocation();
   const [user, setUser] = useContext(LoginContext);
 
   const stakeHolderType = [
@@ -27,14 +28,19 @@ export default function Navbar() {
     "dean"
   ]
 
+  useEffect(()=>{
+    setAvatar(false)
+  }, [location])
+
   const catMenu = useRef(null)
   const [openSlide, setopenSlide] = useState("");
 
   const closeOpenMenus = (e) => {
-    if (catMenu.current && openSlide && !catMenu.current.contains(e.target)) {
-      setopenSlide(false)
+    if (catMenu.current && avatar && !catMenu.current.contains(e.target)) {
+      setAvatar(false)
     }
   }
+
 
   document.addEventListener('mousedown', closeOpenMenus)
 
@@ -48,12 +54,12 @@ export default function Navbar() {
   }
 
   const [avatar, setAvatar] = useState(false)
-  const handleClick = () => setAvatar(!avatar)
+  const handleClick = () => setAvatar(!avatar) 
 
   return (
     <>
       <div className="bg-gray-200 border-gray-200" ref={catMenu}>
-        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 relative">
+        <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 relative" >
 
           {/* Name + Logo */}
           <div className="flex">
@@ -79,7 +85,7 @@ export default function Navbar() {
                   <ProfileAvatar />
                 </li>
                 <li className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 " onClick={logoutHandle}>
-                  <button  > Logout </button>
+                  <button> Logout </button>
                 </li>
               </ul>
             </div>
