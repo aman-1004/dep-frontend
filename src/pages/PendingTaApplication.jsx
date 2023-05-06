@@ -4,7 +4,7 @@ import PendingTaTable from "../components/PendingTaTable.jsx";
 import { useEffect } from "react";
 
 export default function PendingTaApplication() {
-  const [pendingTaList, setPendingTaList] = useState(taInfo);
+  const [pendingTaList, setPendingTaList] = useState([]);
 
   const getTaData = () => {
     fetch("/api/listPendingTAApplication", { method: "POST" })
