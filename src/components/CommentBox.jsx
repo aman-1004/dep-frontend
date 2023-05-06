@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import Input from "./Input";
-import { json, useParams } from "react-router";
+import { json, useLocation, useParams } from "react-router";
 export default function CommentBox({ onAccept, onReview, readOnly }) {
   const { id } = useParams()
   const [comments, setComments] = useState([])
-
+  const location = useLocation()
   useEffect(() => {
-    fetch("/api/getComments", {
+    const commentEndpoint = location.pathname.toLowerCase().includes("ta") ? "/api/getTAComments": "/api/getComments"
+    fetch(commentEndpoint, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ ltcId: id })
+      body: JSON.stringify({ id: id })
     }).then(res => res.json()).then(setComments)
   }, [])
 
