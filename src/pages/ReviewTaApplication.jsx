@@ -16,8 +16,6 @@ export default function ReviewTaApplication() {
   const [people, setPeople] = useState(taData.peopleInvolved);
   const [journey, setJourney] = useState(taData.journeyDetails);
 
-  console.log("getting taData");
-  console.log(taData);
 
   const handleInfo = (json) => {
     setTaData(json);

@@ -11,7 +11,6 @@ function formatDate(date) {
 }
 export default function UserProfile() {
     const [user, setUser] = useContext(LoginContext) 
-    useEffect(()=>console.log('user is', user), [])
   return (
     // <div>{JSON.stringify(user)}</div>
   <Form>
