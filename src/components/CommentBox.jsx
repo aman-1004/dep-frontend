@@ -22,14 +22,14 @@ export default function CommentBox({ onAccept, onReview, readOnly }) {
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-left text-gray-500">
           <thead className="text-gray-700 uppercase bg-gray-50">
-            <tr>
+            {comments.length != 0 && (<tr>
               <th scope="col" className="px-6 py-1">
                 Commentor
               </th>
               <th scope="col" className="px-6 py-1">
                 Comment
               </th>
-            </tr>
+            </tr>)}
           </thead>
           <tbody>
             {comments.map(comment => (
@@ -53,12 +53,12 @@ export default function CommentBox({ onAccept, onReview, readOnly }) {
               htmlFor="comment"
               className="block m-2 text-sm font-medium text-gray-900"
             >
-              Add a comment
+              {/* Add a comment */}
             </label>
             <textarea
               className=" resize-none block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 my-4"
               name="comment"
-              placeholder=""
+              placeholder="Add Comment"
             ></textarea>
           </div>
           <button
