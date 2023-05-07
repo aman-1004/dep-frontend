@@ -8,8 +8,8 @@ const Modal = ({children, ...props}) => {
   }
   return (
     <div>
-      <button className="font-medium text-blue-600 dark:text-blue-500 hover:underline" onClick={toggleVisible}>{props.title} </button>
-      {/* <button className="font-medium text-blue-600 dark:text-blue-500 hover:underline" onClick={toggleVisible}> View Application </button> */}
+    { props.title ? (<button className="font-medium text-blue-600 dark:text-blue-500 hover:underline" onClick={toggleVisible}>{props.title} </button>): (
+      <button className="font-medium text-blue-600 dark:text-blue-500 hover:underline" onClick={toggleVisible}> View Application </button> )}
 
     { visible && (<>
       <div id='modaloverlay' onClick={toggleVisible}/>
