@@ -2,7 +2,7 @@ import Form from "../components/Form.jsx";
 import InputGroup from "../components/InputGroup.jsx";
 import Input from "../components/Input.jsx";
 import Table from "../components/Table.jsx";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import EstabSubmission from "./EstabSubmission.jsx";
 import AccountsSubmission from "./AccountsSubmission.jsx";
 import CommentBox from "../components/CommentBox.jsx";
@@ -16,6 +16,7 @@ export default function NewTaApplication() {
   const [ltcInfo, setLtcInfo] = useState(taInfo[0]);
   const { ltcId } = useParams();
   const navigate = useNavigate();
+  const imageRef = useRef(null)
 
   const [peopleInTa, setPeopleInTa] = useState(taInfo[0].peopleInvolved);
   const [journeyDetails, setJourneyDetails] = useState(
@@ -76,17 +77,17 @@ export default function NewTaApplication() {
     taFormData["stageCurrent"] = 1;
     taFormData["stageRedirect"] = null;
     // a =
+    let fd = new FormData()
+    fd.append('json', JSON.stringify(taFormData))
+    for(let image of imageRef.current.files) {
+      fd.append('file', (image))
+    }
 
     fetch("/api/createNewTAApplication", {
       method: "POST",
-      body: JSON.stringify(taFormData),
-      headers: {
-        "Content-Type": "application/json",
-      },
+      body: fd,
     }).then(handleTaRes);
   };
-
-  // a =
 
   return (
     <>
@@ -282,7 +283,7 @@ export default function NewTaApplication() {
             <div className="m-4 grid gap-6 mb-1 md:grid-cols-2 xl:grid-cols-4">
               <Input label={"Total"} name="totalAmount" type="number" />
             </div>
-
+            <input ref={imageRef} name="file" type="file" multiple/>
             <h3 className="font-semibold text-l text-gray-900 m-4 flex">
               CERTIFIED THAT:
             </h3>
