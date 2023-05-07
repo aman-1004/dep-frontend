@@ -32,7 +32,7 @@ export default function EstabTaSubmission() {
     estabTaData["formId"]=id;
 
   
-    fetch("/api/submitEstabTaData",{
+    fetch("/api/submitTAEstabData",{
       method:"POST",
       body:JSON.stringify(estabTaData),
       headers: {
@@ -52,7 +52,7 @@ export default function EstabTaSubmission() {
   estabTaData["formId"]=id;
 
 
-  fetch("/api/submitEstabTaData",{
+  fetch("/api/submitTAEstabData",{
     method:"POST",
     body:JSON.stringify(estabTaData),
     headers : {

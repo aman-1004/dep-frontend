@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router";
 import NewApplication from "../pages/NewApplication.jsx";
 import LiveApplication from "../pages/LiveApplication.jsx";
+import DoneLTC from "../pages/DoneLTC.jsx";
 import PastApplication from "../pages/PastApplication.jsx";
 import PendingApplication from "../pages/PendingApplication.jsx";
 import ReviewApplication from "../pages/ReviewApplication.jsx";
@@ -22,8 +23,8 @@ import RegistrarTaSubmission from "../pages/RegistrarTaSubmission.jsx";
 import LiveTaApplication from "../pages/LiveTaApplication.jsx";
 import ShowUserApplication from "../pages/ShowUserApplication.jsx";
 import ShowUserTaApplication from "../pages/ShowUserTaApplication.jsx";
-import NotificationPage from "../pages/NotificationPage.jsx"
-import UserProfile from '../pages/UserProfile.jsx'
+import NotificationPage from "../pages/NotificationPage.jsx";
+import UserProfile from "../pages/UserProfile.jsx";
 import OfficeOrder from "./OfficeOrder.jsx";
 export default function Main() {
   return (
@@ -34,10 +35,9 @@ export default function Main() {
         <Route path="live" element={<LiveApplication />} />
         <Route path="view">
           <Route path=":id" element={<ShowUserApplication />} />
-        </Route> 
-        <Route path="newTa">
-          <Route path=":ltcId" element={<NewTaApplication />} />
         </Route>
+        <Route path="newTa/:ltcId" element={<NewTaApplication />} />
+        <Route path="newTa" element={<DoneLTC />} />
         <Route path="liveTa" element={<LiveTaApplication />} />
         <Route path="viewTa">
           <Route path=":id" element={<ShowUserTaApplication />} />
@@ -105,7 +105,6 @@ export default function Main() {
         </Route>
       </Route>
       <Route path="avatar" element={<UserProfile />} />
-        
     </Routes>
   );
 }

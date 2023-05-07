@@ -9,7 +9,7 @@ export default function LiveApplication() {
     setLiveApplications(data);
   };
   useEffect(() => {
-    fetch("/api/listLiveLTCApplications", {
+    fetch("/api/listDoneLTCApplications", {
       method: "POST",
     })
       .then((res) => res.json())

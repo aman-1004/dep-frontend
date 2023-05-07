@@ -29,7 +29,7 @@ export default function AuditTaSubmission() {
     auditTaData["formId"] = id;
 
 
-    fetch("/api/submitAuditTaData", {
+    fetch("/api/submitTAAuditData", {
       method: "POST",
       body: JSON.stringify(auditTaData),
       headers : {
@@ -48,7 +48,7 @@ export default function AuditTaSubmission() {
     auditTaData["formId"] = id;
 
 
-    fetch("/api/submitAuditTaData", {
+    fetch("/api/submitTAAuditData", {
       method: "POST",
       body: JSON.stringify(auditTaData),
       headers : {

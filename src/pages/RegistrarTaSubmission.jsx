@@ -29,7 +29,7 @@ export default function RegistrarTaSubmission() {
     registrarTaData["formId"] = id;
 
 
-    fetch("/api/submitRegistrarTaData", {
+    fetch("/api/submitTARegistrarData", {
       method: "POST",
       body: JSON.stringify(registrarTaData),
       headers : {
@@ -48,7 +48,7 @@ export default function RegistrarTaSubmission() {
     registrarTaData["formId"] = id;
 
 
-    fetch("/api/submitRegistrarTaData", {
+    fetch("/api/submitTARegistrarData", {
       method: "POST",
       body: JSON.stringify(registrarTaData),
       headers : {

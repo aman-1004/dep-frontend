@@ -49,7 +49,7 @@ export default function AccountsTaSubmission() {
     accountsTaData["comment"]=accountsTaComment.value;
     
   
-    fetch("/api/submitAccountsTaData", {
+    fetch("/api/submitTAAccountsData", {
       method:"POST",
       body:JSON.stringify(accountsTaData),
       headers : {
@@ -85,7 +85,7 @@ export default function AccountsTaSubmission() {
     accountsTaData["comment"]=accountsTaComment.value;
     
   
-    fetch("/api/submitAccountsTaData",{
+    fetch("/api/submitTAAccountsData",{
       method:"POST",
       body:JSON.stringify(accountsTaData),
       headers : {
