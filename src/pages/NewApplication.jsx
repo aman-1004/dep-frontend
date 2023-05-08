@@ -2,7 +2,7 @@ import Form from "../components/Form.jsx";
 import InputGroup from "../components/InputGroup.jsx";
 import Input from "../components/Input.jsx";
 import Table from "../components/Table.jsx";
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import EstabSubmission from "./EstabSubmission.jsx";
 import AccountsSubmission from "./AccountsSubmission.jsx";
 import CommentBox from "../components/CommentBox.jsx";
@@ -14,6 +14,7 @@ export default function NewApplication() {
   const [user, setUser] = useContext(LoginContext);
   const [people, setPeople] = useState([]);
   const navigate = useNavigate();
+  const imageRef = useRef(null)
   const handleRes = (res) => {
     if (res.status == 200) {
       navigate("/applicant/live")
@@ -63,13 +64,14 @@ export default function NewApplication() {
     formData["stageRedirect"] = null;
 
     // a =
-
+    let fd = new FormData()
+    fd.append('json', JSON.stringify(formData))
+    for(let image of imageRef.current.files) {
+      fd.append('file', (image))
+    }
     fetch("/api/createNewLTCApplications", {
       method: "POST",
-      body: JSON.stringify(formData),
-      headers: {
-        "Content-Type": "application/json",
-      },
+      body: fd,
     }).then(handleRes);
   };
 
@@ -199,11 +201,13 @@ xl:grid-cols-4"
                 type="number"
               />
             </div>
+            <input ref={imageRef} name="file" type="file" multiple/>
             <div className="flex ml-4 justify-start space-x-10 items-center my-8">
               <p className="font-semibold">
                 The information, as given above is true to the best of my
                 knowledge and belief
               </p>
+              
               <Input name="certification" type="checkbox" />
             </div>
 

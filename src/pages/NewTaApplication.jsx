@@ -2,7 +2,7 @@ import Form from "../components/Form.jsx";
 import InputGroup from "../components/InputGroup.jsx";
 import Input from "../components/Input.jsx";
 import Table from "../components/Table.jsx";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import EstabSubmission from "./EstabSubmission.jsx";
 import AccountsSubmission from "./AccountsSubmission.jsx";
 import CommentBox from "../components/CommentBox.jsx";
@@ -11,16 +11,17 @@ import { useNavigate, useParams } from "react-router";
 import { useEffect } from "react";
 import { taInfo } from "../dummy/taInfos.js";
 import toast from "react-hot-toast";
+import { ltcInfo as ltcdummy } from "../dummy/ltcInfos.js";
 
 export default function NewTaApplication() {
-  const [ltcInfo, setLtcInfo] = useState(taInfo[0]);
+  const [ltcInfo, setLtcInfo] = useState(ltcdummy[0]);
   const { ltcId } = useParams();
   const navigate = useNavigate();
-
-  const [peopleInTa, setPeopleInTa] = useState(taInfo[0].peopleInvolved);
-  const [journeyDetails, setJourneyDetails] = useState(
-    taInfo[0].journeyDetails
-  );
+  const imageRef = useRef(null);
+  console.log("getting ltcInfo");
+  console.log(ltcInfo);
+  const [peopleInTa, setPeopleInTa] = useState(ltcInfo.peopleInvolved);
+  const [journeyDetails, setJourneyDetails] = useState([]);
 
   const handleInfo = (json) => {
     setLtcInfo(json);
@@ -29,6 +30,7 @@ export default function NewTaApplication() {
   };
 
   useEffect(() => {
+    console.log("Inside UseEffect");
     fetch("/api/getLTCInfo", {
       method: "POST",
       headers: {
@@ -38,6 +40,7 @@ export default function NewTaApplication() {
     })
       .then((res) => res.json())
       .then(handleInfo);
+    console.log(ltcInfo);
   }, []);
 
   const handleTaRes = (res) => {
@@ -76,17 +79,17 @@ export default function NewTaApplication() {
     taFormData["stageCurrent"] = 1;
     taFormData["stageRedirect"] = null;
     // a =
+    let fd = new FormData();
+    fd.append("json", JSON.stringify(taFormData));
+    for (let image of imageRef.current.files) {
+      fd.append("file", image);
+    }
 
     fetch("/api/createNewTAApplication", {
       method: "POST",
-      body: JSON.stringify(taFormData),
-      headers: {
-        "Content-Type": "application/json",
-      },
+      body: fd,
     }).then(handleTaRes);
   };
-
-  // a =
 
   return (
     <>
@@ -126,7 +129,9 @@ export default function NewTaApplication() {
                 label={"Date of Joining"}
                 name="date"
                 type="date"
-                value={new Date(ltcInfo.user.dateOfJoining).toISOString().substring(0, 10)}
+                value={new Date(ltcInfo.user.dateOfJoining)
+                  .toISOString()
+                  .substring(0, 10)}
               />
             </div>
             <h3 className="font-semibold text-l text-gray-900 m-4 flex">
@@ -139,7 +144,9 @@ export default function NewTaApplication() {
                 label={"From"}
                 name="leaveFrom"
                 type="date"
-                value={new Date(ltcInfo.fromDate).toISOString().substring(0, 10)}
+                value={new Date(ltcInfo.fromDate)
+                  .toISOString()
+                  .substring(0, 10)}
               />
               <Input
                 label={"To"}
@@ -160,15 +167,21 @@ export default function NewTaApplication() {
             /> */}
               <Input
                 label={"Advance Drawn"}
-                name="advanceDrawnAmount"
+                name="advanceRequired"
                 type="number"
-                value={ltcInfo.advanceDrawn}
+                value={ltcInfo.advanceRequired}
               />
               <Input
                 label={"Advance Drawn Date"}
                 name="advanceDrawnDate"
                 type="date"
-                value={ltcInfo.advanceDrawnDate}
+                value={
+                  ltcInfo.advanceDrawnDate
+                    ? new Date(ltcInfo.advanceDrawnDate)
+                        .toISOString()
+                        .substring(0, 10)
+                    : ""
+                }
               />
               {/* <Input label={"Home Town"} name="homeTown" type="text" /> */}
               <Input
@@ -282,7 +295,7 @@ export default function NewTaApplication() {
             <div className="m-4 grid gap-6 mb-1 md:grid-cols-2 xl:grid-cols-4">
               <Input label={"Total"} name="totalAmount" type="number" />
             </div>
-
+            <input ref={imageRef} name="file" type="file" multiple />
             <h3 className="font-semibold text-l text-gray-900 m-4 flex">
               CERTIFIED THAT:
             </h3>

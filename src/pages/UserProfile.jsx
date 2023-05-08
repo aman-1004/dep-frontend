@@ -29,7 +29,8 @@ export default function UserProfile() {
         <div className="m-4 grid gap-6 mb-1 md:grid-cols-2 xl:grid-cols-4">
           <Input label={"First Name"} name="First Name" type="text" value={user.firstName} readOnly />
           <Input label={"Last Name"} name="Last Name" type="text" value={user.lastName} readOnly />
-          {/* <Input label={"Designation"} name="Designation" type="text" value={user.designation} readOnly /> */}
+          <Input label={"Designation"} name="Designation" type="text" value={user.designation} readOnly />
+          <Input label={"Pay Level"} name="Pay Level" type="int" value={user.payLevel} readOnly />
           <Input label={"Date Of Joining"} name="Date of Joining" type="date" value={formatDate(user.dateOfJoining)} readOnly />
         </div>
         <div className='flex items-center mt-4'>

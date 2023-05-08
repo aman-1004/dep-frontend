@@ -29,7 +29,7 @@ export default function DeanTaSubmission() {
     deanTaData["formId"] = id;
 
 
-    fetch("/api/submitDeanTaData", {
+    fetch("/api/submitTADeanData", {
       method: "POST",
       body: JSON.stringify(deanTaData),
       headers : {
@@ -48,7 +48,7 @@ export default function DeanTaSubmission() {
     deanTaData["formId"] = id;
 
 
-    fetch("/api/submitDeanTaData", {
+    fetch("/api/submitTADeanData", {
       method: "POST",
       body: JSON.stringify(deanTaData),
       headers : {

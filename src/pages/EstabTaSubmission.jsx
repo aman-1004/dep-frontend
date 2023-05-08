@@ -31,9 +31,11 @@ export default function EstabTaSubmission() {
     estabTaData["formId"] = id;
 
 
-    fetch("/api/submitEstabTaData", {
-      method: "POST",
-      body: JSON.stringify(estabTaData),
+
+  
+    fetch("/api/submitTAEstabData",{
+      method:"POST",
+      body:JSON.stringify(estabTaData),
       headers: {
         "Content-Type": "application/json",
       },
@@ -51,13 +53,14 @@ export default function EstabTaSubmission() {
     estabTaData["formId"] = id;
 
 
-    fetch("/api/submitEstabTaData", {
-      method: "POST",
-      body: JSON.stringify(estabTaData),
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    }).then(handleEstabTaResponse);
+
+  fetch("/api/submitTAEstabData",{
+    method:"POST",
+    body:JSON.stringify(estabTaData),
+    headers : {
+      'Content-Type': 'application/json'
+   },
+  }).then(handleEstabTaResponse);
 
   }
 
