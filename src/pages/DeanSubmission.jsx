@@ -59,12 +59,12 @@ export default function DeanSubmission() {
   };
 
   return (
-    <>
+    <div className='max-w-screen-xl mx-auto mt-4'>
     <Modal>
         <ReviewApplication />
       </Modal>
       <CommentBox onAccept={deanOnAccept} onReview={deanOnReview}  />
-    </>
+    </div>
     
   )
 }
