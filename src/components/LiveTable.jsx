@@ -54,7 +54,7 @@ function LiveTable(props) {
                 {/* <td>{item.user.emailId}</td>
                 <td>{item.user.firstName + " " + item.user.lastName}</td> */}
                 <td className="px-6 py-4">{item.fillDate}</td>
-                <td className="px-6 py-4">{stageName[item.stageCurrent]}</td>
+                <td className="px-6 py-4">{item.stageCurrent == 100 ? <Link to={`/applicant/newTa/${item.id}`} className="text-blue-500 font-semibold" >Fill TA</Link> : stageName[item.stageCurrent]}</td>
                 <td className="px-6 py-4">
                   <Link to={`/applicant/view/${item.id}`} className="text-blue-500 font-semibold">View Application</Link>
                 </td>
