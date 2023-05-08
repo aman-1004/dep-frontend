@@ -33,12 +33,12 @@ export default function Navbar() {
   }, [location])
 
   const catMenu = useRef(null)
-  const [openSlide, setopenSlide] = useState("");
 
   const closeOpenMenus = (e) => {
     if (catMenu.current && avatar && !catMenu.current.contains(e.target)) {
       setAvatar(false)
     }
+    setNotification(false)
   }
 
 
@@ -54,6 +54,7 @@ export default function Navbar() {
   }
 
   const [avatar, setAvatar] = useState(false)
+  const [openNotification, setNotification] = useState(false);
   const handleClick = () => setAvatar(!avatar) 
 
   return (
@@ -67,12 +68,14 @@ export default function Navbar() {
             <span className="self-center text-2xl font-semibold whitespace-nowrap">LTC Portal</span>
           </div>
 
-
           {/* Small Screen */}
           <div className="flex items-center lg:order-2">
-            <NotificationBar />
 
-            <div onClick={handleClick} className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300">
+            <div className="mr-6 pt-1" >
+            <NotificationBar open={openNotification} setOpen={setNotification} />
+            </div>
+
+            <div onClick={handleClick} className="flex mr-3 bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300">
               <img className='w-8 h-8 rounded-full' src={ProfileImage} alt="Avatar" />
             </div>
             <div className={!avatar ? "hidden" : "absolute top-0 right-0 translate-y-10 z-50 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow"} id="user-dropdown">
