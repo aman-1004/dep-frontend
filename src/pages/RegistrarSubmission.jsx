@@ -59,13 +59,13 @@ export default function RegistrarSubmission() {
   };
 
   return (
-    <>
+    <div className='max-w-screen-xl mx-auto mt-4'>
 
     <Modal>
         <ReviewApplication />
       </Modal>
       <CommentBox onAccept={registrarOnAccept} onReview={registrarOnReview}  />
-    </>
+    </div>
     
   )
 }

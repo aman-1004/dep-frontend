@@ -59,12 +59,12 @@ export default function DeanTaSubmission() {
   };
 
   return (
-    <>
+    <div className='max-w-screen-xl mx-auto mt-4'>
     <Modal>
         <ReviewTaApplication />
       </Modal>
       <CommentBox  onAccept={deanOnTaAccept} onReview={deanOnTaReview}   />
-    </>
+    </div>
     
   )
 }

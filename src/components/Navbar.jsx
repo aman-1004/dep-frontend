@@ -33,14 +33,14 @@ export default function Navbar() {
     setAvatar(false);
   }, [location]);
 
-  const catMenu = useRef(null);
-  const [openSlide, setopenSlide] = useState("");
+  const catMenu = useRef(null)
 
   const closeOpenMenus = (e) => {
     if (catMenu.current && avatar && !catMenu.current.contains(e.target)) {
       setAvatar(false);
     }
-  };
+    setNotification(false)
+  }
 
   document.addEventListener("mousedown", closeOpenMenus);
 
@@ -59,8 +59,9 @@ export default function Navbar() {
     );
   };
 
-  const [avatar, setAvatar] = useState(false);
-  const handleClick = () => setAvatar(!avatar);
+  const [avatar, setAvatar] = useState(false)
+  const [openNotification, setNotification] = useState(false);
+  const handleClick = () => setAvatar(!avatar) 
 
   return (
     <>
@@ -80,17 +81,13 @@ export default function Navbar() {
 
           {/* Small Screen */}
           <div className="flex items-center lg:order-2">
-            <NotificationBar />
 
-            <div
-              onClick={handleClick}
-              className="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300"
-            >
-              <img
-                className="w-8 h-8 rounded-full"
-                src={ProfileImage}
-                alt="Avatar"
-              />
+            <div className="mr-6 pt-1" >
+            <NotificationBar open={openNotification} setOpen={setNotification} />
+            </div>
+
+            <div onClick={handleClick} className="flex mr-3 bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300">
+              <img className='w-8 h-8 rounded-full' src={ProfileImage} alt="Avatar" />
             </div>
             <div
               className={
