@@ -58,15 +58,11 @@ export default function HodTaSubmission() {
   };
 
   return (
-    <>
-    <div className='max-w-screen-xl mx-auto'>
-
-    <h3 className="font-semibold text-xl text-gray-900 m-4 flex mx-auto">For use by the  Head of the Department</h3>
+    <div className='max-w-screen-xl mx-auto mt-4'>
       <Modal>
         <ReviewTaApplication />
       </Modal>
       <CommentBox onAccept={hodOnTaAccept} onReview={hodOnTaReview}  />
     </div>
-    </>
   )
 }

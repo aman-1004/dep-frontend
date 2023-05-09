@@ -152,7 +152,9 @@ xl:grid-cols-4"
             <h3 className="font-semibold text-l text-gray-900 m-4 flex">
               Details of People involved in LTC
             </h3>
-            <Table
+
+            <div className='-z-50'>
+            <Table 
               fields={[
                 { heading: "Name", type: "text" },
                 { heading: "Age", type: "number" },
@@ -164,7 +166,8 @@ xl:grid-cols-4"
               ]}
               data={people}
               setData={setPeople}
-            />
+              />
+              </div>
             <div className="flex ml-4 justify-center space-x-10 items-center my-4">
               <h3 className="font-semibold">Spouse Entitled for LTC</h3>
               <Input

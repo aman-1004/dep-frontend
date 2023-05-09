@@ -56,17 +56,15 @@ export default function HodSubmission() {
   };
 
   return (
-    <div className="max-w-screen-xl mx-auto">
+    <div className='max-w-screen-xl mx-auto mt-4'>
 
-    <Form >
-      <h3 className="font-semibold text-xl text-gray-900 m-4 flex mx-auto">
-        For use by the Head of the Department
-      </h3>
-      <Modal>
-        <ReviewApplication />
-      </Modal>
-      <CommentBox onAccept={hodOnAccept} onReview={hodOnReview} />
-    </Form>
+      <Form>
+        <Modal>
+          <ReviewApplication />
+        </Modal>
+        <CommentBox onAccept={hodOnAccept} onReview={hodOnReview} />
+      </Form>
+
     </div>
   );
 }
