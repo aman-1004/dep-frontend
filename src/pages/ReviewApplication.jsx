@@ -192,7 +192,7 @@ export default function ReviewApplication() {
             setData={setPeople}
           />
           <div className="flex ml-4 justify-center space-x-10 items-center my-4">
-            <span className="font-semibold text-gray-900"> Spouse Entitled for LTC</span>
+            <span className="font-semibold text-gray-900" > Spouse Entitled for LTC</span>
             <Input className="mt-3"
               readOnly
               label={""}

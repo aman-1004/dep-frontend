@@ -104,26 +104,26 @@ export default function NewTaApplication() {
                 label={"Name"}
                 name="name"
                 type="text"
-                value={ltcInfo.user.firstName + ltcInfo.user.lastName}
+                value={ltcInfo.user.firstName + ltcInfo.user.lastName} required 
               />
               {/* <Input label={"Emp. Code"} name="empCode" type="number" value={ltcInfo.user.id} /> */}
               <Input
                 label={"Pay Level"}
                 name="payLevel"
                 type="number"
-                value={ltcInfo.user.payLevel}
+                value={ltcInfo.user.payLevel} required 
               />
               <Input
                 label={"Designation"}
                 name="Designation"
                 type="text"
-                value={ltcInfo.user.designation}
+                value={ltcInfo.user.designation} required 
               />
               <Input
                 label={"Department"}
                 name="department"
                 type="text"
-                value={ltcInfo.user.department}
+                value={ltcInfo.user.department} required 
               />
               <Input
                 label={"Date of Joining"}
@@ -131,7 +131,7 @@ export default function NewTaApplication() {
                 type="date"
                 value={new Date(ltcInfo.user.dateOfJoining)
                   .toISOString()
-                  .substring(0, 10)}
+                  .substring(0, 10)} required 
               />
             </div>
             <h3 className="font-semibold text-l text-gray-900 m-4 flex">
@@ -146,13 +146,13 @@ export default function NewTaApplication() {
                 type="date"
                 value={new Date(ltcInfo.fromDate)
                   .toISOString()
-                  .substring(0, 10)}
+                  .substring(0, 10)} required 
               />
               <Input
                 label={"To"}
                 name="leaveTo"
                 type="date"
-                value={new Date(ltcInfo.toDate).toISOString().substring(0, 10)}
+                value={new Date(ltcInfo.toDate).toISOString().substring(0, 10)} required 
               />
               {/* <h3>Prefix Details</h3>
             <Input label={"From"} name="prefixFrom" type="date" />
@@ -304,7 +304,7 @@ export default function NewTaApplication() {
                 The information, as given above is true to the best of my
                 knowledge and belief
               </p>
-              <Input name="certification" type="checkbox" />
+              <Input name="certification" type="checkbox"  required  />
             </div>
             <div className="flex ml-4 justify-center space-x-10 items-center my-8">
               <Input

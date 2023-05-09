@@ -85,10 +85,10 @@ export default function NewApplication() {
         <Form onSubmit={ltcSubmitHandler}>
           <InputGroup>
             <div className="m-4 grid gap-6 mb-1 md:grid-cols-2 xl:grid-cols-4">
-              <Input label={"Name"} name="name" type="text" value={`${user.firstName} ${user.lastName}`} />
-              <Input label={"Designation"} name="Designation" type="text" value={user.designation} />
-              <Input label={"Date of Joining"} name="date" type="date" value={new Date(user.dateOfJoining).toISOString().substring(0, 10)} />
-              <Input label={"Pay Level"} name="payLevel" type="number" value={user.payLevel} />
+              <Input label={"Name"} name="name" type="text" value={`${user.firstName} ${user.lastName}`} required />
+              <Input label={"Designation"} name="Designation" type="text" value={user.designation} required />
+              <Input label={"Date of Joining"} name="date" type="date" value={new Date(user.dateOfJoining).toISOString().substring(0, 10)} required />
+              <Input label={"Pay Level"} name="payLevel" type="number" value={user.payLevel} required />
             </div>
             <h3 className="font-semibold text-l m-4 text-gray-900">
               Leave Details
@@ -100,10 +100,10 @@ xl:grid-cols-4"
               <Input
                 label={"Earned Leave Availed"}
                 name="earnedLeave"
-                type="number"
+                type="number" required
               />
-              <Input label={"From"} name="leaveFrom" type="date" />
-              <Input label={"To"} name="leaveTo" type="date" />
+              <Input label={"From"} name="leaveFrom" type="date" required />
+              <Input label={"To"} name="leaveTo" type="date"  required />
             </div>
             <h3 className="font-semibold text-l m-4 text-gray-900">
               Prefix Details
@@ -112,8 +112,8 @@ xl:grid-cols-4"
               className="m-4 grid gap-6 mb-1 md:grid-cols-2 
 xl:grid-cols-4"
             >
-              <Input label={"From"} name="prefixFrom" type="date" />
-              <Input label={"To"} name="prefixTo" type="date" />
+              <Input label={"From"} name="prefixFrom" type="date"   />
+              <Input label={"To"} name="prefixTo" type="date"   />
             </div>
             <h3 className="font-semibold text-l m-4 text-gray-900">
               Suffix Details
@@ -133,17 +133,17 @@ xl:grid-cols-4"
               className="m-4 grid gap-6 mb-1 md:grid-cols-2 
 xl:grid-cols-4"
             >
-              <Input label={"Home Town"} name="homeTown" type="text" />
+              <Input label={"Home Town"} name="homeTown" type="text" required />
               <Input
                 label={"Nature of Visiting Place"}
                 name="visitNature"
-                type="text"
+                type="text" required 
               />
-              <Input label={"Visiting Place"} name="visitPlace" type="text" />
+              <Input label={"Visiting Place"} name="visitPlace" type="text" required  />
               <Input
                 label={"Total Estimated Fare"}
                 name="estimatedFare"
-                type="number"
+                type="number" required 
               />
             </div>
           </InputGroup>
@@ -204,12 +204,12 @@ xl:grid-cols-4"
             </div>
             <input ref={imageRef} name="file" type="file" multiple/>
             <div className="flex ml-4 justify-start space-x-10 items-center my-8">
-              <p className="font-semibold">
+              <p className="font-semibold"   >
                 The information, as given above is true to the best of my
                 knowledge and belief
               </p>
               
-              <Input name="certification" type="checkbox" />
+              <Input name="certification" type="checkbox"  required  />
             </div>
 
             <div className="flex justify-center">

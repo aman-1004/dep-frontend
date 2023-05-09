@@ -60,30 +60,35 @@ export default function ReviewTaApplication() {
         <div className=" grid gap-6 mt-4 mb-2 md:grid-cols-2 xl:grid-cols-4">
 
           <Input
+           readOnly
             label={"Name"}
             name="name"
             type="text"
             value={taData.user.firstName + taData.user.lastName}
             />
           <Input
+           readOnly
             label={"Emp. Code"}
             name="empCode"
             type="number"
             value={taData.user.id}
             />
           <Input
+           readOnly
             label={"Pay Level"}
             name="payLevel"
             type="number"
             value={taData.user.payLevel}
             />
           <Input
+           readOnly
             label={"Designation"}
             name="Designation"
             type="text"
             value={taData.user.designation}
             />
           <Input
+           readOnly
             label={"Department"}
             name="department"
             type="text"
@@ -91,6 +96,7 @@ export default function ReviewTaApplication() {
             />
 
           <Input
+           readOnly
             label={"Date of Joining"}
             name="date"
             type="date"
@@ -102,6 +108,7 @@ export default function ReviewTaApplication() {
           <div className=" grid gap-6 mt-4 mb-2 md:grid-cols-2 xl:grid-cols-4">
 
           <Input
+           readOnly
             label={"From"}
             name="leaveFrom"
             type="date"
@@ -110,6 +117,7 @@ export default function ReviewTaApplication() {
               .substring(0, 10)}
               />
           <Input
+           readOnly
             label={"To"}
             name="leaveTo"
             type="date"
@@ -129,12 +137,14 @@ export default function ReviewTaApplication() {
               type="checkbox"
             /> */}
           <Input
+           readOnly
             label={"Advance Drawn"}
             name="advanceDrawnAmount"
             type="number"
             value={taData.ltcInfo.advanceRequired}
             />
           <Input
+           readOnly
             label={"Advance Drawn Date"}
             name="advanceDrawnDate"
             type="date"
@@ -144,6 +154,7 @@ export default function ReviewTaApplication() {
               />
           {/* <Input label={"Home Town"} name="homeTown" type="text" /> */}
           <Input
+           readOnly
             label={"Bank Account No. (SBI/Any other):"}
             name="accountNo"
             type="number"
@@ -254,6 +265,7 @@ export default function ReviewTaApplication() {
           />
 
           <Input
+           readOnly
             label={"Total"}
             name="totalAmount"
             type="number"
@@ -264,7 +276,7 @@ export default function ReviewTaApplication() {
           <span>
             The information, as given above is true to the best of my knowledge
             and belief{" "}
-            <Input name="certification" type="checkbox" value={true} />
+            <Input name="certification" type="checkbox" checked={true}  readOnly />
           </span>
 
           {/* <Input type="submit" /> */}
