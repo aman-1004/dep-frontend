@@ -65,9 +65,9 @@ function LiveTable(props) {
                       >
                         Fill TA
                       </Link>
-                      <Modal title={"LTC Office Order"}>
+                      {/* <Modal title={"LTC Office Order"}>
                         <OfficeOrder ltcInfo={item} />
-                      </Modal>
+                      </Modal> */}
                     </>
                   ) : (
                     stageName[item.stageCurrent]

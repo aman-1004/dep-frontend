@@ -151,6 +151,12 @@ export default function Navbar() {
                   >
                     Live TA Application{" "}
                   </Link>
+                  <Link
+                    to={"/officeOrder"}
+                    className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:hover:text-blue-700 lg:p-0"
+                  >
+                    Office Orders{" "}
+                  </Link>
                 </>
               ) : (
                 <>
