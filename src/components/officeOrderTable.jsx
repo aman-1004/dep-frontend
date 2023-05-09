@@ -10,6 +10,7 @@ let stageName = [
   "Pending HOD",
   "Pending Establishment Jr.Assistant",
   "Pending Establishment Superintendent",
+  
   "Pending Establishment DR",
   "Pending Accounts JAA",
   "Pending Accounts AO",
@@ -21,7 +22,8 @@ let stageName = [
   "Pending Dean",
 ];
 
-function LiveTable(props) {
+function OfficeOrderTable(props) {
+  console.log("props are", props);
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg max-w-screen-xl mx-auto">
       <table className="w-full text-sm text-left text-gray-500">
@@ -36,10 +38,7 @@ function LiveTable(props) {
               Created On
             </th>
             <th scope="col" className="px-6 py-3">
-              Status
-            </th>
-            <th scope="col" className="px-6 py-3">
-              Form
+              {props.name}
             </th>
           </tr>
         </thead>
@@ -59,12 +58,6 @@ function LiveTable(props) {
                 <td className="px-6 py-4">
                   {item.stageCurrent == 100 ? (
                     <>
-                      <Link
-                        to={`/applicant/newTa/${item.id}`}
-                        className="text-blue-500 font-semibold"
-                      >
-                        Fill TA
-                      </Link>
                       <Modal title={"LTC Office Order"}>
                         <OfficeOrder ltcInfo={item} />
                       </Modal>
@@ -74,12 +67,12 @@ function LiveTable(props) {
                   )}
                 </td>
                 <td className="px-6 py-4">
-                  <Link
+                  {/* <Link
                     to={`/applicant/view/${item.id}`}
                     className="text-blue-500 font-semibold"
                   >
                     View Application
-                  </Link>
+                  </Link> */}
                 </td>
                 {/* <td >
               <Modal>
@@ -95,4 +88,4 @@ function LiveTable(props) {
   );
 }
 
-export default LiveTable;
+export default OfficeOrderTable;

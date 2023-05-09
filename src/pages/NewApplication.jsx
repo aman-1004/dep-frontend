@@ -14,6 +14,7 @@ export default function NewApplication() {
   const [user, setUser] = useContext(LoginContext);
   const [people, setPeople] = useState([]);
   const navigate = useNavigate();
+  console.log("user is",user);
   const imageRef = useRef(null)
   const handleRes = (res) => {
     if (res.status == 200) {
@@ -87,7 +88,7 @@ export default function NewApplication() {
               <Input label={"Name"} name="name" type="text" value={`${user.firstName} ${user.lastName}`} />
               <Input label={"Designation"} name="Designation" type="text" value={user.designation} />
               <Input label={"Date of Joining"} name="date" type="date" value={new Date(user.dateOfJoining).toISOString().substring(0, 10)} />
-              <Input label={"Pay Level"} name="payLevel" type="number" value={user.role.payLevel} />
+              <Input label={"Pay Level"} name="payLevel" type="number" value={user.payLevel} />
             </div>
             <h3 className="font-semibold text-l m-4 text-gray-900">
               Leave Details

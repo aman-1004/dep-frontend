@@ -26,9 +26,11 @@ import ShowUserTaApplication from "../pages/ShowUserTaApplication.jsx";
 import NotificationPage from "../pages/NotificationPage.jsx";
 import UserProfile from "../pages/UserProfile.jsx";
 import OfficeOrder from "./OfficeOrder.jsx";
+import ListOfficeOrders from "../pages/ListOfficeOrders.jsx";
 export default function Main() {
   return (
     <Routes>
+      <Route path="officeOrder" element={<ListOfficeOrders />} />
       <Route path="notification" element={<NotificationPage />} />
       <Route path="applicant">
         <Route path="new" element={<NewApplication />} />
