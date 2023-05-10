@@ -1,6 +1,7 @@
-import { Input } from "postcss";
+//import { Input } from "postcss";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Input from "./Input";
 // import Modal from "./Modal"
 // import AdminForm from "./AdminForm";
 
@@ -60,15 +61,15 @@ function PendingTable(props) {
               <th className="2xl:text-lg text-gray-700 uppercase bg-gray-50">Application Id</th>
               <th scope="col" className="px-6 py-3">
                 User Email
-                <input type="text" onChange={handleEmailChange} /> </th>
+                <Input type="text" placeholder="search" onChange={handleEmailChange} /> </th>
               <th scope="col" className="px-6 py-3">
                 Name
-                <input type="text" onChange={handleNameChange} /> </th>
-              <th scope="col" className="px-6 py-3">
-                Created On
-                <select onChange={handleOrderChange}>
-                  <option value={-1}> Newest First </option>
-                  <option value={1}> Oldest First </option>
+                <Input type="text" placeholder="search" onChange={handleNameChange} /> </th>
+              <th scope="col" className="flex-col pb-4 px-6 py-3">
+              <div>Created On</div>
+                <select className="text-lg font-medium bg-blue-200 rounded-md" onChange={handleOrderChange}>
+                  <option className="bg-white" value={-1}> Newest First </option>
+                  <option className="bg-white" value={1}> Oldest First </option>
                 </select></th>
               <th scope="col" className="px-6 py-3">Form</th>
             </tr>
@@ -80,7 +81,7 @@ function PendingTable(props) {
                   <th scope="row" className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">{item.id}</th>
                   <td className="px-6 py-4">{item.user.emailId}</td>
                   <td className="px-6 py-4">{item.user.firstName + " " + item.user.lastName}</td>
-                  <td className="px-6 py-4">{item.fillDate}</td>
+                  <td className="px-6 py-4">{new Date(item.fillDate).toISOString().substring(0, 10)}</td>
                   <td className="px-6 py-4">
                     <Link to={`../view/${item.id}`} className="text-blue-500 font-semibold hover:underline">View Application </Link>
                   </td>

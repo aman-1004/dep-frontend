@@ -12,7 +12,7 @@ export default function RegistrarTaSubmission() {
 
 
   const handleRegistrarTaResponse = (res) => {
-    if (res == 200) {
+    if (res.status == 200) {
       navigate("/registrar/pendingTa");
     } else {
       toast("You are not authorized");

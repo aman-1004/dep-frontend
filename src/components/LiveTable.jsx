@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Modal from "./Modal";
 import OfficeOrder from "./OfficeOrder";
@@ -22,6 +22,25 @@ let stageName = [
 ];
 
 function LiveTable(props) {
+  const handleNameChange = (e) => {
+    setNameFilter(e.target.value);
+  };
+  const handleEmailChange = (e) => {
+    setEmailFilter(e.target.value);
+  };
+  const handleOrderChange = (e) => {
+    setSortOrder(e.target.value);
+  };
+  const [nameFilter, setNameFilter] = useState("");
+  const [emailFilter, setEmailFilter] = useState("");
+  const [sortOrder, setSortOrder] = useState(-1);
+  const filterData = [...props.data]
+    .sort((a, b) => (new Date(a.fillDate) - new Date(b.fillDate)) * sortOrder)
+    .filter((item) =>
+      (item.user.firstName + " " + item.user.lastName).includes(nameFilter)
+    )
+    .filter((item) => item.user.emailId.includes(emailFilter));
+
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg max-w-screen-xl mx-auto">
       <table className="w-full text-sm text-left text-gray-500">
@@ -32,18 +51,33 @@ function LiveTable(props) {
             </th>
             {/* <th>User Email</th>
             <th>Name</th> */}
-            <th scope="col" className="px-6 py-3">
-              Created On
+            <th scope="col" className="flex-col pb-4 px-6 py-3">
+              <div>Created On</div>
+              <select
+                className="text-lg font-medium bg-blue-200 rounded-md"
+                onChange={handleOrderChange}
+              >
+                <option className="bg-white" value={-1}>
+                  {" "}
+                  Newest First{" "}
+                </option>
+                <option className="bg-white" value={1}>
+                  {" "}
+                  Oldest First{" "}
+                </option>
+              </select>
             </th>
+
             <th scope="col" className="px-6 py-3">
               Status
+              {/* <input type="text" onChange={handleNameChange} />  */}
             </th>
             <th scope="col" className="px-6 py-3">
               Form
             </th>
           </tr>
         </thead>
-        {props.data.map((item) => {
+        {filterData.map((item) => {
           return (
             <tbody key={Math.random()}>
               <tr className="bg-white border-b">
@@ -55,9 +89,9 @@ function LiveTable(props) {
                 </th>
                 {/* <td>{item.user.emailId}</td>
                 <td>{item.user.firstName + " " + item.user.lastName}</td> */}
-                <td className="px-6 py-4">{new Date(item.fillDate)
-                  .toISOString()
-                  .substring(0, 10)}</td>
+                <td className="px-6 py-4">
+                  {new Date(item.fillDate).toISOString().substring(0, 10)}
+                </td>
                 <td className="px-6 py-4">
                   {item.stageCurrent == 100 ? (
                     <>

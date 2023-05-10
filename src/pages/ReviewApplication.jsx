@@ -43,14 +43,14 @@ export default function ReviewApplication() {
               label={"Name"}
               name="name"
               type="text"
-              value={ltcData.user.firstName + ltcData.user.lastName}
+              value={ltcData.user.firstName +" "+ ltcData.user.lastName}
             />
             <Input
               readOnly
               label={"Designation"}
               name="Designation"
               type="text"
-              value={ltcData.user.role.designation}
+              value={ltcData.user.designation}
             />
             <Input
               readOnly
@@ -64,7 +64,7 @@ export default function ReviewApplication() {
               label={"Pay Level"}
               name="payLevel"
               type="number"
-              value={ltcData.user.role.payLevel}
+              value={ltcData.user.payLevel}
             />
           </div>
           <h3 className="font-semibold text-l m-4 text-gray-900">Leave Details</h3>
@@ -100,14 +100,14 @@ export default function ReviewApplication() {
               label={"From"}
               name="prefixFrom"
               type="date"
-              value={new Date(ltcData.prefixFrom).toISOString().substring(0, 10)}
+              value={ltcData.prefixFrom ? new Date(ltcData.prefixFrom).toISOString().substring(0, 10) : ""}
             />
             <Input
               readOnly
               label={"To"}
               name="prefixTo"
               type="date"
-              value={new Date(ltcData.prefixTo).toISOString().substring(0, 10)}
+              value={ltcData.prefixTo ? new Date(ltcData.prefixTo).toISOString().substring(0, 10) : ""}
             />
           </div>
           <h3 className="font-semibold text-l m-4 text-gray-900">Suffix Details</h3>
@@ -117,14 +117,14 @@ export default function ReviewApplication() {
               label={"From"}
               name="suffixFrom"
               type="date"
-              value={new Date(ltcData.suffixFrom).toISOString().substring(0, 10)}
+              value={ltcData.suffixFrom ? new Date(ltcData.suffixFrom).toISOString().substring(0, 10) : ""}
             />
             <Input
               readOnly
               label={"To"}
               name="suffixTo"
               type="date"
-              value={new Date(ltcData.suffixTo).toISOString().substring(0, 10)}
+              value={ltcData.suffixTo ? new Date(ltcData.suffixTo).toISOString().substring(0, 10) : ""}
             />
           </div>
 

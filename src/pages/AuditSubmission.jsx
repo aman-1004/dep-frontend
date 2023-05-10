@@ -60,9 +60,11 @@ export default function AuditSubmission() {
   return (
     <>
       <div className="max-w-screen-xl mx-auto">
+      <br></br>
     <Modal>
         <ReviewApplication />
       </Modal>
+      <br></br>
       <CommentBox onAccept={auditOnAccept} onReview={auditOnReview} />
       </div>
     </>

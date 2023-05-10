@@ -8,7 +8,7 @@ export default function ListComment() {
   const location = useLocation();
 
   useEffect(() => {
-    const commentEndpoint = location.pathname.toLowerCase().includes("ta")
+    const commentEndpoint = location.pathname.includes("Ta")
       ? "/api/getTAComments"
       : "/api/getComments";
     fetch(commentEndpoint, {

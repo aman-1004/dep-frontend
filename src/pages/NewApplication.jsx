@@ -49,11 +49,11 @@ export default function NewApplication() {
       "prefixTo",
       "suffixFrom",
       "suffixTo",
-      "spouseEntitled",
       "homeTown",
       "natureOfTravel",
       "placeToVisit",
       "totalEstimatedFare",
+      "spouseEntitled",
       "advanceRequired",
       "encashmentAvailed",
       "encashmentNoOfDays",
@@ -184,7 +184,7 @@ xl:grid-cols-4"
               className="m-4 grid gap-6 mb-1 md:grid-cols-2 
 xl:grid-cols-4"
             >
-              <Input label={"Home Town"} name="homeTown" type="text" required />
+              <Input label={"Home Town"} name="homeTown" type="text" value={user.hometown} required />
               <Input
                 label={"Nature of Visiting Place"}
                 name="visitNature"
