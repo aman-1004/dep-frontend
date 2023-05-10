@@ -88,7 +88,7 @@ export default function Login() {
             </div>
           </div>
         </div>
-        <dialog className="w-[28rem] rounded-lg p-24 absolute top-[30%] bg-white" ref={dialogRef}>
+        <dialog className="w-[28rem] rounded-lg p-32 absolute top-[30%] bg-white" ref={dialogRef}>
           <div>
             <div>
               Enter OTP:
