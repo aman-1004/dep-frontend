@@ -58,7 +58,7 @@ export default function EstabSubmission() {
   };
 
   return (
-    <>
+    <div className=" h-full">
       <div className="max-w-screen-xl mx-auto">
         <Modal>
           <ReviewApplication />
@@ -66,6 +66,6 @@ export default function EstabSubmission() {
         <EstabTable />
         <CommentBox onAccept={estabOnAccept} onReview={estabOnReview} />
       </div>
-    </>
+    </div>
   );
 }

@@ -92,9 +92,9 @@ export default function NewTaApplication() {
   };
 
   return (
-    <>
+    <div className="bg-yellow-50">
       <div className="max-w-screen-xl mx-auto">
-        <h3 className="font-semibold text-xl text-gray-900 m-4 flex">
+        <h3 className="font-semibold text-xl text-gray-900 p-4 flex">
           New TA Application
         </h3>
         <Form onSubmit={taSubmitHandler}>
@@ -306,7 +306,7 @@ export default function NewTaApplication() {
               </p>
               <Input name="certification" type="checkbox"  required  />
             </div>
-            <div className="flex ml-4 justify-center space-x-10 items-center my-8">
+            <div className="flex ml-4 justify-center space-x-10 items-center py-4">
               <Input
                 className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2"
                 type="submit"
@@ -320,6 +320,6 @@ export default function NewTaApplication() {
 
         {/* <ReviewTaApplication /> */}
       </div>
-    </>
+    </div>
   );
 }

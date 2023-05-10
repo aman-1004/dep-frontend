@@ -16,5 +16,10 @@ export default function LiveTaApplication() {
       .then(handleTaList);
   },[]);
 
-  return <LiveTaTable data={liveTaApplications} />;
+  return (
+    <div className="bg-yellow-50 h-[88vh]">
+
+    <LiveTaTable data={liveTaApplications} />;
+    </div>
+  )
 }

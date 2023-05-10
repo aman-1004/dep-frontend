@@ -1,5 +1,5 @@
 import React from "react";
-import OfficeOrderTable from "../components/officeOrderTable";
+import OfficeOrderTable from "../components/OfficeOrderTable";
 import { useState } from "react";
 import { useEffect } from "react";
 
@@ -29,9 +29,12 @@ export default function ListOfficeOrders() {
   }, []);
 
   return (
-    <>
-      <OfficeOrderTable data={LTCOfficeOrders} name="LTC Office Orders" />;
-      <OfficeOrderTable data={TAOfficeOrders} name="TA Office Orders"/>;
-    </>
+    <div className="bg-yellow-50 h-screen">
+
+    <div className="flex py-4">
+      <OfficeOrderTable data={LTCOfficeOrders} name="LTC Office Orders"/>
+      <OfficeOrderTable data={TAOfficeOrders} name="TA Office Orders"/>
+    </div>
+    </div>
   );
 } 

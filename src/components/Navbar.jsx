@@ -65,16 +65,16 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="bg-gray-200 border-gray-200" ref={catMenu}>
+      <div className="bg-[#0247FE] border-gray-200" ref={catMenu}>
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 relative">
           {/* Name + Logo */}
           <div className="flex">
             <img
-              className="h-8 mr-3"
-              src="http://www.iitrpr.ac.in/sites/default/files/image.jpg"
+              className="h-12 mr-3"
+              src="https://www.iitrpr.ac.in/sites/default/files/logo_0_2.png"
               alt="IIT Ropar Logo"
             />
-            <span className="self-center text-2xl font-semibold whitespace-nowrap">
+            <span className="self-center text-2xl font-semibold whitespace-nowrap text-[#EBF7D4]">
               LTC Portal
             </span>
           </div>
@@ -98,7 +98,7 @@ export default function Navbar() {
               id="user-dropdown"
             >
               <div class="px-4 py-3">
-                <span className="block text-sm text-gray-900 ">{`${user.firstName} ${user.lastName}`}</span>
+                <span className="block text-sm text-gray-700 ">{`${user.firstName} ${user.lastName}`}</span>
                 <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">
                   {user.emailId}
                 </span>
@@ -121,36 +121,36 @@ export default function Navbar() {
           </div>
 
           <div className="items-center justify-between w-full lg:flex lg:w-auto lg:order-1">
-            <div className="flex flex-col font-medium p-4 lg:p-0 mt-4 rounded-lg bg-gray-200 lg:flex-row lg:space-x-8 lg:mt-0 lg:border-0 lg:bg-gray-200">
+            <div className="flex flex-col font-medium p-4 lg:p-0 mt-4 rounded-lg bg-[#0247FE] lg:flex-row lg:space-x-8 lg:mt-0 lg:border-0 lg:bg-[#0247FE]">
               {user.isApplicant ? (
                 <>
                   <Link
                     to={"/applicant/new"}
-                    className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:hover:text-blue-700 lg:p-0"
+                    className="block py-2 pl-3 pr-4 text-[#EBF7D4] rounded hover:bg-[#091D34] lg:hover:bg-transparent lg:hover:text-[#091D34] lg:p-0"
                   >
                     New LTC Application{" "}
                   </Link>
                   <Link
                     to={"/applicant/live"}
-                    className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:hover:text-blue-700 lg:p-0"
+                    className="block py-2 pl-3 pr-4 text-[#EBF7D4] rounded hover:bg-[#091D34] lg:hover:bg-transparent lg:hover:text-[#091D34] lg:p-0"
                   >
                     Live LTC Application{" "}
                   </Link>
                   <Link
                     to={"/applicant/newTa"}
-                    className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:hover:text-blue-700 lg:p-0"
+                    className="block py-2 pl-3 pr-4 text-[#EBF7D4] rounded hover:bg-[#091D34] lg:hover:bg-transparent lg:hover:text-[#091D34] lg:p-0"
                   >
                     New TA Application{" "}
                   </Link>
                   <Link
                     to={"/applicant/liveTa"}
-                    className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:hover:text-blue-700 lg:p-0"
+                    className="block py-2 pl-3 pr-4 text-[#EBF7D4] rounded hover:bg-[#091D34] lg:hover:bg-transparent lg:hover:text-[#091D34] lg:p-0"
                   >
                     Live TA Application{" "}
                   </Link>
                   <Link
                     to={"/officeOrder"}
-                    className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:hover:text-blue-700 lg:p-0"
+                    className="block py-2 pl-3 pr-4 text-[#EBF7D4] rounded hover:bg-[#091D34] lg:hover:bg-transparent lg:hover:text-[#091D34] lg:p-0"
                   >
                     Office Orders{" "}
                   </Link>
@@ -159,13 +159,13 @@ export default function Navbar() {
                 <>
                   <Link
                     to={`/${stakeHolderType[user.roleId]}/pending`}
-                    className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:hover:text-blue-700 lg:p-0"
+                    className="block py-2 pl-3 pr-4 text-[#EBF7D4] rounded hover:bg-[#091D34] lg:hover:bg-transparent lg:hover:text-[#091D34] lg:p-0"
                   >
                     Pending LTC Application{" "}
                   </Link>
                   <Link
                     to={`/${stakeHolderType[user.roleId]}/pendingTa`}
-                    className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 lg:hover:bg-transparent lg:hover:text-blue-700 lg:p-0"
+                    className="block py-2 pl-3 pr-4 text-[#EBF7D4] rounded hover:bg-[#091D34] lg:hover:bg-transparent lg:hover:text-[#091D34] lg:p-0"
                   >
                     Pending TA Application{" "}
                   </Link>

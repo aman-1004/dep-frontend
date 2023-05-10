@@ -43,7 +43,9 @@ function LiveTaTable(props) {
                 </th>
                 {/* <td>{item.user.emailId}</td>
                 <td>{item.user.firstName + " " + item.user.lastName}</td> */}
-                <td className="px-6 py-4">{item.fillDate}</td>
+                <td className="px-6 py-4">{new Date(item.fillDate)
+                  .toISOString()
+                  .substring(0, 10)}</td>
                 <td className="px-6 py-4">{stageName[item.stageCurrent]}</td>
                 <td className="px-6 py-4">
                   <Link

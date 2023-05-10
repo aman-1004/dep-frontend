@@ -1,51 +1,11 @@
 import React, { useEffect, useState } from "react";
 import Input from "./Input";
 import { json, useLocation, useParams } from "react-router";
+import ListComment from "./ListComment";
 export default function CommentBox({ onAccept, onReview, readOnly }) {
-  const { id } = useParams()
-  const [comments, setComments] = useState([])
-  const location = useLocation()
-  useEffect(() => {
-    const commentEndpoint = location.pathname.toLowerCase().includes("ta") ? "/api/getTAComments": "/api/getComments"
-    fetch(commentEndpoint, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ id: id })
-    }).then(res => res.json()).then(setComments)
-  }, [])
-
   return (
     <>
-
-      <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table className="w-full text-left text-gray-500">
-          <thead className="text-gray-700 uppercase bg-gray-50">
-            {comments.length != 0 && (<tr>
-              <th scope="col" className="px-6 py-1">
-                Commentor
-              </th>
-              <th scope="col" className="px-6 py-1">
-                Comment
-              </th>
-            </tr>)}
-          </thead>
-          <tbody>
-            {comments.map(comment => (
-            <tr className="bg-white border-b">
-              <th scope="row" className="px-6 py-1 text-base font-medium text-gray-900 whitespace-nowrap">
-
-                  {`${comment.handler.designation}`}
-              </th>
-              <td className="px-6 py-1 text-base">
-                  {`${comment.comment}`}
-              </td>
-            </tr>
-              ))}
-          </tbody>
-        </table>
-      </div>
+      <ListComment />
       {!readOnly && (
         <>
           <div className="mt-4">
@@ -67,7 +27,7 @@ export default function CommentBox({ onAccept, onReview, readOnly }) {
             name="review"
             onClick={onReview}
           >
-            Review
+            Reject
           </button>
           <button
             className="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2"
@@ -75,7 +35,7 @@ export default function CommentBox({ onAccept, onReview, readOnly }) {
             name="accept"
             onClick={onAccept}
           >
-            Submit
+            Forward
           </button>
         </>
       )}

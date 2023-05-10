@@ -5,6 +5,7 @@ import ReviewApplication from "./ReviewApplication.jsx";
 import { useNavigate, useParams } from "react-router-dom";
 import Form from "../components/Form.jsx";
 import { toast } from "react-hot-toast";
+import ListComment from "../components/ListComment.jsx";
 
 export default function HodSubmission() {
   const { id } = useParams();
@@ -25,7 +26,6 @@ export default function HodSubmission() {
     hodData["status"] = status;
     hodData["formId"] = id;
 
-
     fetch("/api/submitHodData", {
       method: "POST",
       body: JSON.stringify(hodData),
@@ -33,7 +33,6 @@ export default function HodSubmission() {
         "Content-Type": "application/json",
       },
     }).then(handleHodResponse);
-
   };
 
   const hodOnReview = (e) => {
@@ -44,7 +43,6 @@ export default function HodSubmission() {
     hodData["status"] = status;
     hodData["formId"] = id;
 
-
     fetch("/api/submitHodData", {
       method: "POST",
       body: JSON.stringify(hodData),
@@ -52,19 +50,19 @@ export default function HodSubmission() {
         "Content-Type": "application/json",
       },
     }).then(handleHodResponse);
-
   };
 
   return (
-    <div className='max-w-screen-xl mx-auto mt-4'>
-
-      <Form>
-        <Modal>
-          <ReviewApplication />
-        </Modal>
-        <CommentBox onAccept={hodOnAccept} onReview={hodOnReview} />
-      </Form>
-
+    <div>
+      <div className="max-w-screen-xl mx-auto pt-4">
+        <Form>
+          <Modal>
+            <ReviewApplication />
+          </Modal>
+          <ListComment />
+          <CommentBox onAccept={hodOnAccept} onReview={hodOnReview} />
+        </Form>
+      </div>
     </div>
   );
 }

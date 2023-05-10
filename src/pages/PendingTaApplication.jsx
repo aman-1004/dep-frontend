@@ -16,5 +16,10 @@ export default function PendingTaApplication() {
     getTaData();
   }, []);
 
-  return <PendingTaTable data={pendingTaList} />;
+  return(
+    <div className="bg-yellow-50 h-[88vh]">
+
+   <PendingTaTable data={pendingTaList} />;
+    </div>
+  )
 }

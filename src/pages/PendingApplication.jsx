@@ -19,8 +19,8 @@ export default function PendingApplication() {
   //   return <>Pending Application</>;
 
   return (
-    <>
-      <PendingTable data={pendingList} />
-    </>
+    <div className="">
+      <PendingTable data={pendingList}  />
+    </div>
   );
 }

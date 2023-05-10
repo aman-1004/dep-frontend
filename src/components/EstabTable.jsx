@@ -46,7 +46,7 @@ export default function EstabTable() {
       </div>
 
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table className="w-full text-base text-left text-gray-500">
+        <table className="w-full text-base text-left text-gray-500 bg-white">
           <thead>
             <tr>
               <th scope="col" className="px-6 py-3 bg-gray-50">

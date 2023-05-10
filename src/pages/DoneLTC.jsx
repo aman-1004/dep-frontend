@@ -15,5 +15,10 @@ export default function LiveApplication() {
       .then((res) => res.json())
       .then(handleList);
   }, []);
-  return <LiveTable data={liveApplications} />;
+  return(
+    <div className="bg-yellow-50 h-[88vh]">
+
+   <LiveTable data={liveApplications} />;
+    </div>
+  )
 }

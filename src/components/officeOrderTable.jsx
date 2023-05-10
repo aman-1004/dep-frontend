@@ -10,7 +10,7 @@ let stageName = [
   "Pending HOD",
   "Pending Establishment Jr.Assistant",
   "Pending Establishment Superintendent",
-  
+
   "Pending Establishment DR",
   "Pending Accounts JAA",
   "Pending Accounts AO",
@@ -25,7 +25,7 @@ let stageName = [
 function OfficeOrderTable(props) {
   console.log("props are", props);
   return (
-    <div className="relative overflow-x-auto shadow-md sm:rounded-lg max-w-screen-xl mx-auto">
+    <div className="relative overflow-x-auto shadow-md sm:rounded-lg max-w-screen-xl mx-auto bg-white">
       <table className="w-full text-sm text-left text-gray-500">
         <thead className="2xl:text-lg text-gray-700 uppercase bg-gray-50">
           <tr>
@@ -54,11 +54,13 @@ function OfficeOrderTable(props) {
                 </th>
                 {/* <td>{item.user.emailId}</td>
                 <td>{item.user.firstName + " " + item.user.lastName}</td> */}
-                <td className="px-6 py-4">{item.fillDate}</td>
+                <td className="px-6 py-4">{new Date(item.fillDate)
+                  .toISOString()
+                  .substring(0, 10)}</td>
                 <td className="px-6 py-4">
                   {item.stageCurrent == 100 ? (
                     <>
-                      <Modal title={"LTC Office Order"}>
+                      <Modal title={"View"}>
                         <OfficeOrder ltcInfo={item} />
                       </Modal>
                     </>
@@ -66,14 +68,14 @@ function OfficeOrderTable(props) {
                     stageName[item.stageCurrent]
                   )}
                 </td>
-                <td className="px-6 py-4">
+                
                   {/* <Link
                     to={`/applicant/view/${item.id}`}
                     className="text-blue-500 font-semibold"
                   >
                     View Application
                   </Link> */}
-                </td>
+              
                 {/* <td >
               <Modal>
                   <AdminForm itemIndex={itemIndex}/>

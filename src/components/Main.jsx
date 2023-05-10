@@ -26,7 +26,7 @@ import ShowUserTaApplication from "../pages/ShowUserTaApplication.jsx";
 import NotificationPage from "../pages/NotificationPage.jsx";
 import UserProfile from "../pages/UserProfile.jsx";
 import OfficeOrder from "./OfficeOrder.jsx";
-import ListOfficeOrders from "../pages/ListOfficeOrders.jsx";
+import ListOfficeOrders from "../pages/listOfficeOrders.jsx";
 export default function Main() {
   return (
     <Routes>

@@ -84,7 +84,7 @@ export default function AccountsSubmission() {
       <div className="max-w-screen-xl mx-auto">
         <Modal>
           <ReviewApplication />
-        </Modal>
+        </Modal>3
         <Table
           fields={[
             { heading: "From", type: "text" },
