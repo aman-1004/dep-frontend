@@ -59,12 +59,12 @@ export default function Login() {
         <Input name="emailId" type="email" />
         <Input type="submit" />
       </Form> */}
-      <section className="bg-gray-50 dark:bg-gray-900 relative">
+      <section className="bg-yellow-50 dark:bg-gray-900 relative">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-              <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                Sign in to your account
+              <h1 className="text-center text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                LTC Management Portal
               </h1>
               <form className="space-y-4 md:space-y-6" onSubmit={showOTPModal}>
                 <div>
@@ -88,13 +88,13 @@ export default function Login() {
             </div>
           </div>
         </div>
-        <dialog className="w-[100%] h-screen absolute top-[50%]" ref={dialogRef}>
+        <dialog className="w-[28rem] rounded-lg p-24 absolute top-[30%] bg-white" ref={dialogRef}>
           <div>
             <div>
               Enter OTP:
             </div>
             <form onSubmit={checkOTP}>
-            <input type="number" name="otp" id="otp" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="****" required="" />
+            <input type="number" name="otp" id="otp" className=" my-4 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="****" required="" />
             <div className="flex items-center justify-between">
               <div className="flex items-start">
               </div>

@@ -40,7 +40,7 @@ export default function EstabTable() {
           label={"Date of Joining"}
           name="joining date"
           type="date"
-          value={ltcData.user.dateOfJoining}
+          value={new Date(ltcData.user.dateOfJoining).toISOString().substring(0, 10)}
         />
         <Input label={"Block Year"} name="blockYear" type="text" />
       </div>

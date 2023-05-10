@@ -12,7 +12,7 @@ export default function RegistrarSubmission() {
 
 
   const handleRegistrarResponse = (res) => {
-    if (res == 200) {
+    if (res.status == 200) {
       navigate("/registrar/pending");
     } else {
       toast("You are not authorized");
