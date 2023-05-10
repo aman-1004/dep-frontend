@@ -1,0 +1,12 @@
+@media print {
+  .dwnldpdf {
+    display: none !important;
+  }
+
+}
+
+@media print {
+  body {
+    zoom: 80%;
+  }
+}

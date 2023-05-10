@@ -7,29 +7,50 @@ import { toast } from "react-hot-toast";
 
 export default function Login() {
   const [userInfo, setUserInfo] = useContext(LoginContext);
-  const handleStatus = async (res) => {
-    if (res.status != 200) {
-      toast("You are not authoried");
-      setUserInfo(null);
-    } else {
-      const data = await res.json();
-      setUserInfo(data);
-    }
-  };
+  const dialogRef = useRef()
 
-  const submitHandler = (e) => {
+  const showOTPModal = (e) => {
     e.preventDefault()
     const form = e.target;
+    console.log(form)
     const email = form.elements[0].value;
     var formdata = new FormData();
     formdata.append("emailId", email);
-    fetch("/api/login", {
+    let res;
+    console.log("fetching")
+    res = fetch("/api/login", {
       method: "POST",
       body: formdata,
+    }).then(async res => {
+      if(res.status != 200) {
+        console.error((await res.text()))
+        return res.text()
+      }
+      dialogRef.current.show()
+      return res.text()
     })
-      .then(handleStatus)
-      .catch((err) => console.log(err));
-  };
+  }
+
+
+  const checkOTP = (e) => {
+    e.preventDefault()
+    const form = e.target;
+    const otp = form.elements[0].value;
+    var formdata = new FormData();
+    formdata.append("otp", otp);
+    let res;
+    res = fetch("/api/acceptOTP", {
+      method: "POST",
+      body: formdata,
+    }).then(async res => {
+      if(res.status != 200) {
+        console.error((await res.text()))
+        return null 
+      }
+      return res.json()
+    }).then(setUserInfo)
+
+  }
 
   return (
     <>
@@ -38,14 +59,16 @@ export default function Login() {
         <Input name="emailId" type="email" />
         <Input type="submit" />
       </Form> */}
-      <section className="bg-gray-50 dark:bg-gray-900">
+      <section className="bg-gray-50 dark:bg-gray-900 relative">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                 Sign in to your account
               </h1>
-              <form className="space-y-4 md:space-y-6" onSubmit={submitHandler}>
+              <form className="space-y-4 md:space-y-6" onSubmit={showOTPModal}>
+                <div>
+                </div>
                 <div>
                   <label for="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
                   <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required="" />
@@ -60,11 +83,26 @@ export default function Login() {
                     </div>
                   </div>
                 </div>
-                <button type="submit" className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
+                <button  type="submit" className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
               </form>
             </div>
           </div>
         </div>
+        <dialog className="w-[100%] h-screen absolute top-[50%]" ref={dialogRef}>
+          <div>
+            <div>
+              Enter OTP:
+            </div>
+            <form onSubmit={checkOTP}>
+            <input type="number" name="otp" id="otp" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="****" required="" />
+            <div className="flex items-center justify-between">
+              <div className="flex items-start">
+              </div>
+            </div>
+            <button type="submit"  className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign in</button>
+          </form> 
+         </div>
+        </dialog>
       </section>
     </>
   );

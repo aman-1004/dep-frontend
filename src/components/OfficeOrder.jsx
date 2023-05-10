@@ -1,13 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Modal from "./Modal";
+
 
 export default function OfficeOrder({ ltcInfo }) {
   const [ltcData, setLtcData] = useState(ltcInfo);
+  const orderRef = useRef(null)
   console.log("getting ltcData");
   console.log(ltcData);
-
+  const genPdf = () => {
+    print()
+  }
   return (
-    <div className="max-w-screen-lg mx-auto bg-white py-4">
+    <>
+    <button className='dwnldpdf' onClick={genPdf}> Download PDF </button>
+    <div className="max-w-screen-lg mx-auto bg-white py-4" ref={orderRef}>
       <div className="flex items-center place-content-center space-x-14 my-4">
         <img
           className="w-24"
@@ -80,5 +86,6 @@ export default function OfficeOrder({ ltcInfo }) {
         </p>
       </div>
     </div>
+  </>
   );
 }

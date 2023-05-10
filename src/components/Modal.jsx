@@ -14,7 +14,7 @@ const Modal = ({children, ...props}) => {
     { visible && (<>
       <div id='modaloverlay' onClick={toggleVisible}/>
       <div id='modalcontent'>
-        <button style={{float: 'right'}} onClick={toggleVisible}> X </button>
+        <button class='dwnldpdf' style={{float: 'right'}} onClick={toggleVisible}> X </button>
         {children} 
       </div>
       </>
