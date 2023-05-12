@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Table from "../components/Table";
 import Input from "../components/Input";
 import CommentBox from "../components/CommentBox";
@@ -10,7 +10,7 @@ import { toast } from "react-hot-toast";
 export default function AccountsSubmission() {
   const { id } = useParams();
   const navigate = useNavigate();
-
+  const [advanceRequired, setAdvance] = useState(false)
   const [fares, setFares] = useState([]);  
   console.log(fares)
   const totalFare = fares.reduce((total, item) => {
@@ -23,6 +23,21 @@ export default function AccountsSubmission() {
       toast("You are not authorized");
     }
   };
+  console.log(fares)
+  useEffect(() => {
+    fetch("/api/getLTCInfo", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ltcId: id }),
+    })
+      .then((res) => res.json())
+      .then(data => {
+        setFares(data.expectedJourneyDetails ?? [])
+        setAdvance(data.advanceRequired)
+      });
+  }, [])
 
   const accountsOnAccept = (e) => {
     const accountsData = {};
@@ -102,12 +117,15 @@ export default function AccountsSubmission() {
         />
         <div className="m-4 grid gap-6 mb-1 md:grid-cols-2 xl:grid-cols-4">
           <Input label={"Total Rs."} name="totalRs" type="number" value={totalFare}/>
+
           <Input
             label={"Advance Admissible"}
             name="admissibleAdvance"
             type="number"
+            readOnly={advanceRequired}
           />
-          <Input label={"Passed For Rs."} name="passedRs" type="number" />
+
+          <Input label={"Passed For Rs."} name="passedRs" type="number" value={(advanceRequired ? 0.9: 1) * totalFare}/>
           <Input
             label={"Debitable to LTC Advance Dr./Mr./Mrs./Ms."}
             name="title"
