@@ -15,7 +15,6 @@ export default function ReviewApplication() {
   const { id } = useParams()
   const [ltcData, setLtcData] = useState(ltcInfo[0]);
   const [people, setPeople] = useState(ltcData.peopleInvolved);
-
   const handleInfo = (json) => {
     setLtcData(json)
     setPeople(json.peopleInvolved)
@@ -198,7 +197,7 @@ export default function ReviewApplication() {
               label={""}
               name="spouseEntitled"
               type="checkbox"
-              checked={ltcData.spouseEntitled}
+              checked={ltcData.spouseEntitled??false}
             />
             <span className="font-semibold text-gray-900"> Advance Required</span>
             <Input className="mt-3"

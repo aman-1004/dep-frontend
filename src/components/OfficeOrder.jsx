@@ -4,8 +4,6 @@ import Modal from "./Modal";
 export default function OfficeOrder({ ltcInfo }) {
   const [ltcData, setLtcData] = useState(ltcInfo);
   const orderRef = useRef(null);
-  console.log("getting ltcData");
-  console.log(ltcData);
   const genPdf = () => {
     print();
   };

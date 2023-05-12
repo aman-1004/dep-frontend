@@ -9,11 +9,7 @@ import CommentBox from "../components/CommentBox.jsx";
 import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
 import { LoginContext } from "../LoginContext.jsx";
-// import DateRangePicker from "flowbite-datepicker/DateRangePicker";
 
-// import { DateRangePicker } from "react-date-range";
-// import { DateRangePicker } from "react-date-range";
-// import 'react-daterange-picker/dist/css/react-calendar.css';
 
 export default function NewApplication() {
   const [user, setUser] = useContext(LoginContext);
@@ -25,7 +21,6 @@ export default function NewApplication() {
     setDates(dates);
   };
 
-  console.log("user is", user);
 
   const imageRef = useRef(null);
   const handleRes = (res) => {

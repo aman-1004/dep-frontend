@@ -19,7 +19,6 @@ export default function UserProfile() {
       const url = URL.createObjectURL(blob);
       imgRef.current.src = url
     })
-    console.log('user is', user)
   }, [])
 
   return (

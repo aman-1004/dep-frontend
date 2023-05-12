@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Modal from "./Modal";
 import OfficeOrder from "./OfficeOrder";
-// import Modal from "./Modal"
-// import AdminForm from "./AdminForm";
 
 let stageName = [
   "Sent Back",
@@ -38,7 +36,6 @@ function OfficeOrderTable(props) {
   const [sortOrder, setSortOrder] = useState(-1)
   const filterData = [...props.data].sort((a, b) => (new Date(a.fillDate) - new Date(b.fillDate)) * sortOrder).filter(item => (item.user.firstName + " " + item.user.lastName).includes(nameFilter)).filter(item => item.user.emailId.includes(emailFilter))
 
-  console.log("props are", props);
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg max-w-screen-xl mx-auto bg-white">
       <table className="w-full text-sm text-left text-gray-500">
@@ -47,8 +44,6 @@ function OfficeOrderTable(props) {
             <th scope="col" className="px-6 py-3">
               Application Id
             </th>
-            {/* <th>User Email</th>
-            <th>Name</th> */}
             <th scope="col" className="flex-col pb-4 px-6 py-3">
             <div>Created On</div>
               <select className="text-lg font-medium bg-blue-200 rounded-md" onChange={handleOrderChange}>
@@ -70,8 +65,6 @@ function OfficeOrderTable(props) {
                 >
                   {item.id}
                 </th>
-                {/* <td>{item.user.emailId}</td>
-                <td>{item.user.firstName + " " + item.user.lastName}</td> */}
                 <td className="px-6 py-4">{new Date(item.fillDate)
                   .toISOString()
                   .substring(0, 10)}</td>
@@ -86,19 +79,6 @@ function OfficeOrderTable(props) {
                     stageName[item.stageCurrent]
                   )}
                 </td>
-                
-                  {/* <Link
-                    to={`/applicant/view/${item.id}`}
-                    className="text-blue-500 font-semibold"
-                  >
-                    View Application
-                  </Link> */}
-              
-                {/* <td >
-              <Modal>
-                  <AdminForm itemIndex={itemIndex}/>
-              </Modal>
-                  </td> */}
               </tr>
             </tbody>
           );

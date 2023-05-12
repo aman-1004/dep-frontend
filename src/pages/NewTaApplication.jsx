@@ -18,8 +18,6 @@ export default function NewTaApplication() {
   const { ltcId } = useParams();
   const navigate = useNavigate();
   const imageRef = useRef(null);
-  console.log("getting ltcInfo");
-  console.log(ltcInfo);
   const [peopleInTa, setPeopleInTa] = useState(ltcInfo.peopleInvolved);
   const [journeyDetails, setJourneyDetails] = useState([]);
 
@@ -30,7 +28,6 @@ export default function NewTaApplication() {
   };
 
   useEffect(() => {
-    console.log("Inside UseEffect");
     fetch("/api/getLTCInfo", {
       method: "POST",
       headers: {
@@ -40,7 +37,6 @@ export default function NewTaApplication() {
     })
       .then((res) => res.json())
       .then(handleInfo);
-    console.log(ltcInfo);
   }, []);
 
   const handleTaRes = (res) => {

@@ -21,13 +21,12 @@ export default function ListComment() {
       .then((res) => res.json())
       .then(setComments);
   }, []);
-  console.log("comments", comments);
   return (
     <>
-      <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+      <div className="relative overflow-x-auto shadow-md sm:rounded-lg bg-green-300">
         <table className="w-full text-left text-gray-500">
           <thead className="text-gray-700 uppercase bg-gray-50">
-            {comments.length != 0 && (
+            {comments.length != 0 ? (
               <tr>
                 <th scope="col" className="px-6 py-1">
                   Commentor
@@ -36,7 +35,7 @@ export default function ListComment() {
                   Comment
                 </th>
               </tr>
-            )}
+            ): <></>}
           </thead>
           <tbody>
             {comments.map((comment) => (

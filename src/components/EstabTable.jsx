@@ -9,7 +9,6 @@ export default function EstabTable() {
   const [ltcData, setLtcData] = useState(ltcInfo[0]);
   const [ltcDataOld, setLtcDataOld] = useState({});
   const { id } = useParams();
-
   useEffect(() => {
     fetch("/api/getLTCInfo", {
       method: "POST",
@@ -32,7 +31,7 @@ export default function EstabTable() {
       .then((res) => res.json())
       .then(setLtcDataOld);
   }, []);
-
+  console.log('standing leave data is', ltcData.user.standingEarnedLeave)
   return (
     <>
       <div className="m-4 grid gap-6 mb-1 md:grid-cols-2 xl:grid-cols-4">
@@ -42,7 +41,7 @@ export default function EstabTable() {
           type="date"
           value={new Date(ltcData.user.dateOfJoining).toISOString().substring(0, 10)}
         />
-        <Input label={"Block Year"} name="blockYear" type="text" />
+        <Input label={"Block Year"} name="blockYear" type="text" value={new Date().getFullYear()}/>
       </div>
 
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -76,7 +75,7 @@ export default function EstabTable() {
             particulars={"Period From"}
             name={"periodFrom"}
             type={"date"}
-            dataOld={""}
+            dataOld={ltcDataOld.fromDate ? new Date(ltcDataOld.fromDate).toISOString().substring(0, 10) : ""}
             dataNew={new Date(ltcData.fromDate).toISOString().substring(0, 10)}
           />
           <EstabRow

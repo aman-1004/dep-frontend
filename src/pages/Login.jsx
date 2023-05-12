@@ -9,56 +9,55 @@ export default function Login() {
   const [userInfo, setUserInfo] = useContext(LoginContext);
   const dialogRef = useRef()
 
-  const showOTPModal = (e) => {
+  const showOTPModal = async (e) => {
     e.preventDefault()
     const form = e.target;
-    console.log(form)
     const email = form.elements[0].value;
     var formdata = new FormData();
     formdata.append("emailId", email);
     let res;
-    console.log("fetching")
-    res = fetch("/api/login", {
+    res = await fetch("/api/login", {
       method: "POST",
       body: formdata,
-    }).then(async res => {
-      if(res.status != 200) {
-        console.error((await res.text()))
-        return res.text()
-      }
-      dialogRef.current.show()
-      return res.text()
     })
+    if(res.status != 200) {
+      const errorText = await res.text()
+      toast.error(errorText)
+    }
+    else {
+      dialogRef.current.show()
+    }
   }
 
 
-  const checkOTP = (e) => {
+  const checkOTP = async (e) => {
     e.preventDefault()
     const form = e.target;
     const otp = form.elements[0].value;
     var formdata = new FormData();
     formdata.append("otp", otp);
-    let res;
-    res = fetch("/api/acceptOTP", {
+    let res = await fetch("/api/acceptOTP", {
       method: "POST",
       body: formdata,
-    }).then(async res => {
-      if(res.status != 200) {
-        console.error((await res.text()))
-        return null 
-      }
-      return res.json()
-    }).then(setUserInfo)
-
+    })
+    // .then(async res => {
+    //   if(res.status != 200) {
+    //     console.error((await res.text()))
+    //     return null 
+    //   }
+    //   return res.json()
+    // }).then(setUserInfo)
+  if(res.status != 200) {
+    let errorText = await res.text()
+    toast.error(errorText)
   }
+  else {
+    setUserInfo((await res.json()))
+  }
+  }    
 
   return (
     <>
-      {/* Login Page
-      <Form onSubmit={submitHandler}>
-        <Input name="emailId" type="email" />
-        <Input type="submit" />
-      </Form> */}
       <section className="bg-yellow-50 dark:bg-gray-900 relative">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">

@@ -11,8 +11,11 @@ export default function AccountsSubmission() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [fares, setFares] = useState([]);
-
+  const [fares, setFares] = useState([]);  
+  console.log(fares)
+  const totalFare = fares.reduce((total, item) => {
+    return total + item.singleFare * item.noOfFares;
+  }, 0);
   const handleAccountsResponse = (res) => {
     if (res.status == 200) {
       navigate("/accounts/pending");
@@ -88,18 +91,17 @@ export default function AccountsSubmission() {
         <br></br>
         <Table
           fields={[
-            { heading: "From", type: "text" },
-            { heading: "To", type: "text" },
-            { heading: "Mode Of Travel", type: "text" },
-            { heading: "No. of Fares", type: "number" },
-            { heading: "Single Fare", type: "number" },
-            { heading: "Amount", type: "number" },
+            { heading: "From", type: "text" , stateKey:"departureFrom"},
+            { heading: "To", type: "text", stateKey:"arrivalTo"},
+            { heading: "Mode Of Travel", type: "text", stateKey: "modeOfTravel"},
+            { heading: "No. of Fares", type: "number", stateKey: "noOfFares"},
+            { heading: "Single Fare", type: "number", stateKey: "singleFare"},
           ]}
           data={fares}
           setData={setFares}
         />
         <div className="m-4 grid gap-6 mb-1 md:grid-cols-2 xl:grid-cols-4">
-          <Input label={"Total Rs."} name="totalRs" type="number" />
+          <Input label={"Total Rs."} name="totalRs" type="number" value={totalFare}/>
           <Input
             label={"Advance Admissible"}
             name="admissibleAdvance"
