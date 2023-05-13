@@ -123,7 +123,7 @@ export default function AccountsTaTable() {
             particulars={"Advance if any to be deducted"}
             name={"advanceDeduction"}
             type={"number"}
-            value={Math.max(0, advanceDrawn - totalFare)}
+            value={Math.max(0, advanceDrawn)}
           />
 
           <AccountsTaRow
@@ -131,6 +131,7 @@ export default function AccountsTaTable() {
             particulars={"Net amount to be reimbursed to the Claimant (5-6)"}
             name={"netReimbursement"}
             type={"number"}
+            value={Math.max(0, totalFare - advanceDrawn)}
           />
         </table>
       </div>

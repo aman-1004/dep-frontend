@@ -13,17 +13,25 @@ import { useParams } from "react-router";
 export default function ReviewTaApplication() {
   const { id } = useParams();
   const [taData, setTaData] = useState(taInfo[0]);
-  const [people, setPeople] = useState(taData.peopleInvolved);
-  const [journey, setJourney] = useState(taData.journeyDetails);
-
-
+  const [people, setPeople] = useState([]);
+  const [journey, setJourney] = useState([]);
+  console.log(taData);
   const handleInfo = (json) => {
     setTaData(json);
     setPeople(json.ltcInfo.peopleInvolved);
-    json.journeyDetails['departureDate'] = new Date(json.journeyDetails['departureDate']).toISOString()
-    .substring(0, 10);
-    json.journeyDetails['arrivalDate'] = new Date(json.journeyDetails['arrivalDate']).toISOString()
-    .substring(0, 10);
+    for (let i = 0; i < json.journeyDetails.length; i++) {
+      json.journeyDetails[i]["departureDate"] = new Date(
+        json.journeyDetails[i]["departureDate"]
+      )
+        .toISOString()
+        .substring(0, 10);
+      json.journeyDetails[i]["arrivalDate"] = new Date(
+        json.journeyDetails[i]["arrivalDate"]
+      )
+        .toISOString()
+        .substring(0, 10);
+    }
+
     setJourney(json.journeyDetails);
   };
 
@@ -37,7 +45,6 @@ export default function ReviewTaApplication() {
     })
       .then((res) => res.json())
       .then(handleInfo);
-   
   }, []);
 
   const totalFare = journey.reduce((total, item) => {
@@ -45,7 +52,7 @@ export default function ReviewTaApplication() {
   }, 0);
 
   return (
-    <> 
+    <>
       <h3>New TA Application</h3>
       <Form
         onSubmit={() => {
@@ -61,110 +68,114 @@ export default function ReviewTaApplication() {
         }}
       >
         <InputGroup>
-        <div className=" grid gap-6 mt-4 mb-2 md:grid-cols-2 xl:grid-cols-4">
+          <div className=" grid gap-6 mt-4 mb-2 md:grid-cols-2 xl:grid-cols-4">
+            <Input
+              readOnly
+              label={"Name"}
+              name="name"
+              type="text"
+              value={taData.user.firstName + taData.user.lastName}
+            />
+            <Input
+              readOnly
+              label={"Emp. Code"}
+              name="empCode"
+              type="number"
+              value={taData.user.id}
+            />
+            <Input
+              readOnly
+              label={"Pay Level"}
+              name="payLevel"
+              type="number"
+              value={taData.user.payLevel}
+            />
+            <Input
+              readOnly
+              label={"Designation"}
+              name="Designation"
+              type="text"
+              value={taData.user.designation}
+            />
+            <Input
+              readOnly
+              label={"Department"}
+              name="department"
+              type="text"
+              value={taData.user.department}
+            />
 
-          <Input
-           readOnly
-            label={"Name"}
-            name="name"
-            type="text"
-            value={taData.user.firstName + taData.user.lastName}
-            />
-          <Input
-           readOnly
-            label={"Emp. Code"}
-            name="empCode"
-            type="number"
-            value={taData.user.id}
-            />
-          <Input
-           readOnly
-            label={"Pay Level"}
-            name="payLevel"
-            type="number"
-            value={taData.user.payLevel}
-            />
-          <Input
-           readOnly
-            label={"Designation"}
-            name="Designation"
-            type="text"
-            value={taData.user.designation}
-            />
-          <Input
-           readOnly
-            label={"Department"}
-            name="department"
-            type="text"
-            value={taData.user.department}
-            />
-
-          <Input
-           readOnly
-            label={"Date of Joining"}
-            name="date"
-            type="date"
-            value={new Date(taData.fillDate).toISOString().substring(0, 10)}
+            <Input
+              readOnly
+              label={"Date of Joining"}
+              name="date"
+              type="date"
+              value={new Date(taData.fillDate).toISOString().substring(0, 10)}
             />
           </div>
-          <h3 className="font-semibold text-l m-4 text-gray-900">Leave Details</h3>
+          <h3 className="font-semibold text-l m-4 text-gray-900">
+            Leave Details
+          </h3>
           {/* <Input label={"Earned Leave Availed"} name="earnedLeave" type="number" /> */}
           <div className=" grid gap-6 mt-4 mb-2 md:grid-cols-2 xl:grid-cols-4">
-
-          <Input
-           readOnly
-            label={"From"}
-            name="leaveFrom"
-            type="date"
-            value={new Date(taData.ltcInfo.fromDate)
-              .toISOString()
-              .substring(0, 10)}
-              />
-          <Input
-           readOnly
-            label={"To"}
-            name="leaveTo"
-            type="date"
-            value={new Date(taData.ltcInfo.toDate)
-              .toISOString()
-              .substring(0, 10)}
-              />
-          {/* <h3>Prefix Details</h3>
+            <Input
+              readOnly
+              label={"From"}
+              name="leaveFrom"
+              type="date"
+              value={new Date(taData.ltcInfo.fromDate)
+                .toISOString()
+                .substring(0, 10)}
+            />
+            <Input
+              readOnly
+              label={"To"}
+              name="leaveTo"
+              type="date"
+              value={new Date(taData.ltcInfo.toDate)
+                .toISOString()
+                .substring(0, 10)}
+            />
+            {/* <h3>Prefix Details</h3>
             <Input label={"From"} name="prefixFrom" type="date" />
             <Input label={"To"} name="prefixTo" type="date" />
             <h3>Suffix Details</h3>
             <Input label={"From"} name="suffixFrom" type="date" />
           <Input label={"To"} name="suffixTo" type="date" /> */}
-          {/* <Input
+            {/* <Input
               label={"Spouse Entitled for LTC"}
               name="spouseEntitled"
               type="checkbox"
             /> */}
-          <Input
-           readOnly
-            label={"Advance Drawn"}
-            name="advanceDrawnAmount"
-            type="number"
-            value={taData.ltcInfo.advanceRequired}
+            <Input
+              readOnly
+              label={"Advance Drawn"}
+              name="advanceDrawnAmount"
+              type="number"
+              value={taData.ltcInfo.advanceRequired}
             />
-          <Input
-           readOnly
-            label={"Advance Drawn Date"}
-            name="advanceDrawnDate"
-            type="date"
-            value={taData.ltcInfo.advanceDrawnDate ? new Date(taData.ltcInfo.advanceDrawnDate)
-              .toISOString()
-              .substring(0, 10) : ""}
-              />
-          {/* <Input label={"Home Town"} name="homeTown" type="text" /> */}
-          <Input
-           readOnly
-            label={"Bank Account No. (SBI/Any other):"}
-            name="accountNo"
-            type="number"
-            value={taData.accountNo ? taData.accountNo:""}
+            <Input
+              readOnly
+              label={"Advance Drawn Date"}
+              name="advanceDrawnDate"
+              type="date"
+              value={
+                taData.ltcInfo.advanceDrawnDate
+                  ? new Date(taData.ltcInfo.advanceDrawnDate)
+                      .toISOString()
+                      .substring(0, 10)
+                  : ""
+              }
             />
-          {/* <Input
+            {/* <Input label={"Home Town"} name="homeTown" type="text" /> */}
+            <Input
+              readOnly
+              label={"Bank Account No. (SBI/Any other):"}
+              name="accountNo"
+              type="number"
+              value={taData.accountNo ? taData.accountNo : ""}
+            />
+            {/* <Input
               label={"Nature of Visiting Place"}
               name="visitNature"
               type="text"
@@ -175,7 +186,7 @@ export default function ReviewTaApplication() {
               name="estimatedFare"
               type="number"
             /> */}
-            </div>
+          </div>
         </InputGroup>
 
         <InputGroup>
@@ -269,18 +280,25 @@ export default function ReviewTaApplication() {
           />
 
           <Input
-           readOnly
+            readOnly
             label={"Total"}
             name="totalAmount"
             type="number"
             value={totalFare}
           />
 
-          <h3 className="font-semibold text-l m-4 text-gray-900">CERTIFIED THAT:</h3>
+          <h3 className="font-semibold text-l m-4 text-gray-900">
+            CERTIFIED THAT:
+          </h3>
           <span>
             The information, as given above is true to the best of my knowledge
             and belief{" "}
-            <Input name="certification" type="checkbox" checked={true}  readOnly />
+            <Input
+              name="certification"
+              type="checkbox"
+              checked={true}
+              readOnly
+            />
           </span>
 
           {/* <Input type="submit" /> */}
