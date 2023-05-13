@@ -1,13 +1,64 @@
-import React from "react";
+import React, { useState } from "react";
 import Input from "./Input";
 import EstabRow from "./EstabRow";
 // import { ltcInfoOld } from "../dummy/ltcInfosOld";
-import { taInfo } from "../dummy/taInfos";
 import AccountsTaRow from "./AccountsTaRow";
+import { useParams } from "react-router";
+import { ltcInfo } from "../dummy/ltcInfos";
+import { taInfo } from "../dummy/taInfos";
+import { useEffect } from "react";
 
 export default function AccountsTaTable() {
-  //   const taData = taInfo[0];
-  //   const ltcDataOld = ltcInfoOld[0];
+  const [taData, setTaData] = useState(taInfo[0]);
+  const { id } = useParams();
+
+  useEffect(() => {
+    fetch("/api/getTAInfo", {
+      method: "POST",
+      body: JSON.stringify({ taId: id }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then(setTaData);
+  }, []);
+
+  let totalAirFare = taData.journeyDetails.reduce(
+    (sum, item) =>
+      sum + (item.modeOfTravel.toLowerCase() == "air" ? item.totalFare : 0),
+    0
+  );
+  let totalBusFare = taData.journeyDetails.reduce(
+    (sum, item) =>
+      parseInt(sum) +
+      (item.modeOfTravel.toLowerCase() == "bus" ? parseInt(item.totalFare) : 0),
+    0
+  );
+  let totalTrainFare = taData.journeyDetails.reduce(
+    (sum, item) =>
+      sum + (item.modeOfTravel.toLowerCase() == "train" ? item.totalFare : 0),
+    0
+  );
+
+  let totalFare = taData.journeyDetails.reduce(
+    (sum, item) => sum + item.totalFare,
+    0
+  );
+  let otherFare = totalFare - (totalAirFare + totalBusFare + totalTrainFare);
+
+  console.log("data", taData.journeyDetails);
+  console.log("fares", totalFare);
+
+  const advanceDrawn = 0;
+  if (taData.ltcInfo.advanceRequired)
+    advanceDrawn =
+      0.9 *
+      taData.ltcInfo.expectedJourneyDetails.reduce(
+        (sum, item) => sum + item.singleFare * item.noOfFares,
+        0
+      );
+
   return (
     <>
       {/* <Input label={"Date of Joining"} name="joining date" type="date" value={ltcData.user.dateOfJoining}/>
@@ -15,9 +66,15 @@ export default function AccountsTaTable() {
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-left text-gray-500 ">
           <tr>
-            <th scope="col" className="px-6 py-3 bg-gray-50">SI. No.</th>
-            <th scope="col" className="px-6 py-3 ">Particulars</th>
-            <th scope="col" className="px-6 py-3 bg-gray-50">Amount</th>
+            <th scope="col" className="px-6 py-3 bg-gray-50">
+              SI. No.
+            </th>
+            <th scope="col" className="px-6 py-3 ">
+              Particulars
+            </th>
+            <th scope="col" className="px-6 py-3 bg-gray-50">
+              Amount
+            </th>
             {/* <th>Current LTC</th> */}
           </tr>
 
@@ -26,6 +83,7 @@ export default function AccountsTaTable() {
             particulars={"Air Fare"}
             name={"airFare"}
             type={"number"}
+            value={totalAirFare}
           />
 
           <AccountsTaRow
@@ -33,6 +91,7 @@ export default function AccountsTaTable() {
             particulars={"Train Fare"}
             name={"trainFare"}
             type={"number"}
+            value={totalTrainFare}
           />
 
           <AccountsTaRow
@@ -40,6 +99,7 @@ export default function AccountsTaTable() {
             particulars={"Bus Fare"}
             name={"busFare"}
             type={"number"}
+            value={totalBusFare}
           />
 
           <AccountsTaRow
@@ -47,6 +107,7 @@ export default function AccountsTaTable() {
             particulars={"Other if any"}
             name={"otherFare"}
             type={"number"}
+            value={otherFare}
           />
 
           <AccountsTaRow
@@ -54,6 +115,7 @@ export default function AccountsTaTable() {
             particulars={"Total (1 to 4)"}
             name={"totalFare"}
             type={"number"}
+            value={totalFare}
           />
 
           <AccountsTaRow
@@ -61,8 +123,8 @@ export default function AccountsTaTable() {
             particulars={"Advance if any to be deducted"}
             name={"advanceDeduction"}
             type={"number"}
+            value={Math.max(0, advanceDrawn - totalFare)}
           />
-
 
           <AccountsTaRow
             serialNo={"7."}
@@ -70,7 +132,6 @@ export default function AccountsTaTable() {
             name={"netReimbursement"}
             type={"number"}
           />
-
         </table>
       </div>
     </>

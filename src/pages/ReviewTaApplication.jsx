@@ -20,6 +20,10 @@ export default function ReviewTaApplication() {
   const handleInfo = (json) => {
     setTaData(json);
     setPeople(json.ltcInfo.peopleInvolved);
+    json.journeyDetails['departureDate'] = new Date(json.journeyDetails['departureDate']).toISOString()
+    .substring(0, 10);
+    json.journeyDetails['arrivalDate'] = new Date(json.journeyDetails['arrivalDate']).toISOString()
+    .substring(0, 10);
     setJourney(json.journeyDetails);
   };
 

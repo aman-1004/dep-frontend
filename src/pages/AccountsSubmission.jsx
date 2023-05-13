@@ -52,7 +52,7 @@ export default function AccountsSubmission() {
     accountsData["totalRs"] = totalAccountsRs.value;
     accountsData["admissibleAdvance"] = accountsAdmissibleAdvance.value;
     accountsData["passedRs"] = accountsPassedRs.value;
-    accountsData["title"] = accountsTitle.value;
+    // accountsData["title"] = accountsTitle.value;
     accountsData["comment"] = accountsComment.value;
     accountsData["status"] = status;
     accountsData["formId"] = id;
@@ -126,11 +126,11 @@ export default function AccountsSubmission() {
           />
 
           <Input label={"Passed For Rs."} name="passedRs" type="number" value={(advanceRequired ? 0.9: 1) * totalFare}/>
-          <Input
+          {/* <Input
             label={"Debitable to LTC Advance Dr./Mr./Mrs./Ms."}
             name="title"
             type="text"
-          />
+          /> */}
         </div>
         <CommentBox onAccept={accountsOnAccept} onReview={accountsOnReview} />
       </div>

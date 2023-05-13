@@ -85,7 +85,7 @@ function PendingTaTable(props) {
                 <td className="px-6 py-4">
                   {item.user.firstName + " " + item.user.lastName}
                 </td>
-                <td className="px-6 py-4">{item.fillDate}</td>
+                <td className="px-6 py-4">{new Date(item.fillDate).toISOString().substring(0, 10)}</td>
                 <td className="px-6 py-4">
                   <Link
                     to={`../viewTa/${item.id}`}

@@ -17,6 +17,71 @@ export default function NewApplication() {
   const navigate = useNavigate();
   const [dates, setDates] = useState([]);
 
+  const [from, setFrom] = useState();
+  const [to, setTo] = useState();
+  const [suffixFrom, setSuffixFrom] = useState();
+  const [suffixTo, setSuffixTo] = useState();
+  const [prefixFrom, setPrefixFrom] = useState();
+  const [prefixTo, setPrefixTo] = useState();
+  const [encash,setEncash] = useState();
+
+  console.log("FROM",from);
+  console.log("TO",to);
+ 
+
+  const handleFrom = (e) => {
+    setFrom(e.target.value);
+  };
+  const handleTo = (e) => {
+    setTo(e.target.value);
+  };
+  const handleSuffixFrom = (e) => {
+    setSuffixFrom(e.target.value);
+  };
+  const handleSuffixTo = (e) =>{
+    setSuffixTo(e.target.value);
+  };
+  const handlePrefixFrom = (e) => {
+    setPrefixFrom(e.target.value);
+  };
+  const handlePrefixTo = (e) => {
+    setPrefixTo(e.target.value);
+  };
+  const handleEncash = (e) => {
+    setEncash(e.target.checked);
+  };
+
+  var x=((from && to) && (new Date(from)-new Date(to)>0));
+  var y=((prefixFrom && prefixTo) && (new Date(prefixFrom) - new Date(prefixTo) >0));
+  var z=((suffixFrom && suffixTo) && (new Date(suffixFrom) - new Date(suffixTo) >0));
+  var u=((prefixTo && from) && (new Date(prefixTo)-new Date(from)>0));
+  var v=((to && suffixFrom) && (new Date(to)-new Date(suffixFrom)>0));
+  var w=(encash);
+
+  if((from && to) && (new Date(from)-new Date(to)>0))
+  {
+    toast("Journey 'From Date' should be less than 'To Date'");
+  }
+  if((prefixFrom && prefixTo) && (new Date(prefixFrom) - new Date(prefixTo) >0))
+  {
+    toast("Journey 'Prefix From Date' should be less than 'Prefix To Date'");
+  }
+  if((suffixFrom && suffixTo) && (new Date(suffixFrom) - new Date(suffixTo) >0))
+  {
+    toast("Journey 'Suffix From Date' should be less than 'Suffix To Date'");
+  }
+  if((prefixTo && from) && (new Date(prefixTo)-new Date(from)>0))
+  {
+    toast("Journey 'Prefix To Date' should be less than 'From Date'");
+  }
+  if((to && suffixFrom) && (new Date(to)-new Date(suffixFrom)>0))
+  {
+    toast("Journey 'To Date' should be less than 'Suffix From Date'");
+  }
+  
+  
+
+
   const handleSelect = (dates) => {
     setDates(dates);
   };
@@ -101,7 +166,7 @@ export default function NewApplication() {
         <h3 className="font-semibold text-xl text-gray-900 p-4 flex mx-auto">
           New Application
         </h3>
-        <Form onSubmit={ltcSubmitHandler}>
+        <Form disabled ={(x || y || z || u || v)?true:false} onSubmit={ltcSubmitHandler}>
           <InputGroup>
             <div className="m-4 grid gap-6 mb-1 md:grid-cols-2 xl:grid-cols-4">
               <Input
@@ -150,8 +215,8 @@ xl:grid-cols-4"
                 type="number"
                 required
               />
-              <Input label={"From"} name="leaveFrom" type="date" required />
-              <Input label={"To"} name="leaveTo" type="date" required />
+              <Input label={"From"} name="leaveFrom" type="date" onChange={handleFrom} required />
+              <Input label={"To"} name="leaveTo" type="date" onChange={handleTo} required />
             </div>
             <h3 className="font-semibold text-l m-4 text-gray-900">
               Prefix Details
@@ -160,8 +225,8 @@ xl:grid-cols-4"
               className="m-4 grid gap-6 mb-1 md:grid-cols-2 
 xl:grid-cols-4"
             >
-              <Input label={"From"} name="prefixFrom" type="date" />
-              <Input label={"To"} name="prefixTo" type="date" />
+              <Input label={"From"} name="prefixFrom" type="date" onChange={handlePrefixFrom} />
+              <Input label={"To"} name="prefixTo" type="date" onChange={handlePrefixTo} />
             </div>
             <h3 className="font-semibold text-l m-4 text-gray-900">
               Suffix Details
@@ -170,8 +235,8 @@ xl:grid-cols-4"
               className="m-4 grid gap-6 mb-1 md:grid-cols-2 
             xl:grid-cols-4"
             >
-              <Input label={"From"} name="suffixFrom" type="date" />
-              <Input label={"To"} name="suffixTo" type="date" />
+              <Input label={"From"} name="suffixFrom" type="date" onChange={handleSuffixFrom} />
+              <Input label={"To"} name="suffixTo" type="date" onChange={handleSuffixTo} />
 
               <div className="flex ml-4 justify-around items-center"></div>
             </div>
@@ -254,12 +319,14 @@ xl:grid-cols-4"
                   label={""}
                   name="encashment"
                   type="checkbox"
+                  onChange={handleEncash}
                 />
               </div>
               <Input
                 label={"No. of Days"}
                 name="encashmentDays"
                 type="number"
+                disabled={w?false:true}
               />
             </div>
             <input ref={imageRef} name="file" type="file" multiple />
@@ -273,7 +340,7 @@ xl:grid-cols-4"
             </div>
 
             <div className="flex justify-center">
-              <Input
+              <Input  disabled ={(x || y || z || u || v)?true:false} 
                 className=" text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2"
                 type="submit"
               />
