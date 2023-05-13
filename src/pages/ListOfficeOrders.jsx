@@ -1,5 +1,5 @@
 import React from "react";
-import OfficeOrderTable from "../components/officeOrderTable";
+import OfficeOrderTable from "../components/OfficeOrderTable";
 import { useState } from "react";
 import { useEffect } from "react";
 
