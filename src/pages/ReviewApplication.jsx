@@ -3,7 +3,7 @@ import InputGroup from "../components/InputGroup.jsx";
 import Input from "../components/Input.jsx";
 import Table from "../components/Table.jsx";
 import { useParams } from "react-router";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import EstabSubmission from "./EstabSubmission.jsx";
 import AccountsSubmission from "./AccountsSubmission.jsx";
 import CommentBox from "../components/CommentBox.jsx";
@@ -13,12 +13,46 @@ import { useEffect } from "react";
 
 export default function ReviewApplication() {
   const { id } = useParams()
+  const receiptRef = useRef(null)
   const [ltcData, setLtcData] = useState(ltcInfo[0]);
   const [people, setPeople] = useState(ltcData.peopleInvolved);
   const handleInfo = (json) => {
     setLtcData(json)
     setPeople(json.peopleInvolved)
+    console.log("receipt Id")
+    for(let receiptId of json.receipts){
+      console.log(receiptId)
+      addFile(receiptId) 
+    }
   }
+
+  const addFile = (id) => {
+    const formdata = new FormData()
+    formdata.append('fileId', id)
+    fetch('/api/getReceipt', {
+      method: "POST",
+      body: formdata
+    }).then(handleBlob)
+
+  }
+  // console.log(ltcData)
+  const handleBlob = async (res) => {
+    console.log(res)
+    if(res.status == 200) {
+      const blob = await res.blob()
+      console.log(blob)
+      const url = window.URL.createObjectURL(blob)
+      const li = document.createElement('li')
+      const a = document.createElement('a')
+      const textnode = document.createTextNode("Click to open in new tab file");
+      a.appendChild(textnode);
+      a.href = url
+      a.target = "_blank"
+      li.appendChild(a)
+      receiptRef.current.appendChild(li)
+    }
+  }
+
 
   useEffect(() => {
     fetch("/api/getLTCInfo", {
@@ -128,14 +162,6 @@ export default function ReviewApplication() {
           </div>
 
           <div className="flex ml-4 justify-center space-x-10 items-center my-4">
-
-
-
-
-
-
-
-
           </div>
 
           <div className=" grid gap-6 mt-4 mb-2 md:grid-cols-2 xl:grid-cols-4">
@@ -235,6 +261,12 @@ export default function ReviewApplication() {
             <Input name="certification" type="checkbox" checked={true} readOnly />
           </p>
         </InputGroup>
+        <div >
+          Proofs:
+          <ul ref={receiptRef}>
+
+          </ul>
+        </div>
       </Form> 
       {/* <EstabSubmission /> */}
       {/* <AccountsSubmission /> */}

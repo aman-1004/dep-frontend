@@ -11,7 +11,6 @@ export default function AccountsTaRow(props) {
         <td className="px-6 py-4 bg-gray-50">
           <Input name={name} type={type} value={value} />
         </td>
-        
       </tr>
     </>
   );

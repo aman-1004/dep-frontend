@@ -7,7 +7,8 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "http://127.0.0.1:5000",
+        target: process.env.BACKEND_URL,
+        // target: 'https://dep-backend-ce.onrender.com/',
         changeOrigin:true,
         secure:false,
         rewrite: (path) => path.replace(/^\/api/,""),
