@@ -30,10 +30,7 @@ export default function OfficeOrder({ ltcInfo }) {
         <div className="flex place-content-around space-x-32 mb-4">
           <p>F.No. IITRPR/ACAD/{ltcData.id}</p>
           <p>
-            Date:
-            {ltcData.fillDate
-              ? new Date(ltcData.fillDate).toISOString().substring(0, 10)
-              : ""}
+            Date:{ltcData.fillDate? new Date(ltcData.fillDate).toISOString().substring(0, 10): ""}
           </p>
         </div>
         <div className="flex justify-center">

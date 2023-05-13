@@ -10,9 +10,9 @@ import { toast } from "react-hot-toast";
 export default function AccountsSubmission() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [advanceRequired, setAdvance] = useState(false)
-  const [fares, setFares] = useState([]);  
-  console.log(fares)
+  const [advanceRequired, setAdvance] = useState(false);
+  const [fares, setFares] = useState([]);
+  console.log(fares);
   const totalFare = fares.reduce((total, item) => {
     return total + item.singleFare * item.noOfFares;
   }, 0);
@@ -23,7 +23,7 @@ export default function AccountsSubmission() {
       toast("You are not authorized");
     }
   };
-  console.log(fares)
+  console.log(fares);
   useEffect(() => {
     fetch("/api/getLTCInfo", {
       method: "POST",
@@ -33,11 +33,11 @@ export default function AccountsSubmission() {
       body: JSON.stringify({ ltcId: id }),
     })
       .then((res) => res.json())
-      .then(data => {
-        setFares(data.expectedJourneyDetails ?? [])
-        setAdvance(data.advanceRequired)
+      .then((data) => {
+        setFares(data.expectedJourneyDetails ?? []);
+        setAdvance(data.advanceRequired);
       });
-  }, [])
+  }, []);
 
   const accountsOnAccept = (e) => {
     const accountsData = {};
@@ -106,17 +106,26 @@ export default function AccountsSubmission() {
         <br></br>
         <Table
           fields={[
-            { heading: "From", type: "text" , stateKey:"departureFrom"},
-            { heading: "To", type: "text", stateKey:"arrivalTo"},
-            { heading: "Mode Of Travel", type: "text", stateKey: "modeOfTravel"},
-            { heading: "No. of Fares", type: "number", stateKey: "noOfFares"},
-            { heading: "Single Fare", type: "number", stateKey: "singleFare"},
+            { heading: "From", type: "text", stateKey: "departureFrom" },
+            { heading: "To", type: "text", stateKey: "arrivalTo" },
+            {
+              heading: "Mode Of Travel",
+              type: "text",
+              stateKey: "modeOfTravel",
+            },
+            { heading: "No. of Fares", type: "number", stateKey: "noOfFares" },
+            { heading: "Single Fare", type: "number", stateKey: "singleFare" },
           ]}
           data={fares}
           setData={setFares}
         />
         <div className="m-4 grid gap-6 mb-1 md:grid-cols-2 xl:grid-cols-4">
-          <Input label={"Total Rs."} name="totalRs" type="number" value={totalFare}/>
+          <Input
+            label={"Total Rs."}
+            name="totalRs"
+            type="number"
+            value={totalFare}
+          />
 
           <Input
             label={"Advance Admissible"}
@@ -125,7 +134,12 @@ export default function AccountsSubmission() {
             readOnly={advanceRequired}
           />
 
-          <Input label={"Passed For Rs."} name="passedRs" type="number" value={(advanceRequired ? 0.9: 1) * totalFare}/>
+          <Input
+            label={"Passed For Rs."}
+            name="passedRs"
+            type="number"
+            value={(advanceRequired ? 0.9 : 1) * totalFare}
+          />
           {/* <Input
             label={"Debitable to LTC Advance Dr./Mr./Mrs./Ms."}
             name="title"
