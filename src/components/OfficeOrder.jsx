@@ -30,7 +30,10 @@ export default function OfficeOrder({ ltcInfo }) {
         <div className="flex place-content-around space-x-32 mb-4">
           <p>F.No. IITRPR/ACAD/{ltcData.id}</p>
           <p>
-            Date:{new Date(ltcData.fillDate).toISOString().substring(0, 10)}
+            Date:
+            {ltcData.fillDate
+              ? new Date(ltcData.fillDate).toISOString().substring(0, 10)
+              : ""}
           </p>
         </div>
         <div className="flex justify-center">
@@ -49,7 +52,9 @@ export default function OfficeOrder({ ltcInfo }) {
               </span>{" "}
               for Leave Travel Concession (LTC) for the year{" "}
               <span className="font-bold">
-                {new Date(ltcData.fromDate).getFullYear()}
+                {ltcData.fromDate
+                  ? new Date(ltcData.fromDate).getFullYear()
+                  : ""}
               </span>{" "}
               has been approved by the management.
             </p>
@@ -59,8 +64,13 @@ export default function OfficeOrder({ ltcInfo }) {
               <li>Destination of travel: {ltcData.placeToVisit}</li>
               <li>
                 Journey Duration:{" "}
-                {new Date(ltcData.fromDate).toISOString().substring(0, 10)} -{" "}
-                {new Date(ltcData.toDate).toISOString().substring(0, 10)}
+                {(ltcData.fromDate
+                  ? new Date(ltcData.fromDate).toISOString().substring(0, 10)
+                  : "") +
+                  "-" +
+                  (ltcData.toDate
+                    ? new Date(ltcData.toDate).toISOString().substring(0, 10)
+                    : "")}
               </li>
               <li>
                 Names of accompanying family members (if any):

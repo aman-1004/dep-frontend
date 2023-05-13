@@ -13,6 +13,7 @@ import { taInfo } from "../dummy/taInfos.js";
 import toast from "react-hot-toast";
 import { ltcInfo as ltcdummy } from "../dummy/ltcInfos.js";
 
+
 export default function NewTaApplication() {
   const [ltcInfo, setLtcInfo] = useState(ltcdummy[0]);
   const { ltcId } = useParams();
@@ -26,7 +27,7 @@ export default function NewTaApplication() {
     setPeopleInTa(json.peopleInvolved);
     // setJourneyDetails(json.journeyDetails);
   };
-  console.log(ltcInfo)
+
   useEffect(() => {
     fetch("/api/getLTCInfo", {
       method: "POST",
@@ -46,7 +47,10 @@ export default function NewTaApplication() {
       toast("You are not authorized");
     }
   };
-
+  const totalAmount = journeyDetails.reduce(
+    (sum, item) => parseInt(sum) + parseInt(item.totalFare),
+    0
+  );
   const taSubmitHandler = (e) => {
     const arr = [
       "name",
@@ -101,26 +105,30 @@ export default function NewTaApplication() {
                 label={"Name"}
                 name="name"
                 type="text"
-                value={ltcInfo.user.firstName + ltcInfo.user.lastName} required 
+                value={ltcInfo.user.firstName + ltcInfo.user.lastName}
+                required
               />
               {/* <Input label={"Emp. Code"} name="empCode" type="number" value={ltcInfo.user.id} /> */}
               <Input
                 label={"Pay Level"}
                 name="payLevel"
                 type="number"
-                value={ltcInfo.user.payLevel} required 
+                value={ltcInfo.user.payLevel}
+                required
               />
               <Input
                 label={"Designation"}
                 name="Designation"
                 type="text"
-                value={ltcInfo.user.designation} required 
+                value={ltcInfo.user.designation}
+                required
               />
               <Input
                 label={"Department"}
                 name="department"
                 type="text"
-                value={ltcInfo.user.department} required 
+                value={ltcInfo.user.department}
+                required
               />
               <Input
                 label={"Date of Joining"}
@@ -128,7 +136,8 @@ export default function NewTaApplication() {
                 type="date"
                 value={new Date(ltcInfo.user.dateOfJoining)
                   .toISOString()
-                  .substring(0, 10)} required 
+                  .substring(0, 10)}
+                required
               />
             </div>
             <h3 className="font-semibold text-l text-gray-900 m-4 flex">
@@ -143,13 +152,15 @@ export default function NewTaApplication() {
                 type="date"
                 value={new Date(ltcInfo.fromDate)
                   .toISOString()
-                  .substring(0, 10)} required 
+                  .substring(0, 10)}
+                required
               />
               <Input
                 label={"To"}
                 name="leaveTo"
                 type="date"
-                value={new Date(ltcInfo.toDate).toISOString().substring(0, 10)} required 
+                value={new Date(ltcInfo.toDate).toISOString().substring(0, 10)}
+                required
               />
               {/* <h3>Prefix Details</h3>
             <Input label={"From"} name="prefixFrom" type="date" />
@@ -177,12 +188,12 @@ export default function NewTaApplication() {
                 disabled={!ltcInfo.advanceRequired}
               />
               {/* <Input label={"Home Town"} name="homeTown" type="text" /> */}
-              <Input
+              {/* <Input
                 label={"Bank Account No. (SBI/Any other):"}
                 name="accountNo"
                 type="number"
-                // value={ltcInfo.accountNo}
-              />
+                value={ltcInfo.accountNo}
+              /> */}
               {/* <Input
               label={"Nature of Visiting Place"}
               name="visitNature"
@@ -284,9 +295,13 @@ export default function NewTaApplication() {
               data={journeyDetails}
               setData={setJourneyDetails}
             />
-
             <div className="m-4 grid gap-6 mb-1 md:grid-cols-2 xl:grid-cols-4">
-              <Input label={"Total"} name="totalAmount" type="number" />
+              <Input
+                label={"Total"}
+                name="totalAmount"
+                type="number"
+                value={totalAmount}
+              />
             </div>
             <input ref={imageRef} name="file" type="file" multiple />
             <h3 className="font-semibold text-l text-gray-900 m-4 flex">
@@ -297,7 +312,7 @@ export default function NewTaApplication() {
                 The information, as given above is true to the best of my
                 knowledge and belief
               </p>
-              <Input name="certification" type="checkbox"  required  />
+              <Input name="certification" type="checkbox" required />
             </div>
             <div className="flex ml-4 justify-center space-x-10 items-center py-4">
               <Input

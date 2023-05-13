@@ -1,12 +1,12 @@
 import React from "react";
-import OfficeOrderTable from "../components/OfficeOrderTable";
+import OfficeOrderTable from "../components/officeOrderTable";
 import { useState } from "react";
 import { useEffect } from "react";
 
 export default function ListOfficeOrders() {
   const [LTCOfficeOrders, setLTCOfficeOrders] = useState([]);
   const [TAOfficeOrders, setTAOfficeOrders] = useState([]);
-
+  console.log(TAOfficeOrders);
   const handleLTCList = (data) => {
     setLTCOfficeOrders(data);
   };
@@ -30,11 +30,18 @@ export default function ListOfficeOrders() {
 
   return (
     <div className="bg-yellow-50 h-screen">
-
-    <div className="flex py-4">
-      <OfficeOrderTable data={LTCOfficeOrders} name="LTC Office Orders"/>
-      <OfficeOrderTable data={TAOfficeOrders} name="TA Office Orders"/>
-    </div>
+      <div className="flex py-4">
+        <OfficeOrderTable
+          data={LTCOfficeOrders}
+          formType="ltc"
+          name="LTC Office Orders"
+        />
+        <OfficeOrderTable
+          data={TAOfficeOrders}
+          formType="ta"
+          name="TA Office Orders"
+        />
+      </div>
     </div>
   );
-} 
+}
