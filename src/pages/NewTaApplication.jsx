@@ -26,7 +26,7 @@ export default function NewTaApplication() {
     setPeopleInTa(json.peopleInvolved);
     // setJourneyDetails(json.journeyDetails);
   };
-
+  console.log(ltcInfo)
   useEffect(() => {
     fetch("/api/getLTCInfo", {
       method: "POST",
@@ -86,7 +86,8 @@ export default function NewTaApplication() {
       body: fd,
     }).then(handleTaRes);
   };
-
+  let advanceTotal = 0;
+  if(ltcInfo.advanceRequired) advanceTotal = 0.9 * ltcInfo.expectedJourneyDetails.reduce((sum, item) => sum + item.singleFare * item.noOfFares, 0)
   return (
     <div className="bg-yellow-50">
       <div className="max-w-screen-xl mx-auto">
@@ -165,19 +166,15 @@ export default function NewTaApplication() {
                 label={"Advance Drawn"}
                 name="advanceRequired"
                 type="number"
-                value={ltcInfo.advanceRequired}
+                value={advanceTotal}
+                disabled={!ltcInfo.advanceRequired}
               />
               <Input
                 label={"Advance Drawn Date"}
                 name="advanceDrawnDate"
                 type="date"
-                value={
-                  ltcInfo.advanceDrawnDate
-                    ? new Date(ltcInfo.advanceDrawnDate)
-                        .toISOString()
-                        .substring(0, 10)
-                    : ""
-                }
+                required={ltcInfo.advanceRequired}
+                disabled={!ltcInfo.advanceRequired}
               />
               {/* <Input label={"Home Town"} name="homeTown" type="text" /> */}
               <Input

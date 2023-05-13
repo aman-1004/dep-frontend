@@ -7,10 +7,11 @@ import EstabSubmission from "./EstabSubmission.jsx";
 import AccountsSubmission from "./AccountsSubmission.jsx";
 import CommentBox from "../components/CommentBox.jsx";
 import { taInfo } from "../dummy/taInfos.js";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useParams } from "react-router";
 
 export default function ReviewTaApplication() {
+  const receiptRef = useRef(null)
   const { id } = useParams();
   const [taData, setTaData] = useState(taInfo[0]);
   const [people, setPeople] = useState(taData.peopleInvolved);
@@ -21,7 +22,38 @@ export default function ReviewTaApplication() {
     setTaData(json);
     setPeople(json.ltcInfo.peopleInvolved);
     setJourney(json.journeyDetails);
+    console.log("receipt Id")
+    for(let receiptId of json.receipts){
+      console.log(receiptId)
+      addFile(receiptId) 
+    }
   };
+
+  const addFile = (id) => {
+    const formdata = new FormData()
+    formdata.append('fileId', id)
+    fetch('/api/getReceipt', {
+      method: "POST",
+      body: formdata
+    }).then(handleBlob)
+  }
+
+    const handleBlob = async (res) => {
+    console.log(res)
+    if(res.status == 200) {
+      const blob = await res.blob()
+      console.log(blob)
+      const url = window.URL.createObjectURL(blob)
+      const li = document.createElement('li')
+      const a = document.createElement('a')
+      const textnode = document.createTextNode("Click to open in new tab file");
+      a.appendChild(textnode);
+      a.href = url
+      a.target = "_blank"
+      li.appendChild(a)
+      receiptRef.current.appendChild(li)
+    }
+  }
 
   useEffect(() => {
     fetch("/api/getTAInfo", {
@@ -281,6 +313,11 @@ export default function ReviewTaApplication() {
 
           {/* <Input type="submit" /> */}
         </InputGroup>
+    <div >
+          Proofs:
+          <ul ref={receiptRef}>
+          </ul>
+        </div>
       </Form>
       {/* <EstabSubmission /> */}
       {/* <AccountsSubmission /> */}

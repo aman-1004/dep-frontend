@@ -8,6 +8,7 @@ export default defineConfig({
     proxy: {
       "/api": {
         target: process.env.BACKEND_URL,
+        // target: 'https://dep-backend-ce.onrender.com/',
         changeOrigin:true,
         secure:false,
         rewrite: (path) => path.replace(/^\/api/,""),
