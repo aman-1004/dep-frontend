@@ -1,5 +1,7 @@
 This project has been tested on Arch Linux and Windows 11.
+
 Setup Backend:
+
 Optionally create new virtual environment by using `python3 -m pip venv .venv && source .venv/bin/activate`
 
 1. Go to script.google.com and create a new script and copy content from `app-scripts/otp.gs` and deploy the script. Copy the url of deployed function.
@@ -15,6 +17,7 @@ REMINDER_URL='[URL OBTAINED FOR T2]'
 7. `python3 app.py`
 
 Setup Frontend:
+
 8. `git clone git@github.com:aman-1004/dep-frontend.git`
 9. `cd dep-frontend`
 10. `npm install`
